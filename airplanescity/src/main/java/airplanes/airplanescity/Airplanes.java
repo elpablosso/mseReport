@@ -58,7 +58,7 @@ public class Airplanes {
             isFlying=false;
         }
 
-        public int getDeltaXDividedBy10(Cities.City city){
+        public double getDeltaXDividedBy10(Cities.City city){
             return locationX > city.getLocationX() ? (locationX-city.getLocationX())/10 : (city.getLocationX()-locationX)/10;
         }
         public int getDeltaYDividedBy10(Cities.City city){
