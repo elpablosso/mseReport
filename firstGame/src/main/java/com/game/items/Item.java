@@ -2,31 +2,31 @@ package com.game.items;
 
 public abstract class Item {
 
-    private final int itemId;
-    private final String itemName;
-    private final String itemDescription;
-    private final int itemValue;
+    private final int id;
+    private final String name;
+    private final String description;
+    private final int value;
 
-    public Item(int itemId, String itemName, String itemDescription, int itemValue) {
-        this.itemId = itemId;
-        this.itemName = itemName;
-        this.itemDescription = itemDescription;
-        this.itemValue = itemValue;
+    public Item(int id, String name, String description, int value) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.value = value;
     }
 
-    public int getItemId() {
-        return itemId;
+    public int getId() {
+        return id;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getName() {
+        return name;
     }
 
-    public String getItemDescription() {
-        return itemDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public int getItemValue() {
-        return itemValue;
+    public int getValue() {
+        return value;
     }
 }
