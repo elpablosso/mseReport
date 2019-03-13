@@ -1,9 +1,5 @@
 package com.game.items.wearable;
 
-import com.game.items.enums.ArmorType;
-import com.game.items.enums.WearableItemType;
-import com.game.items.wearable.WearableItem;
-
 public abstract class Armor extends WearableItem {
 
     private ArmorType armorType;

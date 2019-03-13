@@ -1,4 +1,4 @@
-package com.game.items.enums;
+package com.game.items.wearable;
 
 public enum WearableItemType {
     WEAPON,

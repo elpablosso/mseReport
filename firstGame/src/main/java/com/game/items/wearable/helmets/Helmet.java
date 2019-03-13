@@ -1,7 +1,7 @@
 package com.game.items.wearable.helmets;
 
 import com.game.items.wearable.Armor;
-import com.game.items.enums.ArmorType;
+import com.game.items.wearable.ArmorType;
 
 public abstract class Helmet extends Armor {
     public Helmet(int id, String name, String description, int value, int levelRequired, int itemLevel, int defenceValue) {

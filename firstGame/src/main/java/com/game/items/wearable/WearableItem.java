@@ -1,7 +1,6 @@
 package com.game.items.wearable;
 
 import com.game.items.Item;
-import com.game.items.enums.WearableItemType;
 
 public abstract class WearableItem extends Item implements Wearable {
 
