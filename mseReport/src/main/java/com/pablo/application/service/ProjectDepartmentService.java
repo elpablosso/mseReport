@@ -1,5 +1,5 @@
 package com.pablo.application.service;
-import com.pablo.application.entity.department.Departments;
+import com.pablo.application.entity.department.DepartmentKey;
 import com.pablo.application.entity.department.ProjectDepartment;
 import com.pablo.application.repository.ProjectDepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +17,25 @@ public class ProjectDepartmentService {
     ProjectDepartmentRepository projectDepartmentRepository;
 
     public String createNewProjectDepartment(String projectNumber){
-        ProjectDepartment projectDepartment = new ProjectDepartment(projectNumber);
+
+        DepartmentKey departmentKey = new DepartmentKey();
+        departmentKey.setUserId(899898989894L);
+        departmentKey.setProjectNumber(projectNumber);
+
+        ProjectDepartment projectDepartment = new ProjectDepartment();
+        projectDepartment.setDepartmentKey(departmentKey);
+
         projectDepartment.setCorrespondence(new BigDecimal(BigInteger.ZERO).round(new MathContext(1, RoundingMode.HALF_DOWN)));
         projectDepartment.setDocumentation(new BigDecimal(BigInteger.ZERO).round(new MathContext(1, RoundingMode.HALF_DOWN)));
         projectDepartment.setDrawings(new BigDecimal(BigInteger.ZERO).round(new MathContext(1, RoundingMode.HALF_DOWN)));
         projectDepartment.setModelling(new BigDecimal(BigInteger.ZERO).round(new MathContext(1, RoundingMode.HALF_DOWN)));
         projectDepartmentRepository.save(projectDepartment);
+
         return "Created project department";
     }
 
     public ProjectDepartment findByProjectNumber(String projectNumber){
-        return projectDepartmentRepository.findByProjectNumber(projectNumber);
+        return projectDepartmentRepository.findByDepartmentKey(projectNumber);
     }
 
     private void increaseModelling(String projectNumber, double increaseValue){

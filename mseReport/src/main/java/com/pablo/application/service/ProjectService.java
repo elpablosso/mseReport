@@ -27,7 +27,7 @@ public class ProjectService {
     }
 
     public boolean hasNoSuchProjectNumber(String projectNumber){
-        return Objects.isNull(projectRepository.findByProjectNumber(projectNumber));
+        return Objects.isNull(projectRepository.findByNumber(projectNumber));
     }
 
     public Project saveProject(Project project){
@@ -38,8 +38,8 @@ public class ProjectService {
         return (List<Project>)projectRepository.findAll();
     }
 
-    public Project findByProjectNumber(String projectNumber){
-        return projectRepository.findByProjectNumber(projectNumber);
+    public Project findByNumber(String projectNumber){
+        return projectRepository.findByNumber(projectNumber);
     }
 
 }

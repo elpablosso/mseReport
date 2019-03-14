@@ -1,4 +1,4 @@
-package com.pablo.application.entity.department;
+package com.pablo.application.service;
 
 public enum Departments {
     MODELLING,

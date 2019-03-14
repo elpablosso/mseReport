@@ -1,7 +1,7 @@
 package com.pablo.application.entity.department;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 
@@ -14,10 +14,10 @@ import java.math.BigDecimal;
     DOCUMENTATION         **/
 
 @Entity
-public class ProjectDepartment {
+public class ProjectDepartment{
 
-    @Id // PROJECT NUMBER IS UNIQUE VALUE FOR EVERY PROJECT
-    private String projectNumber;
+    @EmbeddedId
+    DepartmentKey departmentKey;
 
     // THERE FIELDS REPRESENT TIME SPENT IN SPECIFIC AREAS OF PROJECT
     // THE UNIT IS AN HOUR
@@ -29,10 +29,6 @@ public class ProjectDepartment {
     private BigDecimal documentation;
 
     public ProjectDepartment() {
-    }
-
-    public ProjectDepartment(String projectNumber) {
-        setProjectNumber(projectNumber);
     }
 
     public void setDrawings(BigDecimal drawings) {
@@ -67,11 +63,11 @@ public class ProjectDepartment {
         return documentation;
     }
 
-    public String getProjectNumber() {
-        return projectNumber;
+    public DepartmentKey getDepartmentKey() {
+        return departmentKey;
     }
 
-    public void setProjectNumber(String projectNumber) {
-        this.projectNumber = projectNumber;
+    public void setDepartmentKey(DepartmentKey departmentKey) {
+        this.departmentKey = departmentKey;
     }
 }

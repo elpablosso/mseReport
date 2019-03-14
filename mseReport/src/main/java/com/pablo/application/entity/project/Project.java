@@ -2,44 +2,45 @@ package com.pablo.application.entity.project;
 import javax.persistence.*;
 
 @Entity
+@Table(name="project")
 public class Project {
 
     @Id
-    private String projectNumber;
+    private String number;
 
-    private String projectName;
+    private String name;
 
-    private int projectBudget;
+    private int budget;
 
     public Project() {
     }
 
     public Project(String projectNumber) {
-        this.projectNumber = projectNumber;
+        this.number = projectNumber;
     }
 
-    public String getProjectNumber() {
-        return projectNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setProjectNumber(String projectNumber) {
-        this.projectNumber = projectNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getName() {
+        return name;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getProjectBudget() {
-        return projectBudget;
+    public int getBudget() {
+        return budget;
     }
 
-    public void setProjectBudget(int projectBudget) {
-        this.projectBudget = projectBudget;
+    public void setBudget(int budget) {
+        this.budget = budget;
     }
 
 }

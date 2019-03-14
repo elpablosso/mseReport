@@ -1,5 +1,5 @@
 package com.pablo.application.controller;
-import com.pablo.application.entity.department.Departments;
+import com.pablo.application.service.Departments;
 import com.pablo.application.entity.department.ProjectDepartment;
 import com.pablo.application.service.ProjectDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
