@@ -4,7 +4,7 @@ import com.pablo.application.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
-
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,6 +36,12 @@ public class ProjectService {
 
     public List<Project> findAll(){
         return (List<Project>)projectRepository.findAll();
+    }
+
+    public List<Project> sortedByBudget() {
+        List<Project> listToSort = findAll();
+        listToSort.sort(Comparator.comparingInt(Project::getBudget));
+        return listToSort;
     }
 
     public Project findByNumber(String projectNumber){
