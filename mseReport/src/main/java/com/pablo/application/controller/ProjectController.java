@@ -1,59 +1,51 @@
 package com.pablo.application.controller;
+
 import com.pablo.application.entity.project.Project;
 import com.pablo.application.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import javax.validation.Valid;
+
 @Controller
-@RequestMapping(path="/projects")
 public class ProjectController {
 
     @Autowired
     ProjectService projectService;
 
-    @RequestMapping(value="/list")
-    public String home(Model model){
-        model.addAttribute("projects", projectService.findAll());
-        return "projectlist";
+    // MAPPING A PROJECT LIST ATTRIBUTE TO THE VIEW
+    @GetMapping(value="projects/list")
+    public String projectList(ModelMap modelMap){
+        modelMap.addAttribute("projects", projectService.findAll());
+        return "project/list";
     }
 
-    @GetMapping(path="/all")
-    @ResponseBody
-    public List<Project> projects(){
-        return projectService.findAll();
+    // MAPPING CREATION OF NEW PROJECT
+    @GetMapping(value="projects/add")
+    public ModelAndView addProjectForm(){
+    return new ModelAndView("project/add","project", new Project());
     }
 
-    @GetMapping(path="/{projectNumber}")
-    @ResponseBody
-    public Project findProject(@PathVariable String projectNumber){
-        return projectService.findByNumber(projectNumber);
+    @RequestMapping(value = "projects/new", method = RequestMethod.POST)
+    public String submit(@Valid @ModelAttribute("project")Project project,
+                         BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+            return "index";
+        }
+        model.addAttribute("number", project.getNumber());
+        model.addAttribute("name", project.getName());
+        model.addAttribute("budget", project.getBudget());
+
+        projectService.saveProject(project);
+
+        return "project/submit";
     }
 
-    @RequestMapping(path="/update", method = RequestMethod.POST)
-    @ResponseBody
-    public Project updateProject(
-            @RequestBody Project project){
-        Project findProject = projectService.findByNumber(project.getNumber());
-        return projectService.saveProject(project);
-    }
-
-    @GetMapping(path="/changebudget")
-    @ResponseBody
-    public Project changeProjectBudget(@RequestParam String projectNumber,
-                                       @RequestParam int budget){
-        Project project = projectService.findByNumber(projectNumber);
-        project.setBudget(budget);
-        return projectService.saveProject(project);
-    }
-
-    @GetMapping(path="/add") // Map ONLY GET Requests
-    public @ResponseBody
-    String addNewProject (@RequestParam String projectNumber) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-        return projectService.createNewProject(projectNumber);
-    }
 }

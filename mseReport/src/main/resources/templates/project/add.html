@@ -4,6 +4,7 @@
     <title>Reporting center</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
 * {
   box-sizing: border-box;
@@ -76,17 +77,26 @@ footer {
 <section>
     <nav>
         <ul>
-                <a th:href="@{/projects/add}">Add project</a><br>
-                <a th:href="@{/projects/list}">Project List</a>
+            <a th:href="@{/projects/add}">Add project</a><br>
+            <a th:href="@{/projects/list}">Project List</a>
         </ul>
     </nav>
     <article>
-        Welcome to the reporting center. </article>
+
+        <form action="#" th:action="@{/projects/new}" th:object="${project}" method="post">
+            <p>Project number : <input type="text" th:field="*{number}" /></p>
+            <p>Project name : <input type="text" th:field="*{name}" /></p>
+            <p>Project budget : <input type="text" th:field="*{budget}" /></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+
+    </article>
 </section>
 
 <footer>
     Version beta 0.1 <br>
     Created by Paweł Muniak
 </footer>
+
 </body>
 </html>

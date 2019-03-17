@@ -4,6 +4,7 @@
     <title>Reporting center</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
 * {
   box-sizing: border-box;
@@ -42,7 +43,7 @@ article {
   padding: 20px;
   width: 70%;
   background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
+
 }
 
 /* Clear floats after the columns */
@@ -76,17 +77,36 @@ footer {
 <section>
     <nav>
         <ul>
-                <a th:href="@{/projects/add}">Add project</a><br>
-                <a th:href="@{/projects/list}">Project List</a>
+            <a th:href="@{/projects/add}">Add project</a><br>
+            <a th:href="@{/projects/list}">Project List</a>
         </ul>
     </nav>
     <article>
-        Welcome to the reporting center. </article>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Project number</th>
+                <th>Description</th>
+                <th>Budget</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${projects}">
+                <td th:text="${project.number}">number</td>
+                <td th:text="${project.name}">name</td>
+                <td th:text="${project.budget}">budget</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </article>
 </section>
 
 <footer>
     Version beta 0.1 <br>
     Created by Paweł Muniak
 </footer>
+
 </body>
 </html>
