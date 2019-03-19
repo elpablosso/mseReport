@@ -1,27 +1,14 @@
 package com.pablo.application.entity.project;
-import com.pablo.application.entity.converter.LocalDateConverter;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+public class ProjectForm {
 
-@Entity
-@Table(name="project")
-public class Project {
-
-    @Id
     private String number;
-
-    @Convert(converter = LocalDateConverter.class)
-    private LocalDate date;
 
     private String name;
 
-    private int budget;
+    private String budget;
 
     private boolean closed;
-
-    public Project() {
-    }
 
     public String getNumber() {
         return number;
@@ -29,14 +16,6 @@ public class Project {
 
     public void setNumber(String number) {
         this.number = number;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 
     public String getName() {
@@ -47,11 +26,11 @@ public class Project {
         this.name = name;
     }
 
-    public int getBudget() {
+    public String getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(String budget) {
         this.budget = budget;
     }
 

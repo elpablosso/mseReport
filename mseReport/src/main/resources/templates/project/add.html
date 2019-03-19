@@ -14,7 +14,7 @@
 </header>
 
 <div class="topnav">
-    <a href="/main">MAIN MENU</a>
+    <a href="/home">MAIN MENU</a>
     <a href="/projects/add">ADD PROJECT</a>
     <a href="/projects/list">PROJECT LIST</a>
 </div>
@@ -23,13 +23,35 @@
     <div class="leftcolumn">
         <div class="card">
             <h3>Add new project:</h3>
-            <form action="#" th:action="@{/projects/new}" th:object="${project}" method="post">
-                <p>Project number : <input type="text" th:field="*{number}" /></p>
-                <p>Project name : <input type="text" th:field="*{name}" /></p>
-                <p>Project budget : <input type="text" th:field="*{budget}" /></p>
-                <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+            <form action="#" th:action="@{/projects/new}" th:object="${projectform}" method="post">
+
+                <div class="row">
+                    <div class="col-25">
+                        <label for="number">Project number:</label> </div>
+                    <div class="col-75">
+                <input id="number" type="text" placeholder="Write project number..." th:field="*{number}" />
+                    </div></div>
+
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name">Project name:</label> </div>
+                    <div class="col-75">
+                        <input id="name" type="text" placeholder="Write project name..." th:field="*{name}" />
+                    </div></div>
+
+                <div class="row">
+                    <div class="col-25">
+                        <label for="budget">Project budget:</label> </div>
+                    <div class="col-75">
+                        <input id="budget" type="text" placeholder="Write project budget..." th:field="*{budget}" />
+                    </div></div>
+
+                <div class="row">
+                    <div class="col-75">
+                <p><input type="submit" value="Submit" /> </p>
+                    </div></div>
             </form>
-        </div>
+            </div>
     </div>
     <div class="rightcolumn">
         <div class="card">

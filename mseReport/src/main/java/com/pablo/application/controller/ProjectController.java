@@ -1,6 +1,6 @@
 package com.pablo.application.controller;
 import com.pablo.application.entity.project.Project;
-import com.pablo.application.entity.project.ProjectNameResolver;
+import com.pablo.application.entity.project.ProjectForm;
 import com.pablo.application.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -41,7 +39,8 @@ public class ProjectController {
     // MAPPING CREATION OF NEW PROJECT
     @GetMapping(value="projects/add")
     public ModelAndView addProjectForm(){
-    return new ModelAndView("project/add","project", new Project());
+
+        return new ModelAndView("project/add","projectform", new ProjectForm());
     }
 
 
@@ -62,15 +61,14 @@ public class ProjectController {
         }
 
     @RequestMapping(value = "projects/new", method = RequestMethod.POST)
-    public String submit(@Valid @ModelAttribute("project")Project project,
+    public String submit(@Valid @ModelAttribute("projectform")ProjectForm form,
                          BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
-            return "index";
+            return "project/add";
         }
-        model.addAttribute("number", project.getNumber());
-        model.addAttribute("name", project.getName());
-        model.addAttribute("budget", project.getBudget());
 
+        Project project = projectService.createNewProject(form);
+        model.addAttribute("project", project);
         projectService.saveProject(project);
 
         return "project/submit";

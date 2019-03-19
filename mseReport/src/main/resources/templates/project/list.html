@@ -14,7 +14,7 @@
 </header>
 
 <div class="topnav">
-    <a href="/main">MAIN MENU</a>
+    <a href="/home">MAIN MENU</a>
     <a href="/projects/add">ADD PROJECT</a>
     <a href="/projects/list">PROJECT LIST</a>
 </div>
@@ -22,20 +22,23 @@
 <div class="row">
     <div class="leftcolumn">
         <div class="card">
-            <h3>List of projects:</h3>
             <table>
                 <thead>
                 <tr>
-                    <th>Project number</th>
-                    <th>Name</th>
-                    <th>Budget</th>
+                    <th>PROJECT NUMBER</th>
+                    <th>DATE STARTED</th>
+                    <th>NAME</th>
+                    <th>BUDGET</th>
+                    <th>STATUS</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="project : ${projects}">
-                    <td th:text="${project.number}">number</td>
-                    <td th:text="${project.name}">name</td>
-                    <td th:text="${project.budget}">budget</td>
+                    <td th:text="${project.number}"></td>
+                    <td th:text="${project.date}"></td>
+                    <td th:text="${project.name}"></td>
+                    <td th:text="${project.budget}"></td>
+                    <td th:text="${project.closed} ? 'Closed' : 'Open'" /></td>
                 </tr>
                 </tbody>
             </table>

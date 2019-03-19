@@ -14,7 +14,7 @@
 </header>
 
 <div class="topnav">
-    <a href="/main">MAIN MENU</a>
+    <a href="/home">MAIN MENU</a>
     <a href="/projects/add">ADD PROJECT</a>
     <a href="/projects/list">PROJECT LIST</a>
 </div>
@@ -24,15 +24,19 @@
         <div class="card">
             <h3>Project added.</h3>
             <table>
+                <thead>
                 <tr>
-                    <p th:text="'Project number : ' + ${project.number}"></p>
+                    <th>NUMBER</th>
+                    <th>NAME</th>
+                    <th>BUDGET</th>
                 </tr>
                 <tr>
-                    <p th:text="'Project name : ' + ${project.name}"></p>
+                    <td th:text="${project.number}"></td>
+                    <td th:text="${project.name}"></td>
+                    <td th:text="${project.budget}"></td>
                 </tr>
-                <tr>
-                    <p th:text="'Project number : ' + ${project.budget}"></p>
-                </tr>
+
+
             </table>
         </div>
     </div>

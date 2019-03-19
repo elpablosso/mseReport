@@ -1,9 +1,13 @@
 package com.pablo.application.service;
 import com.pablo.application.entity.project.Project;
+import com.pablo.application.entity.project.ProjectForm;
 import com.pablo.application.repository.ProjectRepository;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -13,18 +17,20 @@ import java.util.Objects;
 public class ProjectService {
 
     @Autowired
-    ProjectDepartmentService projectDepartmentService;
+    private ProjectDepartmentService projectDepartmentService;
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
-    public String createNewProject(String projectNumber){
-        if(hasNoSuchProjectNumber(projectNumber)){
-            Project project = new Project(projectNumber);
-            projectRepository.save(project);
-            projectDepartmentService.createNewProjectDepartment(projectNumber);
-            return "Project saved";
-        } else return "This project number is already in database!";
-    }
+    public Project createNewProject(ProjectForm form){
+        if(hasNoSuchProjectNumber(form.getName())){
+            Project project = new Project();
+            project.setNumber(form.getNumber());
+            project.setDate(LocalDate.now());
+            project.setBudget(Integer.parseInt(form.getBudget()));
+            project.setName(form.getName());
+            projectDepartmentService.createNewProjectDepartment(form.getNumber());
+            return project; }
+            else return null; }
 
     public boolean hasNoSuchProjectNumber(String projectNumber){
         return Objects.isNull(projectRepository.findByNumber(projectNumber));
