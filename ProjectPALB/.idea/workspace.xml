@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="210e68de-f70c-4cdf-a3d4-844cf3ad4f76" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/.gradle/" />
+    <ignored path="$PROJECT_DIR$/build/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/mseReport$ProjectDepartmentTest_shouldSaveInDatabaseAndFindByProjectName.ic" NAME="ProjectDepartmentTest.shouldSaveInDatabaseAndFindByProjectName Coverage Results" MODIFIED="1552509511030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/project/Project.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" selection-start-line="24" selection-end-line="25" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/controller/MainController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/department/UsersInProjects.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/controller/WebController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/test.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/projectlist.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/addproject.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/controller/TestController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/submit.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/updateproject.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/controller/PostRequestController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/addProject.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/lists.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/li.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/111.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/mystyle.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/lista.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/addnewproject.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/submit2.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/repository/ProjectRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/report/ReportService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/repository/ReportRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/service/ReportService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/project/ProjectNameResolver.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/converter/LocalDateTimeAttributeConverter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/converter/LocalDateAttributeConverter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/converter/LocalDatePersistenceConverter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/converter/LocalDateConverter.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/css/style.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/submit.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/list.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/find.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/project/ProjectForm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/controller/ProjectController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project/add.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/service/ProjectService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/project/Project.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/repository/UserRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/user/Role.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/repository/RoleRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/service/UserDetailsServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/security/SecurityService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/security/SecurityServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/user/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/department/ProjectDepartment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/entity/department/DepartmentKey.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/service/ProjectDepartmentService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/repository/ProjectDepartmentRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pablo/application/controller/MainController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="565" />
+    <option name="y" value="7" />
+    <option name="width" value="1268" />
+    <option name="height" value="980" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mseReport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectPALB" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="mseReport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectPALB" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mseReport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectPALB" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="mseReport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectPALB" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mseReport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectPALB" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mseReport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectPALB" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mseReport" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectPALB" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553182341783" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mseReport" />
+    <property name="settings.editor.selected.configurable" value="Template Data Languages" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Pablo\IdeaProjects\mseReport\src\main\resources\templates\project" />
+      <recent name="C:\Users\Pablo\IdeaProjects\mseReport\src\main\resources\templates" />
+      <recent name="C:\Users\Pablo\IdeaProjects\mseReport\src\main\resources\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Pablo\IdeaProjects\mseReport\src\main\resources\static\css" />
+      <recent name="C:\Users\Pablo\IdeaProjects\mseReport\src\main\resources\static" />
+      <recent name="C:\Users\Pablo\IdeaProjects\mseReport\src\main\resources\templates\project" />
+      <recent name="C:\Users\Pablo\IdeaProjects\mseReport" />
+      <recent name="C:\Users\Pablo\IdeaProjects\mseReport\src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Application (1)">
+    <configuration name="ProjectDepartmentTest.shouldIncreaseValues" type="AndroidJUnit" temporary="true" nameIsGenerated="true">
+      <module name="mseReport.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ProjectDepartmentTest" />
+      <option name="METHOD_NAME" value="shouldIncreaseValues" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProjectDepartmentTest.shouldSaveInDatabaseAndFindByProjectName" type="AndroidJUnit" temporary="true" nameIsGenerated="true">
+      <module name="mseReport.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ProjectDepartmentTest" />
+      <option name="METHOD_NAME" value="shouldSaveInDatabaseAndFindByProjectName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.pablo.application.Application" />
+      <module name="mseReport.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.pablo.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Project.Application" />
+      <module name="mseReport.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="application.Application" />
+      <module name="mseReport.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value=".*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Application (1)" />
+        <item itemvalue="Application.Application (1)" />
+        <item itemvalue="Android JUnit.ProjectDepartmentTest.shouldIncreaseValues" />
+        <item itemvalue="Android JUnit.ProjectDepartmentTest.shouldSaveInDatabaseAndFindByProjectName" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="210e68de-f70c-4cdf-a3d4-844cf3ad4f76" name="Default Changelist" comment="" />
+      <created>1552330479733</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1552330479733</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Day2">
+      <created>1552513692347</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1552513692347</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update">
+      <created>1552513915594</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1552513915594</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update">
+      <created>1552514002905</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1552514002905</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update">
+      <created>1552600805120</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1552600805120</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update">
+      <created>1552784622611</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1552784622611</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update">
+      <created>1552849480153</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1552849480153</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update">
+      <created>1553031301573</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1553031301573</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Update">
+      <created>1553185883668</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1553185883668</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="ProjectDepartmentTest_shouldIncreaseValues - 2019.03.13 at 20h 21m 18s.xml">
+      <configuration name="ProjectDepartmentTest.shouldIncreaseValues" configurationId="AndroidJUnit" />
+    </history-entry>
+    <history-entry file="ProjectDepartmentTest_shouldIncreaseValues - 2019.03.13 at 20h 21m 50s.xml">
+      <configuration name="ProjectDepartmentTest.shouldIncreaseValues" configurationId="AndroidJUnit" />
+    </history-entry>
+    <history-entry file="ProjectDepartmentTest_shouldIncreaseValues - 2019.03.13 at 20h 24m 26s.xml">
+      <configuration name="ProjectDepartmentTest.shouldIncreaseValues" configurationId="AndroidJUnit" />
+    </history-entry>
+    <history-entry file="ProjectDepartmentTest_shouldIncreaseValues - 2019.03.13 at 20h 33m 59s.xml">
+      <configuration name="ProjectDepartmentTest.shouldIncreaseValues" configurationId="AndroidJUnit" />
+    </history-entry>
+    <history-entry file="ProjectDepartmentTest_shouldSaveInDatabaseAndFindByProjectName - 2019.03.13 at 20h 34m 08s.xml">
+      <configuration name="ProjectDepartmentTest.shouldSaveInDatabaseAndFindByProjectName" configurationId="AndroidJUnit" />
+    </history-entry>
+    <history-entry file="ProjectDepartmentTest_shouldSaveInDatabaseAndFindByProjectName - 2019.03.13 at 21h 38m 34s.xml">
+      <configuration name="ProjectDepartmentTest.shouldSaveInDatabaseAndFindByProjectName" configurationId="AndroidJUnit" />
+    </history-entry>
+    <history-entry file="ProjectDepartmentTest_shouldIncreaseValues - 2019.03.13 at 21h 38m 56s.xml">
+      <configuration name="ProjectDepartmentTest.shouldIncreaseValues" configurationId="AndroidJUnit" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34697986" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3555241" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3286119" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Build" order="10" weight="0.3286119" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3286119" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Gradle" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.3295302" />
+    </layout>
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Day2" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand>
+      <path>
+        <item name="mseReport" type="b2602c69:ProjectViewProjectNode" />
+        <item name="mseReport" type="462c0819:PsiDirectoryNode" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/gradlew">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Application/AppConfig.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/project/User.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/config/WebMvcConfig.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/index.html" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/ProjectDepartmentTest.java" />
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/department/UsersInProjects.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/controller/WebController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/controller/PostRequestController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/controller/ProjectDepartmentController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project/lists.html" />
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/phrase.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/repository/ReportRepository.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/service/ReportService.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/project/ProjectNameResolver.java" />
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/5.0.9.RELEASE/9302d930f932ee20b76bdbf1a5ee69485e2cec91/spring-expression-5.0.9.RELEASE-sources.jar!/org/springframework/expression/spel/ast/PropertyOrFieldReference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="216" selection-start-line="216" selection-end-line="216" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#308#309#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/converter/LocalDateAttributeConverter.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/style.css" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project/updateproject.html" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project/list.html" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project/submit.html" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project/find.html" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/project/ProjectForm.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project/add.html" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/converter/LocalDateConverter.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/service/Departments.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/controller/ProjectController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/repository/RoleRepository.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/user/Role.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/security/SecurityService.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/security/SecurityServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/service/UserDetailsServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/controller/UserController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/repository/ProjectRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/department/ProjectDepartment.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/department/DepartmentKey.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/service/ProjectDepartmentService.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/repository/UserRepository.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/user/User.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/service/ProjectService.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/report/Report.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/repository/ProjectDepartmentRepository.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/entity/project/Project.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" selection-start-line="24" selection-end-line="25" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pablo/application/controller/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
