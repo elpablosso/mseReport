@@ -1,7 +1,5 @@
 package com.pablo.application.entity.department;
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 

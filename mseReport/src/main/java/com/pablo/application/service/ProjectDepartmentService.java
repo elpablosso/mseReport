@@ -16,11 +16,11 @@ public class ProjectDepartmentService {
     @Autowired
     ProjectDepartmentRepository projectDepartmentRepository;
 
-    public String createNewProjectDepartment(String projectNumber){
+    public String createNewProjectDepartment(String projectNumber, String userId){
 
         DepartmentKey departmentKey = new DepartmentKey();
-        departmentKey.setUserId(899898989894L);
         departmentKey.setProjectNumber(projectNumber);
+        departmentKey.setUserId(userId);
 
         ProjectDepartment projectDepartment = new ProjectDepartment();
         projectDepartment.setDepartmentKey(departmentKey);
@@ -34,8 +34,9 @@ public class ProjectDepartmentService {
         return "Created project department";
     }
 
+
     public ProjectDepartment findByProjectNumber(String projectNumber){
-        return projectDepartmentRepository.findByDepartmentKey(projectNumber);
+        return projectDepartmentRepository.findByProjectNumber(projectNumber);
     }
 
     private void increaseModelling(String projectNumber, double increaseValue){

@@ -1,7 +1,8 @@
 package com.pablo.application.controller;
 import com.pablo.application.entity.project.Project;
-import com.pablo.application.entity.project.ProjectForm;
 import com.pablo.application.service.ProjectService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +14,8 @@ import java.util.List;
 
 @Controller
 public class ProjectController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
 
     @Autowired
     ProjectService projectService;
@@ -36,42 +39,32 @@ public class ProjectController {
         return projectService.findAll();
     }
 
+
     // MAPPING CREATION OF NEW PROJECT
     @GetMapping(value="projects/add")
     public ModelAndView addProjectForm(){
-
-        return new ModelAndView("project/add","projectform", new ProjectForm());
+        ModelAndView modelAndView = new ModelAndView("project/add");
+        modelAndView.addObject("project", new Project());
+        return modelAndView;
     }
 
-
-    @GetMapping(value="projects/find")
-    public ModelAndView findProjectForm() { return new ModelAndView("project/find","project", new Project());}
-
-
-    @RequestMapping(value = "projects/found", method = RequestMethod.POST)
-    public String findProject(@Valid @ModelAttribute ("project")Project found, ModelMap model) {
-
-            Project foundProject = projectService.findByNumber(found.getNumber());
-
-                model.addAttribute("number", foundProject.getNumber());
-                model.addAttribute("name", foundProject.getName());
-                model.addAttribute("budget", foundProject.getBudget());
-
-            return "project/submit";
-        }
-
     @RequestMapping(value = "projects/new", method = RequestMethod.POST)
-    public String submit(@Valid @ModelAttribute("projectform")ProjectForm form,
-                         BindingResult result, ModelMap model) {
+    public ModelAndView submit(@Valid Project form,
+                         BindingResult result) {
+
+        ModelAndView modelAndView = new ModelAndView();
         if (result.hasErrors()) {
-            return "project/add";
+            logger.info("Validation errors while submitting form.");
+            modelAndView.setViewName("project/add");
+            modelAndView.addObject("project", new Project());
+            return modelAndView;
         }
 
-        Project project = projectService.createNewProject(form);
-        model.addAttribute("project", project);
-        projectService.saveProject(project);
+        projectService.saveProject(form);
+        modelAndView.setViewName("project/submit");
 
-        return "project/submit";
+        logger.info("Form submitted successfully.");
+        return modelAndView;
     }
 }
 

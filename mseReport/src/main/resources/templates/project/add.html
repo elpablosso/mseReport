@@ -23,36 +23,32 @@
     <div class="leftcolumn">
         <div class="card">
             <h3>Add new project:</h3>
-            <form action="#" th:action="@{/projects/new}" th:object="${projectform}" method="post">
 
-                <div class="row">
-                    <div class="col-25">
-                        <label for="number">Project number:</label> </div>
-                    <div class="col-75">
-                <input id="number" type="text" placeholder="Write project number..." th:field="*{number}" />
-                    </div></div>
+            <form action="#" th:action="@{/projects/new}" th:object="${project}" method="post">
 
-                <div class="row">
-                    <div class="col-25">
-                        <label for="name">Project name:</label> </div>
-                    <div class="col-75">
-                        <input id="name" type="text" placeholder="Write project name..." th:field="*{name}" />
-                    </div></div>
+            <label>Project number</label>
+                    <input type="text" class="form-control" maxlength="32" th:field="*{number}"
+                           placeholder="Between 1 and 32 characters"/>
+                    <span th:if="${#fields.hasErrors('number')}" class="help-block" th:errors="*{number}"></span>
 
-                <div class="row">
-                    <div class="col-25">
-                        <label for="budget">Project budget:</label> </div>
-                    <div class="col-75">
-                        <input id="budget" type="text" placeholder="Write project budget..." th:field="*{budget}" />
-                    </div></div>
+                <label>Project name</label>
+                <input type="text" class="form-control" maxlength="32" th:field="*{name}"
+                       placeholder="Between 1 and 32 characters"/>
+                <span th:if="${#fields.hasErrors('number')}" class="help-block" th:errors="*{name}"></span>
 
-                <div class="row">
-                    <div class="col-75">
-                <p><input type="submit" value="Submit" /> </p>
-                    </div></div>
+
+                <label>Project budget</label>
+                <input type="text" class="form-control" maxlength="32" th:field="*{budget}"
+                       placeholder="Budget"/>
+                <span th:if="${#fields.hasErrors('number')}" class="help-block" th:errors="*{budget}"></span>
+
+                <input type="submit" id="submit" value="Add" />
+
             </form>
             </div>
     </div>
+
+
     <div class="rightcolumn">
         <div class="card">
             <h2>Sort projects</h2>
@@ -60,7 +56,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="footer">
     <p>Version beta 0.1 <br>

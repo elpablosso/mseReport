@@ -9,7 +9,7 @@ import java.util.Objects;
 public class DepartmentKey implements Serializable {
 
     @Column(name = "user_id")
-    private Long userId;
+    private String userId;
 
     @Column(name = "project_number")
     private String projectNumber;
@@ -17,11 +17,11 @@ public class DepartmentKey implements Serializable {
     public DepartmentKey() {
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
