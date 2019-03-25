@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class ProjectDepartment{
 
     @EmbeddedId
-    DepartmentKey departmentKey;
+    DepartmentKey key;
 
     // THERE FIELDS REPRESENT TIME SPENT IN SPECIFIC AREAS OF PROJECT
     // THE UNIT IS AN HOUR
@@ -61,11 +61,11 @@ public class ProjectDepartment{
         return documentation;
     }
 
-    public DepartmentKey getDepartmentKey() {
-        return departmentKey;
+    public DepartmentKey getKey() {
+        return key;
     }
 
-    public void setDepartmentKey(DepartmentKey departmentKey) {
-        this.departmentKey = departmentKey;
+    public void setKey(DepartmentKey key) {
+        this.key = key;
     }
 }

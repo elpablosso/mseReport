@@ -1,11 +1,13 @@
 package com.pablo.application.entity.project;
+import com.pablo.application.entity.converter.ListToStringConverter;
 import com.pablo.application.entity.converter.LocalDateConverter;
 import com.pablo.application.entity.user.User;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,6 +16,7 @@ public class Project {
 
     @Id
     @Size(min=1, max=32)
+    @Column(name = "project_id")
     private String number;
 
     @Convert(converter = LocalDateConverter.class)
@@ -23,13 +26,25 @@ public class Project {
     private String name;
 
     @ManyToMany(mappedBy = "projects")
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
 
     private int budget;
 
     private boolean closed;
 
     public Project() {
+    }
+
+    public Project(@Size(min = 1, max = 32) String number) {
+        this.number = number;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public String getNumber() {
