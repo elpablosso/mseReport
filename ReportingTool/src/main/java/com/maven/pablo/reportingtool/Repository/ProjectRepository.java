@@ -3,6 +3,7 @@ package com.maven.pablo.reportingtool.Repository;
 import com.maven.pablo.reportingtool.Entity.Project;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,6 +23,16 @@ public interface ProjectRepository extends CrudRepository<Project,String> {
     List<Project> findClosedProjects();
 
     @Query("SELECT p FROM Project p WHERE p.budget>=?1")
-    List<Project> findProjectsWithBudgetHigherThan(int low);
+    List<Project> findProjectsWithBudgetHigherThan(int bot);
+
+    @Query("SELECT p FROM Project p WHERE p.budget<=?1")
+    List<Project> findProjectsWithBudgetLowerThan(int top);
+
+    @Query("SELECT p FROM Project p WHERE p.budget BETWEEN ?1 AND ?2")
+    List<Project> findProjectsWithBudgetBetween(int bot, int top);
+    
+
+    @Query("SELECT p FROM Project p WHERE p.title LIKE CONCAT('%',:title,'%')")
+    List<Project> listOfProjectsWithNameContaining(@Param("title") String name);
 
 }
