@@ -11,9 +11,7 @@ import java.util.List;
 @Repository
 public interface ProjectRepository extends CrudRepository<Project,String> {
 
-    @Query("SELECT p FROM Project p WHERE p.number = ?1")
-    Project findByProjectNumber(String projectNumber);
-
+    Project findByProjectNumber(String number);
 
 }
 

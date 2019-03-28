@@ -1,4 +1,4 @@
-package com.pablo.application.entity.department;
+package com.pablo.application.service;
 import com.pablo.application.entity.department.DepartmentKey;
 import com.pablo.application.entity.department.ProjectDepartment;
 import com.pablo.application.repository.ProjectDepartmentRepository;

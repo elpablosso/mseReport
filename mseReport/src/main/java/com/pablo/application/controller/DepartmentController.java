@@ -1,7 +1,7 @@
 package com.pablo.application.controller;
 
 import com.pablo.application.entity.department.ProjectDepartment;
-import com.pablo.application.entity.department.ProjectDepartmentService;
+import com.pablo.application.service.ProjectDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
