@@ -4,30 +4,31 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class User {
+@Table(name = "employee")
+public class Employee {
 
 
-    @Column(name = "user_id")
+    @Column(name = "employee_id")
     @Id
-    private String userId;
+    private String id;
 
     private String email;
     private String name;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "User_Project",
-            joinColumns = { @JoinColumn(name = "user_id") },
+            name = "employees_project",
+            joinColumns = { @JoinColumn(name = "employee_id") },
             inverseJoinColumns = { @JoinColumn(name = "project_id") }
     )
-    private Set<Project> projects = new HashSet<>();
+    private Set<Project> projects;
 
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -44,13 +45,5 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
     }
 }

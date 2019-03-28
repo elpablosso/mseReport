@@ -13,7 +13,8 @@ public class ProjectController {
 
 @GetMapping("")
     public ModelAndView testPage(){
-    return new ModelAndView("index","projects",projectService.getListOfAllProjects());
+    return new ModelAndView("index","projects",projectService
+            .convertListOfProjectsIntoResponse(projectService.listOfProjetsWithNameContaining("MSE")));
 }
 
 

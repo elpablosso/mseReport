@@ -1,22 +1,22 @@
 package com.maven.pablo.reportingtool.Service;
 
+import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
-import com.maven.pablo.reportingtool.Entity.User;
 
 import java.util.List;
 import java.util.Set;
 
-public interface IProjectUserService {
+public interface IProjectEmployeeService {
 
     // GETTING LIST OF USERS ACTIVE IN SOME PROJECT
-    Set<User> getUsersSetFromProjectByNumber(String projectNumber);
-    Set<User> getUsersSetFromProject(Project project);
+    Set<Employee> getUsersSetFromProjectByNumber(String projectNumber);
+    Set<Employee> getUsersSetFromProject(Project project);
 
     // GETTING SPECIFIED USERS PROJECT LIST
-    List<Project> getListOfProjectsOfUser(User user);
+    List<Project> getListOfProjectsOfUser(Employee employee);
     List<Project> listOfProjectsByUserId(String userId);
 
 
     void addUserToTheProject(String projectNumber, String userId);
-    void updateUserSetInProject(String projectNumber, Set<User> set);
+    void updateUserSetInProject(String projectNumber, Set<Employee> set);
 }

@@ -1,10 +1,9 @@
 package com.maven.pablo.reportingtool.Service;
 
 import com.maven.pablo.reportingtool.Entity.Project;
-import com.maven.pablo.reportingtool.Entity.User;
+import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
 
 import java.util.List;
-import java.util.Set;
 
 public interface IProjectService {
 

@@ -1,7 +1,7 @@
-package com.maven.pablo.reportingtool.Service;
+package com.maven.pablo.reportingtool.Service.Response;
 
+import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
-import com.maven.pablo.reportingtool.Entity.User;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -29,7 +29,7 @@ public class ProjectInfo {
         setProjectBudget(project.getBudget());
         setDate(project.getDateStarted());
         setClosed(project.isClosed());
-        usersIds.addAll(project.getUsers().stream().map(User::getUserId).collect(Collectors.toSet()));
+        usersIds.addAll(project.getEmployees().stream().map(Employee::getId).collect(Collectors.toSet()));
     }
 
     public ProjectInfo createFromProject(Project project){

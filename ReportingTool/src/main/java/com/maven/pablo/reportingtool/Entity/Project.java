@@ -17,7 +17,7 @@ public class Project {
     private String name;
 
     @ManyToMany(mappedBy = "projects")
-    private Set<User> users = new HashSet<>();
+    private Set<Employee> employees = new HashSet<>();
 
     private int budget;
 
@@ -30,12 +30,12 @@ public class Project {
         this.number = number;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     public String getNumber() {
