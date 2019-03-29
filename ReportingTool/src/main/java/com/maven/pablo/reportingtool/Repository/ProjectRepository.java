@@ -30,9 +30,8 @@ public interface ProjectRepository extends CrudRepository<Project,String> {
 
     @Query("SELECT p FROM Project p WHERE p.budget BETWEEN ?1 AND ?2")
     List<Project> findProjectsWithBudgetBetween(int bot, int top);
-    
 
-    @Query("SELECT p FROM Project p WHERE p.title LIKE CONCAT('%',:title,'%')")
-    List<Project> listOfProjectsWithNameContaining(@Param("title") String name);
+    @Query("SELECT p FROM Project p WHERE p.number LIKE CONCAT('%',:title,'%')")
+    List<Project> listOfProjectsWithNameContaining(@Param("title") String title);
 
 }
