@@ -15,6 +15,10 @@ public class Employee {
     private String email;
     private String name;
 
+    // FINANCES //
+    private int salary;
+    private int bonus;
+
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "employees_project",
@@ -43,7 +47,31 @@ public class Employee {
         return name;
     }
 
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public int getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(int bonus) {
+        this.bonus = bonus;
     }
 }

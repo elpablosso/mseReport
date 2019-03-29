@@ -6,5 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface EmployeeRepository extends CrudRepository<Employee,String> {
 
+    @Query("SELECT e FROM Employee e WHERE e.id = ?1")
+    Employee getEmployeeOfId(String id);
 
 }
