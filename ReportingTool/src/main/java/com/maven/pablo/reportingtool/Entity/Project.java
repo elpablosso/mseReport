@@ -14,7 +14,8 @@ public class Project {
 
     private LocalDate dateStarted;
 
-    private String name;
+    @Column(name = "title")
+    private String title;
 
     @ManyToMany(mappedBy = "projects")
     private Set<Employee> employees = new HashSet<>();
@@ -54,12 +55,12 @@ public class Project {
         this.dateStarted = dateStarted;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getBudget() {

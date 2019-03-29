@@ -1,4 +1,4 @@
-package com.maven.pablo.reportingtool.Service;
+package com.maven.pablo.reportingtool.Service.Interface;
 
 import com.maven.pablo.reportingtool.Entity.Project;
 import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
@@ -28,7 +28,7 @@ public interface IProjectService {
     List<Project> listOfProjectsWithBudgetBetween(int bot, int high);
 
     // RETURN LIST OF PROJECTS WITH NAME CONTAINS
-    List<Project> listOfProjetsWithNameContaining(String name);
+    List<Project> listOfProjectsWithNameContaining(String name);
 
 
     // SINGLE OBJECT FIND //

@@ -3,7 +3,7 @@
 <head>
     <title>Reporting center</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta title="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 
@@ -21,7 +21,7 @@
     <tbody>
     <tr th:each="project : ${projects}">
         <td th:text="${project.projectNumber}"></td>
-        <td th:text="${project.projectName}"></td>
+        <td th:text="${project.projectTitle}"></td>
         <td th:text="${project.projectBudget}"></td>
         <td th:text="${project.closed} ? 'Closed' : 'Open'" /></td>
     </tr>

@@ -1,5 +1,5 @@
 package com.maven.pablo.reportingtool.ControllerMVC;
-import com.maven.pablo.reportingtool.Service.IProjectService;
+import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ public class ProjectController {
 @GetMapping("")
     public ModelAndView testPage(){
     return new ModelAndView("index","projects",projectService
-            .convertListOfProjectsIntoResponse(projectService.listOfProjetsWithNameContaining("MSE")));
+            .convertListOfProjectsIntoResponse(projectService.listOfProjectsWithNameContaining("TEST")));
 }
 
 

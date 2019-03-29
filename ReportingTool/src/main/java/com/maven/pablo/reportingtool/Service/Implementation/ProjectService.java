@@ -1,7 +1,7 @@
-package com.maven.pablo.reportingtool.Service;
+package com.maven.pablo.reportingtool.Service.Implementation;
 import com.maven.pablo.reportingtool.Entity.Project;
 import com.maven.pablo.reportingtool.Repository.ProjectRepository;
-import com.maven.pablo.reportingtool.Repository.EmployeeRepository;
+import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
 import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,23 +46,23 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public List<Project> listOfProjetsWithNameContaining(String name) {
-        return null;
+    public List<Project> listOfProjectsWithNameContaining(String name) {
+        return projectRepository.listOfProjectsWithNameContaining(name);
     }
 
     @Override
     public Project findProjectByProjectNumber(String number) {
-        return null;
+        return projectRepository.findProjectByNumber(number);
     }
 
     @Override
     public void saveProjectInRepository(Project project) {
-
+        projectRepository.save(project);
     }
 
     @Override
     public ProjectInfo convertSingleProjectIntoResponse(Project project) {
-        return null;
+        return new ProjectInfo(project);
     }
 
     @Override

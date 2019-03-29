@@ -1,4 +1,4 @@
-package com.maven.pablo.reportingtool.Service;
+package com.maven.pablo.reportingtool.Service.Interface;
 
 import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;

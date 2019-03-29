@@ -14,7 +14,7 @@ public class ProjectInfo {
 
     private LocalDate date;
 
-    private String projectName;
+    private String projectTitle;
 
     private Set<String> usersIds;
 
@@ -25,7 +25,7 @@ public class ProjectInfo {
     public ProjectInfo(Project project) {
         usersIds = new HashSet<>();
         setProjectNumber(project.getNumber());
-        setProjectName(project.getName());
+        setProjectTitle(project.getTitle());
         setProjectBudget(project.getBudget());
         setDate(project.getDateStarted());
         setClosed(project.isClosed());
@@ -52,12 +52,12 @@ public class ProjectInfo {
         this.date = date;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getProjectTitle() {
+        return projectTitle;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setProjectTitle(String projectTitle) {
+        this.projectTitle = projectTitle;
     }
 
     public Set<String> getUsers() {
