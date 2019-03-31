@@ -1,8 +1,10 @@
 package com.maven.pablo.reportingtool.Service.Interface;
 import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
-import java.util.Collection;
+import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
 
+import java.util.Collection;
+import java.util.List;
 
 
 public interface IProjectService {
@@ -32,6 +34,10 @@ public interface IProjectService {
     // CHANGING OBJECTS
     void addEmployeeToProject(String projectNumber, Employee employee);
 
+    // CREATING RESPONSE // OBJECT FROM RESPONSE
+
+    List<ProjectInfo> allProjectsAsResponse(Collection<Project> projects);
+    Project getProjectFromResponse(ProjectInfo info);
 
 
 }

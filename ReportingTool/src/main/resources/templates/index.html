@@ -21,18 +21,22 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="project : ${allProjectsList}">
+    <tr th:each="project : ${projectList}">
         <td th:text="${project.projectNumber}"></td>
         <td th:text="${project.projectTitle}"></td>
         <td th:text="${project.projectBudget}"></td>
-        <td th:text="${project.closed} ? 'Closed' : 'Open'" /></td>
-        <td><a th:href="@{/delete_project/${project.projectNumber}}" class="btn btn-danger">Delete</a></td>
+        <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
+        <td>
+            <form action ="#" th:action="@{/delete}" th:object="${project}" method="post">
+                <input type="submit" id="submitButton" th:value="Save">
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
 
-<form action="#" th:action="@{/add}" th:object="${projectInfo}" method="post">
-    <input type="text" th:field="*{projectNumber}" />
+<form action="#" th:action="@{/saveProject}" th:object="${projectInfo}" method="post">
+    <input th:field="*{projectNumber}" type="text"/>
     <input type="text" th:field="*{projectTitle}" />
     <input type="text" th:field="*{projectBudget}"/>
     <input type="submit" value="Submit" />

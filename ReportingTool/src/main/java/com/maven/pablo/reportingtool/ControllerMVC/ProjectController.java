@@ -6,10 +6,13 @@ import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
 import com.maven.pablo.reportingtool.Service.Interface.IProjectsOfEmployeeService;
 import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -24,13 +27,22 @@ public class ProjectController {
     @Autowired
     IEmployeesInProjectService employeesInProjectService;
 
+    @GetMapping("/")
+    public ModelAndView home(){
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("projectList",
+                projectService.allProjectsAsResponse(projectService.getListOfAllProjects()));
+        modelAndView.addObject("projectInfo",new ProjectInfo());
+        return modelAndView;
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ProjectInfo> find(@PathVariable(name="id") String id){
         Project project = projectService.findProjectByProjectNumber(id);
         return new ResponseEntity<>(new ProjectInfo(project), HttpStatus.OK);
     }
 
-    @GetMapping("/add")
+    @GetMapping("/connect")
     public @ResponseBody String connectUserToProject(@RequestParam String userId,
                                        @RequestParam String projectId)
     {
@@ -39,14 +51,20 @@ public class ProjectController {
         return "Done!";
     }
 
-
-    @PostMapping(value = "delete_project/{projectNumber}")
-    public String removeEmployee(@PathVariable("projectNumber") String projectNumber){
-        projectService.removeProjectByNumber(projectNumber);
-        return "index";
+    @PostMapping("/saveProject")
+    public ModelAndView saveProjectSumbit(@ModelAttribute(name = "projectInfo") ProjectInfo projectInfo){
+        projectService.saveProjectInRepository(projectService.getProjectFromResponse(projectInfo));
+        return new ModelAndView("index","projectList",
+                projectService.allProjectsAsResponse(projectService.getListOfAllProjects()));
     }
 
 
+    @PostMapping(value = "/delete")
+    public ModelAndView removeEmployee(@ModelAttribute("projectInfo") ProjectInfo projectInfo){
+        projectService.removeProjectByNumber(projectInfo.getProjectNumber());
+        return new ModelAndView("index","projectList",
+                projectService.allProjectsAsResponse(projectService.getListOfAllProjects()));
+    }
 
 
 }

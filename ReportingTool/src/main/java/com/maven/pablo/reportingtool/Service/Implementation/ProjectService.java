@@ -3,11 +3,14 @@ import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
 import com.maven.pablo.reportingtool.Repository.ProjectRepository;
 import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
+import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -64,7 +67,7 @@ public class ProjectService implements IProjectService {
 
     @Override
     public void removeProjectByNumber(String projectNumber) {
-        projectRepository.deleteProjectByNumber(projectNumber);
+        projectRepository.delete(findProjectByProjectNumber(projectNumber));
     }
 
     @Override
@@ -84,5 +87,18 @@ public class ProjectService implements IProjectService {
         project.setEmployees(employees);
         projectRepository.save(project);
     }
+
+    @Override
+    public Project getProjectFromResponse(ProjectInfo info) {
+        Project project = new Project();
+        project.setNumber(info.getProjectNumber());
+        project.setTitle(info.getProjectTitle());
+        project.setBudget(info.getProjectBudget());
+        return project;
+    }
+
+    @Override
+    public List<ProjectInfo> allProjectsAsResponse(Collection<Project> projects) {
+        return projects.stream().map(ProjectInfo::new).collect(Collectors.toList());}
 }
 
