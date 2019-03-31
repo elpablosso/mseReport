@@ -1,5 +1,4 @@
 package com.maven.pablo.reportingtool.Service.Response;
-
 import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
 
@@ -16,24 +15,34 @@ public class ProjectInfo {
 
     private String projectTitle;
 
-    private Set<String> usersIds;
+    private Set<String> employeesIds;
 
     private int projectBudget;
 
     private boolean closed;
 
-    public ProjectInfo(Project project) {
-        usersIds = new HashSet<>();
-        setProjectNumber(project.getNumber());
-        setProjectTitle(project.getTitle());
-        setProjectBudget(project.getBudget());
-        setDate(project.getDateStarted());
-        setClosed(project.isClosed());
-        usersIds.addAll(project.getEmployees().stream().map(Employee::getId).collect(Collectors.toSet()));
+    public ProjectInfo() {
     }
 
-    public ProjectInfo createFromProject(Project project){
-        return new ProjectInfo(project);
+    public ProjectInfo(Project project) {
+
+        employeesIds = new HashSet<>();
+
+        if (project.getNumber() != null)
+            setProjectNumber(project.getNumber());
+
+        if (project.getTitle() != null)
+            setProjectTitle(project.getTitle());
+
+        if (project.getBudget() != 0)
+            setProjectBudget(project.getBudget());
+
+        setDate(project.getDateStarted());
+        setClosed(project.isClosed());
+
+        if (project.getEmployees() != null) {
+            employeesIds.addAll(project.getEmployees().stream().map(Employee::getId).collect(Collectors.toSet()));
+        }
     }
 
     public String getProjectNumber() {
@@ -60,12 +69,13 @@ public class ProjectInfo {
         this.projectTitle = projectTitle;
     }
 
-    public Set<String> getUsers() {
-        return usersIds;
+
+    public Set<String> getEmployeesIds() {
+        return employeesIds;
     }
 
-    public void setUsers(Set<String> users) {
-        this.usersIds = users;
+    public void setEmployeesIds(Set<String> employeesIds) {
+        this.employeesIds = employeesIds;
     }
 
     public int getProjectBudget() {

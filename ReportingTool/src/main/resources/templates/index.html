@@ -9,24 +9,36 @@
 
 <body>
 
+
 <table>
     <thead>
     <tr>
-        <th>PROJECT NUMBER</th>
+        <th >PROJECT NUMBER</th>
         <th>NAME</th>
         <th>BUDGET</th>
         <th>STATUS</th>
+        <th>DELETE</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="project : ${projects}">
+    <tr th:each="project : ${allProjectsList}">
         <td th:text="${project.projectNumber}"></td>
         <td th:text="${project.projectTitle}"></td>
         <td th:text="${project.projectBudget}"></td>
         <td th:text="${project.closed} ? 'Closed' : 'Open'" /></td>
+        <td><a th:href="@{/delete_project/${project.projectNumber}}" class="btn btn-danger">Delete</a></td>
     </tr>
     </tbody>
 </table>
+
+<form action="#" th:action="@{/add}" th:object="${projectInfo}" method="post">
+    <input type="text" th:field="*{projectNumber}" />
+    <input type="text" th:field="*{projectTitle}" />
+    <input type="text" th:field="*{projectBudget}"/>
+    <input type="submit" value="Submit" />
+</form>
+
+
 
 </body>
 </html>

@@ -1,20 +1,16 @@
 package com.maven.pablo.reportingtool.ControllerMVC;
-import com.maven.pablo.reportingtool.Entity.Employee;
-import com.maven.pablo.reportingtool.Service.Implementation.ProjectEmployeeService;
-import com.maven.pablo.reportingtool.Service.Interface.IProjectEmployeeService;
+import com.maven.pablo.reportingtool.Entity.Project;
+import com.maven.pablo.reportingtool.Service.Interface.IEmployeeService;
+import com.maven.pablo.reportingtool.Service.Interface.IEmployeesInProjectService;
 import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
+import com.maven.pablo.reportingtool.Service.Interface.IProjectsOfEmployeeService;
 import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Controller
 public class ProjectController {
@@ -22,38 +18,35 @@ public class ProjectController {
     @Autowired
     IProjectService projectService;
     @Autowired
-    IProjectEmployeeService projectEmployeeService;
+    IEmployeeService employeeService;
+    @Autowired
+    IProjectsOfEmployeeService projectsOfEmployeeService;
+    @Autowired
+    IEmployeesInProjectService employeesInProjectService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ProjectInfo> find(@PathVariable(name="id") String id){
+        Project project = projectService.findProjectByProjectNumber(id);
+        return new ResponseEntity<>(new ProjectInfo(project), HttpStatus.OK);
+    }
 
-    @ModelAttribute("allProjectsList")
-    public List<ProjectInfo> allProjects(){
-        return projectService.convertListOfProjectsIntoResponse(projectService.getListOfAllProjects());
+    @GetMapping("/add")
+    public @ResponseBody String connectUserToProject(@RequestParam String userId,
+                                       @RequestParam String projectId)
+    {
+        employeesInProjectService.addEmployeeToProjectById(projectId,userId);
+        projectsOfEmployeeService.addProjectToEmployee(projectId,userId);
+        return "Done!";
     }
 
 
-    @GetMapping(value = "add")
-    public String addProjectForm(Model model) {
-        model.addAttribute("projectInfo", new ProjectInfo());
+    @PostMapping(value = "delete_project/{projectNumber}")
+    public String removeEmployee(@PathVariable("projectNumber") String projectNumber){
+        projectService.removeProjectByNumber(projectNumber);
         return "index";
     }
 
-    @PostMapping(value = "add")
-    public String saveProject(
-            final ProjectInfo projectInfo, final BindingResult bindingResult, final ModelMap model) {
-        if (bindingResult.hasErrors()) {
-            return "index";
-        }
-        projectService.saveProjectInRepository(projectService.createProjectFromResponse(projectInfo));
-        model.clear();
-        return "redirect:/add";
-    }
 
 
-@GetMapping("")
-    public ModelAndView testPage(){
-    projectEmployeeService.connectUserToProject("MSE1","APK01");
-    return new ModelAndView("index","projects",projectService
-            .convertListOfProjectsIntoResponse(projectService.listOfProjectsWithNameContaining("NAME1")));
-}
 
 }

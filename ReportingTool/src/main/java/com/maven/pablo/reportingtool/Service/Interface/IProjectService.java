@@ -1,38 +1,21 @@
 package com.maven.pablo.reportingtool.Service.Interface;
-
 import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
-import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
-
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+
+
 
 public interface IProjectService {
 
     /// LISTS OF PROJECTS ///////////////////////
 
-    // RETURN LIST OF ALL AVAIBLE PROJECTS
-    List<Project> getListOfAllProjects();
-
-    // RETURN LIST OF PROJECTS WHICH ARE STILL OPEN
-    List<Project> getListOfOpenProjects();
-
-    //RETURN LIST OF CLOSED PROJECTS
-    List<Project> getListOfClosedProjects();
-
-    // RETURN LIST OF PROJECTS WITH BUDGET HIGHER OR EQUALS
-    List<Project> listOfProjectsWithBudgetHigher(int bot);
-
-    // RETURN LIST OF PROJECTS WITH BUDGET LOWER OR EQUALS
-    List<Project> listOfProjectsWithBudgetLower(int high);
-
-    // RETURN LIST OF PROJECTS WITH BUDGET BETWEEN
-    List<Project> listOfProjectsWithBudgetBetween(int bot, int high);
-
-    // RETURN LIST OF PROJECTS WITH NAME CONTAINS
-    List<Project> listOfProjectsWithNameContaining(String name);
-
+    Collection<Project> getListOfAllProjects();
+    Collection<Project> getListOfOpenProjects();
+    Collection<Project> getListOfClosedProjects();
+    Collection<Project> getProjectsWithBudgetHigher(int bot);
+    Collection<Project> getProjectsWithBudgetLower(int high);
+    Collection<Project> getProjectsWithBudgetBetween(int bot, int high);
+    Collection<Project> getProjectsWithNameContaining(String name);
 
     // SINGLE OBJECT FIND //
     Project findProjectByProjectNumber(String number);
@@ -42,14 +25,13 @@ public interface IProjectService {
     void saveProjectInRepository(Project project);
 
     // DELETING
-
     void removeProjectByNumber(String projectNumber);
+    void removeEmployeeFromProject(String projectNumber, Employee employee);
 
 
-    /// CONVERTING INTO CONTROLLER RESPONSE ////
+    // CHANGING OBJECTS
+    void addEmployeeToProject(String projectNumber, Employee employee);
 
-    Project createProjectFromResponse(ProjectInfo projectInfo);
-    ProjectInfo convertSingleProjectIntoResponse(Project project);
-    List<ProjectInfo> convertListOfProjectsIntoResponse(Collection<Project> projectList);
+
 
 }
