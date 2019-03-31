@@ -1,9 +1,12 @@
 package com.maven.pablo.reportingtool.Service.Interface;
 
+import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
 import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public interface IProjectService {
 
@@ -38,13 +41,15 @@ public interface IProjectService {
     /// SAVING PROJECT IN REPOSITORY ///
     void saveProjectInRepository(Project project);
 
+    // DELETING
 
-    //// MODIFING THE PROJECT
+    void removeProjectByNumber(String projectNumber);
 
 
     /// CONVERTING INTO CONTROLLER RESPONSE ////
 
+    Project createProjectFromResponse(ProjectInfo projectInfo);
     ProjectInfo convertSingleProjectIntoResponse(Project project);
-    List<ProjectInfo> convertListOfProjectsIntoResponse(List<Project> projectList);
+    List<ProjectInfo> convertListOfProjectsIntoResponse(Collection<Project> projectList);
 
 }

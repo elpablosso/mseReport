@@ -5,6 +5,8 @@ import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
 import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +15,8 @@ public class ProjectService implements IProjectService {
 
     @Autowired
     private ProjectRepository projectRepository;
-
+    @Autowired
+    private EmployeeService employeeService;
 
     @Override
     public List<Project> getListOfAllProjects() {
@@ -66,8 +69,32 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public List<ProjectInfo> convertListOfProjectsIntoResponse(List<Project> projectList) {
+    public List<ProjectInfo> convertListOfProjectsIntoResponse(Collection<Project> projectList) {
         return projectList.stream().map(ProjectInfo::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public void removeProjectByNumber(String projectNumber) {
+        projectRepository.deleteProjectByNumber(projectNumber);
+    }
+
+    @Override
+    public Project createProjectFromResponse(ProjectInfo projectInfo) {
+        Project project = new Project();
+
+        if(projectInfo.getProjectNumber()!=null)
+        project.setNumber(projectInfo.getProjectNumber());
+
+        if(projectInfo.getProjectTitle()!=null)
+        project.setTitle(projectInfo.getProjectTitle());
+
+        if(projectInfo.getProjectBudget()!=0)
+        project.setBudget(projectInfo.getProjectBudget());
+
+        if(projectInfo.getUsers()!=null)
+        project.setEmployees(employeeService.getEmployeeSetFromIdList(projectInfo.getUsers()));
+
+        return project;
     }
 }
 
