@@ -1,8 +1,11 @@
 package com.maven.pablo.reportingtool.Service.Interface;
 import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
+import com.maven.pablo.reportingtool.Service.Response.EmployeeInfo;
+import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 
@@ -22,6 +25,12 @@ public interface IEmployeeService {
 
     void addProjectToEmployeeById(String employeeId, Project project);
     void removeProjectFromEmployeeById(String employeeId, Project project);
+
+
+    /// RESPONSE
+
+    List<EmployeeInfo> allEmployeesAsResponse(Collection<Employee> employees);
+    Employee getEmployeeFromResponse(EmployeeInfo info);
 
 
 }

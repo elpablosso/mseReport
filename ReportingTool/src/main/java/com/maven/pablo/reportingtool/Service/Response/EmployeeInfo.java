@@ -19,7 +19,7 @@ public class EmployeeInfo {
     private int bonus;
 
     private Set<String> projectIds;
-    private Set<Project> projects;
+
 
     private EmployeeInfo() {
         setId("");
@@ -28,7 +28,6 @@ public class EmployeeInfo {
         setSalary(0);
         setBonus(0);
         projectIds = new HashSet<>();
-        projects = new HashSet<>();
     }
 
     public EmployeeInfo(Employee employee) {
@@ -39,7 +38,6 @@ public class EmployeeInfo {
             employeeInfo.setName(employee.getName());
         if(employee.getProjects()!=null) {
             projectIds = employee.getProjects().stream().map(Project::getNumber).collect(Collectors.toSet());
-            projects = employee.getProjects();
         }
     }
 

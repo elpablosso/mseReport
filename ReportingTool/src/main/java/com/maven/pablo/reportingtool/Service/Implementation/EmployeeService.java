@@ -3,9 +3,11 @@ import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
 import com.maven.pablo.reportingtool.Repository.EmployeeRepository;
 import com.maven.pablo.reportingtool.Service.Interface.IEmployeeService;
+import com.maven.pablo.reportingtool.Service.Response.EmployeeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -65,6 +67,16 @@ public class EmployeeService implements IEmployeeService {
         projects.remove(project);
         employee.setProjects(projects);
         employeeRepository.save(employee);
+    }
+
+    @Override
+    public List<EmployeeInfo> allEmployeesAsResponse(Collection<Employee> employees) {
+        return employees.stream().map(EmployeeInfo::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public Employee getEmployeeFromResponse(EmployeeInfo info) {
+        return employeeRepository.getEmployeeOfId(info.getId());
     }
 
     @Override
