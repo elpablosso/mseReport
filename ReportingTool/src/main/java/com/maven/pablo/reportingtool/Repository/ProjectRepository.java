@@ -40,8 +40,6 @@ public interface ProjectRepository extends CrudRepository<Project,String> {
 
     /////// DELETE ////////////////////////////////
 
-    @Query("DELETE FROM Project p WHERE p.number=?1")
-    void deleteProjectByNumber(String number);
 
 
 }
