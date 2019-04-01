@@ -19,12 +19,7 @@ public class Employee {
     private int salary;
     private int bonus;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "employees_project",
-            joinColumns = { @JoinColumn(name = "employee_id") },
-            inverseJoinColumns = { @JoinColumn(name = "project_id") }
-    )
+    @ManyToMany(mappedBy = "employees")
     private Set<Project> projects;
 
     public String getId() {

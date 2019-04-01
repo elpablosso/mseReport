@@ -6,17 +6,16 @@ import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
 import com.maven.pablo.reportingtool.Service.Interface.IProjectsOfEmployeeService;
 import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
 public class ProjectController {
+
 
     @Autowired
     IProjectService projectService;
@@ -59,11 +58,14 @@ public class ProjectController {
     }
 
 
-    @PostMapping(value = "/delete")
-    public ModelAndView removeEmployee(@ModelAttribute("projectInfo") ProjectInfo projectInfo){
-        projectService.removeProjectByNumber(projectInfo.getProjectNumber());
-        return new ModelAndView("index","projectList",
+    @GetMapping(value = "/delete")
+    public ModelAndView deleteProject(@RequestParam("projectNumber") String projectNumber){
+        projectService.removeProjectByNumber(projectNumber);
+
+        ModelAndView modelAndView = new ModelAndView("index","projectList",
                 projectService.allProjectsAsResponse(projectService.getListOfAllProjects()));
+        modelAndView.addObject(new ProjectInfo());
+        return modelAndView;
     }
 
 

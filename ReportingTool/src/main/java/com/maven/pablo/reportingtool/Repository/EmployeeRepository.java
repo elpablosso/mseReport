@@ -21,4 +21,6 @@ public interface EmployeeRepository extends CrudRepository<Employee,String> {
     @Query("DELETE FROM Employee e WHERE e.id=?1")
     void deleteEmployeeOfId(String id);
 
+
+
 }

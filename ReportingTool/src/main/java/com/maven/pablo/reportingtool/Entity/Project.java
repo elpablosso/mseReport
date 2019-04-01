@@ -17,8 +17,12 @@ public class Project {
     @Column(name = "title")
     private String title;
 
-    @ManyToMany(mappedBy = "projects")
-    private Set<Employee> employees = new HashSet<>();
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "project_employee",
+            joinColumns = { @JoinColumn(name = "project_id") },
+            inverseJoinColumns = { @JoinColumn(name = "employee_id") }
+    )    private Set<Employee> employees = new HashSet<>();
 
     private int budget;
 

@@ -27,9 +27,8 @@
         <td th:text="${project.projectBudget}"></td>
         <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
         <td>
-            <form action ="#" th:action="@{/delete}" th:object="${project}" method="post">
-                <input type="submit" id="submitButton" th:value="Save">
-            </form>
+            <a th:href="@{/delete(projectNumber=${project.projectNumber})}" class="btn btn-danger">Delete</a>
+
         </td>
     </tr>
     </tbody>
