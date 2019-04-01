@@ -26,11 +26,14 @@ public class ProjectController {
     @Autowired
     IEmployeesInProjectService employeesInProjectService;
 
+
     @GetMapping("/")
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("projectList",
                 projectService.allProjectsAsResponse(projectService.getListOfAllProjects()));
+        //modelAndView.addObject("employeeList",
+         //       employeeService.)
         modelAndView.addObject("projectInfo",new ProjectInfo());
         return modelAndView;
     }
@@ -41,9 +44,9 @@ public class ProjectController {
         return new ResponseEntity<>(new ProjectInfo(project), HttpStatus.OK);
     }
 
-    @GetMapping("/connect")
-    public @ResponseBody String connectUserToProject(@RequestParam String userId,
-                                       @RequestParam String projectId)
+    @GetMapping("/connect/{userId}/{projectId}")
+    public @ResponseBody String connectUserToProject(@PathVariable String userId,
+                                       @PathVariable String projectId)
     {
         employeesInProjectService.addEmployeeToProjectById(projectId,userId);
         projectsOfEmployeeService.addProjectToEmployee(projectId,userId);
@@ -53,8 +56,10 @@ public class ProjectController {
     @PostMapping("/saveProject")
     public ModelAndView saveProjectSumbit(@ModelAttribute(name = "projectInfo") ProjectInfo projectInfo){
         projectService.saveProjectInRepository(projectService.getProjectFromResponse(projectInfo));
-        return new ModelAndView("index","projectList",
+        ModelAndView modelAndView = new ModelAndView("index","projectList",
                 projectService.allProjectsAsResponse(projectService.getListOfAllProjects()));
+                modelAndView.addObject("projectInfo",new ProjectInfo());
+        return modelAndView;
     }
 
 
@@ -64,7 +69,7 @@ public class ProjectController {
 
         ModelAndView modelAndView = new ModelAndView("index","projectList",
                 projectService.allProjectsAsResponse(projectService.getListOfAllProjects()));
-        modelAndView.addObject(new ProjectInfo());
+        modelAndView.addObject("projectInfo",new ProjectInfo());
         return modelAndView;
     }
 

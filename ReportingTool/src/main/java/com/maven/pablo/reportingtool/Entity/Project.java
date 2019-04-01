@@ -9,7 +9,7 @@ import java.util.Set;
 public class Project {
 
     @Id
-    @Column(name = "project_id")
+    @Column(name = "project_number")
     private String number;
 
     private LocalDate dateStarted;
@@ -22,7 +22,8 @@ public class Project {
             name = "project_employee",
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "employee_id") }
-    )    private Set<Employee> employees = new HashSet<>();
+    )
+      private Set<Employee> employees = new HashSet<>();
 
     private int budget;
 
