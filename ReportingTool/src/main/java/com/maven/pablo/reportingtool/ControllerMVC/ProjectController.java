@@ -1,77 +1,81 @@
 package com.maven.pablo.reportingtool.ControllerMVC;
+import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
-import com.maven.pablo.reportingtool.Service.Interface.IEmployeeService;
-import com.maven.pablo.reportingtool.Service.Interface.IEmployeesInProjectService;
+import com.maven.pablo.reportingtool.Service.Implementation.EmployeeService;
 import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
-import com.maven.pablo.reportingtool.Service.Interface.IProjectsOfEmployeeService;
-import com.maven.pablo.reportingtool.Service.Response.ProjectInfo;
+import com.maven.pablo.reportingtool.Service.Response.EmployeeDto;
+import com.maven.pablo.reportingtool.Service.Response.EmployeeMapper.EmployeeMapper;
+import com.maven.pablo.reportingtool.Service.Response.ProjectDto;
+import com.maven.pablo.reportingtool.Service.Response.ProjectMapper.ProjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import java.util.List;
 
 @Controller
 public class ProjectController {
 
-
     @Autowired
     IProjectService projectService;
     @Autowired
-    IEmployeeService employeeService;
+    ProjectMapper projectMapper;
     @Autowired
-    IProjectsOfEmployeeService projectsOfEmployeeService;
+    EmployeeService employeeService;
     @Autowired
-    IEmployeesInProjectService employeesInProjectService;
+    EmployeeMapper employeeMapper;
 
+    @ModelAttribute(name="projectList")
+    List<ProjectDto> projectDtoList(){
+        return projectMapper.listOfProjectsToDto((List<Project>) projectService.getCollectionOfAllProjects());
+    }
+    @ModelAttribute(name="employeeList")
+    List<EmployeeDto> employeeDtoList(){
+        return employeeMapper.listOfEmployeesToDto((List<Employee>) employeeService.collectionOfAllEmployees());
+    }
 
     @GetMapping("/")
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("projectList",
-                projectService.allProjectsAsResponse(projectService.getListOfAllProjects()));
-        //modelAndView.addObject("employeeList",
-         //       employeeService.)
-        modelAndView.addObject("projectInfo",new ProjectInfo());
+        modelAndView.addObject("newProjectDto",new ProjectDto());
+        modelAndView.addObject("newEmployeeDto",new EmployeeDto());
         return modelAndView;
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ProjectInfo> find(@PathVariable(name="id") String id){
-        Project project = projectService.findProjectByProjectNumber(id);
-        return new ResponseEntity<>(new ProjectInfo(project), HttpStatus.OK);
-    }
-
-    @GetMapping("/connect/{userId}/{projectId}")
-    public @ResponseBody String connectUserToProject(@PathVariable String userId,
-                                       @PathVariable String projectId)
-    {
-        employeesInProjectService.addEmployeeToProjectById(projectId,userId);
-        projectsOfEmployeeService.addProjectToEmployee(projectId,userId);
-        return "Done!";
     }
 
     @PostMapping("/saveProject")
-    public ModelAndView saveProjectSumbit(@ModelAttribute(name = "projectInfo") ProjectInfo projectInfo){
-        projectService.saveProjectInRepository(projectService.getProjectFromResponse(projectInfo));
-        ModelAndView modelAndView = new ModelAndView("index","projectList",
-                projectService.allProjectsAsResponse(projectService.getListOfAllProjects()));
-                modelAndView.addObject("projectInfo",new ProjectInfo());
+    public ModelAndView saveProjectSumbit(@ModelAttribute(name = "newProjectDto") ProjectDto projectDto){
+        projectService.saveProjectInRepository(projectMapper.newProjectFromDto(projectDto));
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("newProjectDto",new ProjectDto());
+        modelAndView.addObject("newEmployeeDto",new EmployeeDto());
+        modelAndView.addObject("projectList",projectDtoList());
+        modelAndView.addObject("employeeList",employeeDtoList());
         return modelAndView;
     }
 
+    @PostMapping("/saveEmployee")
+    public ModelAndView saveEmployeeSumbit(@ModelAttribute(name = "newEmployeeDto") EmployeeDto employeeDto){
+        employeeService.saveEmployeeInRepository(employeeMapper.newEmployeeFromDto(employeeDto));
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("newEmployeeDto",new EmployeeDto());
+        modelAndView.addObject("newProjectDto",new ProjectDto());
+        modelAndView.addObject("employeeList",employeeDtoList());
+        modelAndView.addObject("projectList",projectDtoList());
+        return modelAndView;
+    }
 
-    @GetMapping(value = "/delete")
+    @GetMapping(value = "/deleteProject")
     public ModelAndView deleteProject(@RequestParam("projectNumber") String projectNumber){
         projectService.removeProjectByNumber(projectNumber);
-
-        ModelAndView modelAndView = new ModelAndView("index","projectList",
-                projectService.allProjectsAsResponse(projectService.getListOfAllProjects()));
-        modelAndView.addObject("projectInfo",new ProjectInfo());
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("newProjectDto",new ProjectDto());
+        modelAndView.addObject("projectList",projectDtoList());
+        modelAndView.addObject("newEmployeeDto",new EmployeeDto());
+        modelAndView.addObject("employeeList",employeeDtoList());
         return modelAndView;
     }
+
+
 
 
 }

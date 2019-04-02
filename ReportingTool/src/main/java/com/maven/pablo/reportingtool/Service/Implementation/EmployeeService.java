@@ -3,12 +3,10 @@ import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
 import com.maven.pablo.reportingtool.Repository.EmployeeRepository;
 import com.maven.pablo.reportingtool.Service.Interface.IEmployeeService;
-import com.maven.pablo.reportingtool.Service.Response.EmployeeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -34,27 +32,27 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public Set<String> getSetOfAllEmployeesIds() {
+    public List<String> getListOfAllEmployeesIds() {
         return employeeRepository.collectionOfAllEmployees().stream().map(Employee::getId)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Set<String> getSetOfAllEmployeesNames() {
+    public List<String> getListOfAllEmployeesNames() {
         return employeeRepository.collectionOfAllEmployees().stream().map(Employee::getName)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Set<String> getSetOfAllEmployeesEmails() {
+    public List<String> getListOfAllEmployeesEmails() {
         return employeeRepository.collectionOfAllEmployees().stream().map(Employee::getEmail)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
     public void addProjectToEmployeeById(String employeeId, Project project) {
         Employee employee = employeeRepository.getEmployeeOfId(employeeId);
-        Set<Project> projects = employee.getProjects();
+        List<Project> projects = employee.getProjects();
         projects.add(project);
         employee.setProjects(projects);
         employeeRepository.save(employee);
@@ -63,20 +61,10 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public void removeProjectFromEmployeeById(String employeeId, Project project) {
         Employee employee = employeeRepository.getEmployeeOfId(employeeId);
-        Set<Project> projects = employee.getProjects();
+        List<Project> projects = employee.getProjects();
         projects.remove(project);
         employee.setProjects(projects);
         employeeRepository.save(employee);
-    }
-
-    @Override
-    public List<EmployeeInfo> allEmployeesAsResponse(Collection<Employee> employees) {
-        return employees.stream().map(EmployeeInfo::new).collect(Collectors.toList());
-    }
-
-    @Override
-    public Employee getEmployeeFromResponse(EmployeeInfo info) {
-        return employeeRepository.getEmployeeOfId(info.getId());
     }
 
     @Override

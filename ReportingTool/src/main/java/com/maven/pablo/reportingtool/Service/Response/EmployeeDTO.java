@@ -1,13 +1,9 @@
 package com.maven.pablo.reportingtool.Service.Response;
-
-import com.maven.pablo.reportingtool.Entity.Employee;
-import com.maven.pablo.reportingtool.Entity.Project;
-
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-public class EmployeeInfo {
+
+public class EmployeeDto {
 
     private String id;
 
@@ -18,28 +14,7 @@ public class EmployeeInfo {
     private int salary;
     private int bonus;
 
-    private Set<String> projectIds;
-
-
-    private EmployeeInfo() {
-        setId("");
-        setName("");
-        setEmail("");
-        setSalary(0);
-        setBonus(0);
-        projectIds = new HashSet<>();
-    }
-
-    public EmployeeInfo(Employee employee) {
-        EmployeeInfo employeeInfo = new EmployeeInfo();
-        if(employee.getId()!=null)
-            employeeInfo.setId(employee.getId());
-        if(employee.getName()!=null)
-            employeeInfo.setName(employee.getName());
-        if(employee.getProjects()!=null) {
-            projectIds = employee.getProjects().stream().map(Project::getNumber).collect(Collectors.toSet());
-        }
-    }
+    private List<String> projectIds;
 
     public String getId() {
         return id;
@@ -81,7 +56,11 @@ public class EmployeeInfo {
         this.bonus = bonus;
     }
 
-    public Set<String> getProjectIds() {
+    public List<String> getProjectIds() {
         return projectIds;
+    }
+
+    public void setProjectIds(List<String> projectIds) {
+        this.projectIds = projectIds;
     }
 }

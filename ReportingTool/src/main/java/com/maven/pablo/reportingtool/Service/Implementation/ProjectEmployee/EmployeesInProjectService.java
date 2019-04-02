@@ -5,8 +5,7 @@ import com.maven.pablo.reportingtool.Service.Interface.IEmployeesInProjectServic
 import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,14 +18,14 @@ public class EmployeesInProjectService implements IEmployeesInProjectService {
 
 
     @Override
-    public Set<Employee> employeesInProjectByNumber(String projectNumber) {
+    public List<Employee> employeesInProjectByNumber(String projectNumber) {
         return projectService.findProjectByProjectNumber(projectNumber).getEmployees();
     }
 
     @Override
-    public Set<String> employeesInProjectByNumberAsString(String projectNumber) {
+    public List<String> employeesInProjectByNumberAsString(String projectNumber) {
         return projectService.findProjectByProjectNumber(projectNumber).getEmployees().stream()
-                .map(Employee::getId).collect(Collectors.toSet());
+                .map(Employee::getId).collect(Collectors.toList());
     }
 
     @Override

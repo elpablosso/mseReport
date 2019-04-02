@@ -1,6 +1,7 @@
 package com.maven.pablo.reportingtool.Entity;
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,7 +21,7 @@ public class Employee {
     private int bonus;
 
     @ManyToMany(mappedBy = "employees")
-    private Set<Project> projects;
+    private List<Project> projects;
 
     public String getId() {
         return id;
@@ -42,11 +43,11 @@ public class Employee {
         return name;
     }
 
-    public Set<Project> getProjects() {
+    public List<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(Set<Project> projects) {
+    public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
 

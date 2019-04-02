@@ -9,6 +9,9 @@
 
 <body>
 
+<div class="header">
+    <h2>WELCOME IN REPORTS CENTER</h2>
+</div>
 
 <table>
     <thead>
@@ -21,26 +24,55 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="project : ${projectList}">
-        <td th:text="${project.projectNumber}"></td>
-        <td th:text="${project.projectTitle}"></td>
-        <td th:text="${project.projectBudget}"></td>
+    <tr th:each="project: ${projectList}">
+        <td th:text="${project.number}"></td>
+        <td th:text="${project.title}"></td>
+        <td th:text="${project.budget}"></td>
         <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
         <td>
-            <a th:href="@{/delete(projectNumber=${project.projectNumber})}" class="btn btn-danger">Delete</a>
+            <a th:href="@{/deleteProject(projectNumber=${project.number})}" class="btn btn-danger">Delete</a>
 
         </td>
     </tr>
     </tbody>
 </table>
 
-<form action="#" th:action="@{/saveProject}" th:object="${projectInfo}" method="post">
-    <input th:field="*{projectNumber}" type="text"/>
-    <input type="text" th:field="*{projectTitle}" />
-    <input type="text" th:field="*{projectBudget}"/>
+<form action="#" th:action="@{/saveProject}" th:object="${newProjectDto}" method="post">
+    <input type="text" th:field="*{number}" />
+    <input type="text" th:field="*{title}" />
+    <input type="text" th:field="*{budget}"/>
     <input type="submit" value="Submit" />
 </form>
 
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>EMAIL</th>
+        <th>NAME</th>
+        <th>SALARY</th>
+        <th>BONUS</th>
+        <th>DELETE</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="employee:${employeeList}">
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.email}"></td>
+        <td th:text="${employee.name}"></td>
+        <td>DELETE</td>
+        </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/saveEmployee}" th:object="${newEmployeeDto}" method="post">
+    <input type="text" th:field="*{id}" />
+    <input type="text" th:field="*{email}" />
+    <input type="text" th:field="*{name}"/>
+    <input type="submit" value="Submit" />
+</form>
 
 
 </body>
