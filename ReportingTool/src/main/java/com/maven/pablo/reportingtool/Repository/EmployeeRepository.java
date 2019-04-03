@@ -1,5 +1,5 @@
-package com.maven.pablo.reportingtool.Repository;
-import com.maven.pablo.reportingtool.Entity.Employee;
+package com.maven.pablo.reportingtool.repository;
+import com.maven.pablo.reportingtool.entity.Employee;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

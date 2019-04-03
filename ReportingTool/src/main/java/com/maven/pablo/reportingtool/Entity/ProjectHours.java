@@ -1,5 +1,5 @@
-package com.maven.pablo.reportingtool.Entity;
-import com.maven.pablo.reportingtool.Service.Key.ProjectEmployeeKey;
+package com.maven.pablo.reportingtool.entity;
+import com.maven.pablo.reportingtool.service.keys.ProjectEmployeeKey;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.math.BigDecimal;

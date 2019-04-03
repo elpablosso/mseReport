@@ -1,9 +1,7 @@
-package com.maven.pablo.reportingtool.Repository;
-import com.maven.pablo.reportingtool.Service.Key.ProjectEmployeeKey;
-import com.maven.pablo.reportingtool.Entity.ProjectHours;
+package com.maven.pablo.reportingtool.repository;
+import com.maven.pablo.reportingtool.service.keys.ProjectEmployeeKey;
+import com.maven.pablo.reportingtool.entity.ProjectHours;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 public interface ProjectHoursRepository extends CrudRepository<ProjectHours, ProjectEmployeeKey> {
 

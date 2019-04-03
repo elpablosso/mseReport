@@ -1,10 +1,8 @@
-package com.maven.pablo.reportingtool.Entity;
+package com.maven.pablo.reportingtool.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name="project")
@@ -27,7 +25,7 @@ public class Project {
     )
     private List<Employee> employees = new ArrayList<>();
 
-    private int budget;
+    private Integer budget;
 
     private boolean closed;
 
@@ -70,11 +68,11 @@ public class Project {
         this.title = title;
     }
 
-    public int getBudget() {
+    public Integer getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(Integer budget) {
         this.budget = budget;
     }
 

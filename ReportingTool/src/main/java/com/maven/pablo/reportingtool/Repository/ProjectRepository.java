@@ -1,13 +1,12 @@
-package com.maven.pablo.reportingtool.Repository;
+package com.maven.pablo.reportingtool.repository;
 
-import com.maven.pablo.reportingtool.Entity.Project;
+import com.maven.pablo.reportingtool.entity.Project;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.List;
 
 @Component("projectRepository")
 public interface ProjectRepository extends CrudRepository<Project,String> {

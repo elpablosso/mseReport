@@ -1,4 +1,4 @@
-package com.maven.pablo.reportingtool.Entity;
+package com.maven.pablo.reportingtool.entity;
 
 public class ReportPart {
 

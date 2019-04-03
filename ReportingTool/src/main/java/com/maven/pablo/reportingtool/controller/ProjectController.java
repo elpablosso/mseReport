@@ -1,9 +1,9 @@
-package com.maven.pablo.reportingtool.ControllerMVC;
-import com.maven.pablo.reportingtool.Entity.Project;
-import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
-import com.maven.pablo.reportingtool.Service.Response.EmployeeDto;
-import com.maven.pablo.reportingtool.Service.Response.ProjectDto;
-import com.maven.pablo.reportingtool.Service.Response.ProjectMapper.ProjectMapper;
+package com.maven.pablo.reportingtool.controller;
+import com.maven.pablo.reportingtool.entity.Project;
+import com.maven.pablo.reportingtool.service.interfaces.IProjectService;
+import com.maven.pablo.reportingtool.service.responses.EmployeeDto;
+import com.maven.pablo.reportingtool.service.responses.ProjectDto;
+import com.maven.pablo.reportingtool.service.responses.ProjectMapper.ProjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
