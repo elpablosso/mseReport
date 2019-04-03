@@ -1,8 +1,8 @@
-package com.maven.pablo.reportingtool.Service.Implementation;
-import com.maven.pablo.reportingtool.Entity.Employee;
-import com.maven.pablo.reportingtool.Entity.Project;
-import com.maven.pablo.reportingtool.Repository.EmployeeRepository;
-import com.maven.pablo.reportingtool.Service.Interface.IEmployeeService;
+package com.maven.pablo.reportingtool.service.implementation;
+import com.maven.pablo.reportingtool.entity.Employee;
+import com.maven.pablo.reportingtool.entity.Project;
+import com.maven.pablo.reportingtool.repository.EmployeeRepository;
+import com.maven.pablo.reportingtool.service.interfaces.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
@@ -13,8 +13,12 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeService implements IEmployeeService {
 
-    @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     public Employee getEmployeeById(String id) {

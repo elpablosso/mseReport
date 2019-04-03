@@ -1,7 +1,7 @@
-package com.maven.pablo.reportingtool.Service.Implementation;
-import com.maven.pablo.reportingtool.Entity.ProjectHours;
-import com.maven.pablo.reportingtool.Repository.ProjectHoursRepository;
-import com.maven.pablo.reportingtool.Service.Interface.IProjectHoursService;
+package com.maven.pablo.reportingtool.service.implementation;
+import com.maven.pablo.reportingtool.entity.ProjectHours;
+import com.maven.pablo.reportingtool.repository.ProjectHoursRepository;
+import com.maven.pablo.reportingtool.service.interfaces.IProjectHoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class ProjectHoursService implements IProjectHoursService {
 
-    @Autowired
     ProjectHoursRepository projectHoursRepository;
+
+    @Autowired
+    public ProjectHoursService(ProjectHoursRepository projectHoursRepository) {
+        this.projectHoursRepository = projectHoursRepository;
+    }
 
     @Override
     public void increaseModelling(String userId, String projectId, BigDecimal value) {

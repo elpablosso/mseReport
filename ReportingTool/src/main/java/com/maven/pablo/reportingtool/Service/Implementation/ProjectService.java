@@ -1,8 +1,8 @@
-package com.maven.pablo.reportingtool.Service.Implementation;
-import com.maven.pablo.reportingtool.Entity.Employee;
-import com.maven.pablo.reportingtool.Entity.Project;
-import com.maven.pablo.reportingtool.Repository.ProjectRepository;
-import com.maven.pablo.reportingtool.Service.Interface.IProjectService;
+package com.maven.pablo.reportingtool.service.implementation;
+import com.maven.pablo.reportingtool.entity.Employee;
+import com.maven.pablo.reportingtool.entity.Project;
+import com.maven.pablo.reportingtool.repository.ProjectRepository;
+import com.maven.pablo.reportingtool.service.interfaces.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class ProjectService implements IProjectService {
 
-    @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    public ProjectService(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
+    }
 
     @Override
     public Collection<Project> getCollectionOfAllProjects() {
