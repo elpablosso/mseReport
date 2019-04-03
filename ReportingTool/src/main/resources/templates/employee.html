@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Reporting center</title>
+    <meta charset="UTF-8" />
+    <meta title="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
+
+<ul class="topnav">
+    <li><a th:href="@{/home}">Home</a></li>
+    <li><a th:href="@{/projects/all}">Projects</a></li>
+    <li><a class="active">Employees</a></li>
+    <li class="right"><a href="#about">About</a></li>
+</ul>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>EMAIL</th>
+        <th>NAME</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="employeeDto:${employeeList}">
+        <td th:text="${employeeDto.id}"></td>
+        <td th:text="${employeeDto.email}"></td>
+        <td th:text="${employeeDto.name}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/employee/save}" th:object="${newEmployeeDto}" method="post">
+    <input type="text" th:field="*{id}" />
+    <input type="text" th:field="*{email}" />
+    <input type="text" th:field="*{name}"/>
+    <input type="submit" value="Submit" />
+</form>
+
 
 </body>
 </html>

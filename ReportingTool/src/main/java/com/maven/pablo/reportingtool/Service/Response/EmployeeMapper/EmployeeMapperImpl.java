@@ -4,8 +4,6 @@ import com.maven.pablo.reportingtool.Entity.Employee;
 import com.maven.pablo.reportingtool.Entity.Project;
 import com.maven.pablo.reportingtool.Service.Response.EmployeeDto;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +17,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
     @Override
     public EmployeeDto employeeToDto(Employee employee) {
         EmployeeDto employeeDto = new EmployeeDto();
-        employee.setId(employee.getId());
+        employeeDto.setId(employee.getId());
         employeeDto.setName(employee.getName());
         employeeDto.setEmail(employee.getEmail());
         //employeeDto.setBonus(employee.getBonus());

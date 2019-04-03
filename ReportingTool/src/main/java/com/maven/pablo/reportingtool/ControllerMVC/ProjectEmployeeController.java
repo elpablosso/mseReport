@@ -15,14 +15,17 @@ public class ProjectEmployeeController {
     @Autowired
     private IProjectsOfEmployeeService projectsOfEmployeeService;
 
+    @GetMapping("/home")
+    public String homePage(){
+        return "index";
+    }
+
     @GetMapping("/connect/{userId}/{projectId}")
     public String connectUserToProject(@PathVariable String userId,
                                        @PathVariable String projectId)
     {
         employeesInProjectService.addEmployeeToProjectById(projectId,userId);
         projectsOfEmployeeService.addProjectToEmployee(projectId,userId);
-
-        /// REFRESHING THE LIST OF CONNECTION BETWEEN EMPLOYEE AND PROJECT - TO BE IMPL
 
         return "index";
     }

@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Reporting center</title>
+    <meta charset="UTF-8" />
+    <meta title="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
+
 <body>
 
+<ul class="topnav">
+    <li><a th:href="@{/home}">Home</a></li>
+    <li><a class="active">Projects</a></li>
+    <li><a th:href="@{/employee/all}">Employees</a></li>
+    <li class="right"><a href="#about">About</a></li>
+</ul>
+
+<table>
+    <thead>
+    <tr>
+        <th >PROJECT NUMBER</th>
+        <th>NAME</th>
+        <th>BUDGET</th>
+        <th>STATUS</th>
+        <th>DELETE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project: ${projectList}">
+        <td th:text="${project.number}"></td>
+        <td th:text="${project.title}"></td>
+        <td th:text="${project.budget}"></td>
+        <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
+        <td>
+            <a th:href="@{/projects/delete(projectNumber=${project.number})}" class="btn btn-danger">Delete</a>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<form action="#" th:action="@{/projects/save}" th:object="${newProjectDto}" method="post">
+    <label for="number">NUMBER</label>
+    <input type="text" id="number" th:field="*{number}" />
+    <label for="title">TITLE</label>
+    <input type="text" id="title" th:field="*{title}" />
+    <label for="budget">BUDGET</label>
+    <input type="text" id="budget" th:field="*{budget}"/>
+
+    <input type="submit" value="Submit" />
+</form>
+
+
 </body>
+
 </html>

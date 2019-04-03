@@ -1,12 +1,10 @@
 package com.maven.pablo.reportingtool.Service.Response;
 import java.util.List;
-import java.util.Set;
 
 
 public class EmployeeDto {
 
     private String id;
-
     private String email;
     private String name;
 

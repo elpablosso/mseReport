@@ -3,3 +3,74 @@
   padding: 20px;
   text-align: center;
 }
+
+body{
+background-color:  #d9d9d9 ;
+}
+
+/* GENERAL PARAMETERS OF NAVBAR - UNTOUCHED NOT ACTIVE */
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:  #262626; /* DARK GREY */
+  border: 1px solid white;
+  font-family: Impact, fantasy;
+}
+
+ul.topnav li {
+float: left;
+}
+
+ul.topnav li a {
+  display: block;       /* NAV BAR ELEMENT - DISPLAY TYPE */
+  color: white;         /* NAV BAR ELEMENT - TEXT COLOR */
+  text-align: center;   /* NAV BAR ELEMENT - TEXT ALIGN */
+  padding: 20px 25px;   /* NAV BAR ELEMENT - SIZE OF BOX */
+  text-decoration: none;
+}
+
+ /* NAV BAR ELEMENT - CURRENTLY SELECTED WITH MOUSE */
+ul.topnav li a:hover:not(.active) {
+background-color: #d9d9d9;
+color: black;
+}
+
+ /* NAV BAR ELEMENT - CURRENTLY IN */
+ul.topnav li a.active {
+background-color: #7c7c7c;
+color: black;
+}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right,
+  ul.topnav li {float: none;}
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+background-color: #7c7c7c;
+}
+
+input[type=text] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  color: white;
+  background-color: #404040;
+  color: white;
+}
+
