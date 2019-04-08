@@ -11,6 +11,4 @@ public class ReportingtoolApplication {
 		SpringApplication.run(ReportingtoolApplication.class, args);
 	}
 
-
-
 }

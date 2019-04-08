@@ -11,8 +11,8 @@
 	<groupId>com.maven.pablo</groupId>
 	<artifactId>reportingtool</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<title>reportingtool</title>
 	<title>Demo project for Spring Boot</title>
+	<title>msereportool</title>
 
 	<properties>
 		<java.version>1.8</java.version>
