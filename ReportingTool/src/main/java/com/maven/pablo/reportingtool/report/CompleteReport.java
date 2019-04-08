@@ -15,5 +15,4 @@ public class CompleteReport {
     BigDecimal totalDuration;
 
 
-
 }

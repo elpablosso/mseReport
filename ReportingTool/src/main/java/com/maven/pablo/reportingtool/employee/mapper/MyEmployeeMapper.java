@@ -5,6 +5,7 @@ import com.maven.pablo.reportingtool.employee.entity.Employee;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class MyEmployeeMapper implements EmployeeMapper {
@@ -14,17 +15,23 @@ public class MyEmployeeMapper implements EmployeeMapper {
         return new EmployeeDto(
                 employee.getId(),
                 employee.getEmail(),
-                employee.getName(),
-                employee.getRole().toString());
-    }
+                employee.getName());}
 
     @Override
     public List<EmployeeDto> convertToDto(List<Employee> employees) {
-        return null;
-    }
+        return employees.stream().map(this::convertToDto).collect(Collectors.toList()) ;}
 
     @Override
     public Employee newEmployeeFromDto(EmployeeDto employeeDto) {
-        return null;
+        Employee employee = new Employee();
+        employee.setId(employeeDto.getId());
+        employee.setName(employeeDto.getName());
+        employee.setEmail(employeeDto.getEmail());
+        return employee;
+    }
+
+    @Override
+    public EmployeeDto emptyEmployeeDto() {
+        return new EmployeeDto();
     }
 }

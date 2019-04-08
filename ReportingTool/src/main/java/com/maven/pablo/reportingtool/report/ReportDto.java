@@ -1,6 +1,5 @@
 package com.maven.pablo.reportingtool.report;
-import com.maven.pablo.reportingtool.employee.Departments;
-
+import com.maven.pablo.reportingtool.employee.enums.Departments;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -13,13 +12,13 @@ public class ReportDto {
     private boolean additionalRange;
     private LocalDate date;
 
-    public ReportDto() {
-        date = LocalDate.now();
-        setEmployeeId("");
-        setProjectId("");
-        setTime(BigDecimal.ZERO);
-        setDepartments(null);
-        setAdditionalRange(false);
+    public ReportDto(String employeeId, String projectId, BigDecimal time, Departments departments, boolean additionalRange, LocalDate date) {
+        this.employeeId = employeeId;
+        this.projectId = projectId;
+        this.time = time;
+        this.departments = departments;
+        this.additionalRange = additionalRange;
+        this.date = date;
     }
 
     public String getEmployeeId() {

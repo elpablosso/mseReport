@@ -16,18 +16,18 @@ import java.util.List;
 @RequestMapping("employee")
 public class EmployeeController {
 
-    private EmployeeServiceImp employeeServiceImp;
-    private EmployeeMapper employeeMapper;
+    private EmployeeServiceImp service;
+    private EmployeeMapper mapper;
 
     @Autowired
-    public EmployeeController(EmployeeServiceImp employeeServiceImp, EmployeeMapper employeeMapper) {
-        this.employeeServiceImp = employeeServiceImp;
-        this.employeeMapper = employeeMapper;
+    public EmployeeController(EmployeeServiceImp service, EmployeeMapper mapper) {
+        this.service = service;
+        this.mapper = mapper;
     }
 
     @ModelAttribute(name="employeeList")
     List<EmployeeDto> employeeDtoList(){
-        return employeeMapper.convertToDto((List<Employee>) employeeServiceImp.findAll());
+        return mapper.convertToDto((List<Employee>) service.findAll());
     }
 
     @GetMapping("/all")
@@ -35,7 +35,7 @@ public class EmployeeController {
 
         modelAndView.setViewName("employee");
         modelAndView.addObject("employeeList", employeeDtoList());
-        modelAndView.addObject("newEmployeeDto",new EmployeeDto());
+        modelAndView.addObject("newEmployeeDto", mapper.emptyEmployeeDto());
 
         return modelAndView;
     }
@@ -43,10 +43,10 @@ public class EmployeeController {
     @PostMapping("/save")
     public ModelAndView saveEmployeeSumbit(@ModelAttribute(name = "newEmployeeDto") EmployeeDto employeeDto,
                                            ModelAndView modelAndView){
-        employeeServiceImp.saveInRepository(employeeMapper.newEmployeeFromDto(employeeDto));
 
+        service.saveInRepository(mapper.newEmployeeFromDto(employeeDto));
         modelAndView.setViewName("employee");
-        modelAndView.addObject("newEmployeeDto",new EmployeeDto());
+        modelAndView.addObject("newEmployeeDto", mapper.emptyEmployeeDto());
         modelAndView.addObject("employeeList",employeeDtoList());
 
         return modelAndView;

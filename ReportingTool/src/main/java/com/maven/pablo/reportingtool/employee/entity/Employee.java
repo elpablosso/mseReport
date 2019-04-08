@@ -1,9 +1,5 @@
 package com.maven.pablo.reportingtool.employee.entity;
-import com.maven.pablo.reportingtool.employee.Roles;
-import com.maven.pablo.reportingtool.project.entity.Project;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -13,7 +9,15 @@ public class Employee {
     private String id;
     private String email;
     private String name;
-    private Roles role;
+
+
+    // SECURITY
+
+    private String username;
+    private String password;
+
+
+    ////////
 
     private int salary;
     private int bonus;
@@ -58,11 +62,21 @@ public class Employee {
         this.bonus = bonus;
     }
 
-    public Roles getRole() {
-        return role;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setRole(Roles role) {
-        this.role = role;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

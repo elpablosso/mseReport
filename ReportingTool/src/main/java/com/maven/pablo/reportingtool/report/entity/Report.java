@@ -1,5 +1,5 @@
 package com.maven.pablo.reportingtool.report.entity;
-import com.maven.pablo.reportingtool.employee.Departments;
+import com.maven.pablo.reportingtool.employee.enums.Departments;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;

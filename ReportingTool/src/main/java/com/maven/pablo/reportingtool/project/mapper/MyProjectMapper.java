@@ -4,9 +4,9 @@ import com.maven.pablo.reportingtool.project.entity.Project;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class MyProjectMapper implements ProjectMapper{
@@ -52,10 +52,7 @@ public class MyProjectMapper implements ProjectMapper{
     }
 
     public List<ProjectDto> convertToDto(Collection<Project> projects){
-        ArrayList<ProjectDto> projectDtos = new ArrayList<>();
-        for(Project project : projects){
-            projectDtos.add(convertToDto(project));
-        } return projectDtos;
+        return projects.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     @Override
