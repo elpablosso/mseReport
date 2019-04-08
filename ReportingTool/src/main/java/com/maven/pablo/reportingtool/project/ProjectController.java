@@ -1,48 +1,52 @@
-package com.maven.pablo.reportingtool.controller;
-import com.maven.pablo.reportingtool.entity.Project;
-import com.maven.pablo.reportingtool.service.interfaces.IProjectService;
-import com.maven.pablo.reportingtool.service.responses.EmployeeDto;
-import com.maven.pablo.reportingtool.service.responses.ProjectDto;
-import com.maven.pablo.reportingtool.service.responses.ProjectMapper.ProjectMapper;
+package com.maven.pablo.reportingtool.project;
+import com.maven.pablo.reportingtool.project.entity.Project;
+import com.maven.pablo.reportingtool.project.mapper.ProjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/projects")
 public class ProjectController {
 
+    private ProjectService service;
+    private ProjectMapper mapper;
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
-    IProjectService projectService;
-    @Autowired
-    ProjectMapper projectMapper;
+    public ProjectController(ProjectService service, ProjectMapper mapper) {
+        this.service = service;
+        this.mapper = mapper;
+    }
 
     @ModelAttribute(name="projectList")
     List<ProjectDto> projectDtoList(){
-        return projectMapper.listOfProjectsToDto((List<Project>) projectService.getCollectionOfAllProjects());
+        return mapper.convertToDto(service.getAllProjects());
     }
-
-
 
     @GetMapping("/all")
     public ModelAndView home(ModelAndView modelAndView){
 
         modelAndView.setViewName("project");
-        modelAndView.addObject("newProjectDto",new ProjectDto());
-        modelAndView.addObject("newEmployeeDto",new EmployeeDto());
-
+        modelAndView.addObject("newProjectDto", mapper.emptyDto());
         return modelAndView;
     }
 
     @PostMapping("/save")
-    public ModelAndView saveProjectSumbit(@ModelAttribute(name = "newProjectDto") ProjectDto projectDto,
+    public ModelAndView saveProjectSumbit(@ModelAttribute("newProjectDto") ProjectDto projectDto,
                                           ModelAndView modelAndView){
 
-        projectService.saveProjectInRepository(projectMapper.newProjectFromDto(projectDto));
+        logger.info(projectDto.getNumber());
+        logger.info(projectDto.getTitle());
+        Project project = mapper.newProjectFromDto(projectDto);
+        service.saveProjectInRepository(project);
         modelAndView.setViewName("project");
-        modelAndView.addObject("newProjectDto",new ProjectDto());
+        modelAndView.addObject("newProjectDto",mapper.emptyDto());
         modelAndView.addObject("projectList",projectDtoList());
 
         return modelAndView;
@@ -54,7 +58,7 @@ public class ProjectController {
     public ModelAndView deleteProject(@RequestParam("projectNumber") String projectNumber,
                                       ModelAndView modelAndView){
 
-        projectService.removeProjectByNumber(projectNumber);
+        service.removeProjectByNumber(projectNumber);
 
         modelAndView.setViewName("project");
         modelAndView.addObject("newProjectDto",new ProjectDto());

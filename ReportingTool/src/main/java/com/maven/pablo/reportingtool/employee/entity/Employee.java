@@ -1,4 +1,7 @@
-package com.maven.pablo.reportingtool.entity;
+package com.maven.pablo.reportingtool.employee.entity;
+import com.maven.pablo.reportingtool.employee.Roles;
+import com.maven.pablo.reportingtool.project.entity.Project;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -6,20 +9,14 @@ import java.util.List;
 @Table(name = "employee")
 public class Employee {
 
-
-    @Column(name = "employee_id")
     @Id
     private String id;
-
     private String email;
     private String name;
+    private Roles role;
 
-    // FINANCES //
     private int salary;
     private int bonus;
-
-    @ManyToMany(mappedBy = "employees")
-    private List<Project> projects;
 
     public String getId() {
         return id;
@@ -41,14 +38,6 @@ public class Employee {
         return name;
     }
 
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -67,5 +56,13 @@ public class Employee {
 
     public void setBonus(int bonus) {
         this.bonus = bonus;
+    }
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
     }
 }

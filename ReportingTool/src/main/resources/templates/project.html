@@ -13,6 +13,7 @@
     <li><a th:href="@{/home}">Home</a></li>
     <li><a class="active">Projects</a></li>
     <li><a th:href="@{/employee/all}">Employees</a></li>
+    <li><a th:href="@{/reports/all}">Reports</a></li>
     <li class="right"><a href="#about">About</a></li>
 </ul>
 
@@ -39,8 +40,6 @@
     </tr>
     </tbody>
 </table>
-
-
 <form action="#" th:action="@{/projects/save}" th:object="${newProjectDto}" method="post">
     <label for="number">NUMBER</label>
     <input type="text" id="number" th:field="*{number}" />

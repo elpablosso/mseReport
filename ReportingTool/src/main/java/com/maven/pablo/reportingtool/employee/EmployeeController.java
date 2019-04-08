@@ -1,8 +1,7 @@
-package com.maven.pablo.reportingtool.controller;
-import com.maven.pablo.reportingtool.entity.Employee;
-import com.maven.pablo.reportingtool.service.implementation.EmployeeService;
-import com.maven.pablo.reportingtool.service.responses.EmployeeDto;
-import com.maven.pablo.reportingtool.service.responses.EmployeeMapper.EmployeeMapper;
+package com.maven.pablo.reportingtool.employee;
+import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.employee.mapper.EmployeeMapper;
+import com.maven.pablo.reportingtool.employee.implementation.EmployeeServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,15 +16,18 @@ import java.util.List;
 @RequestMapping("employee")
 public class EmployeeController {
 
-    @Autowired
-    EmployeeService employeeService;
-    @Autowired
-    EmployeeMapper employeeMapper;
+    private EmployeeServiceImp employeeServiceImp;
+    private EmployeeMapper employeeMapper;
 
+    @Autowired
+    public EmployeeController(EmployeeServiceImp employeeServiceImp, EmployeeMapper employeeMapper) {
+        this.employeeServiceImp = employeeServiceImp;
+        this.employeeMapper = employeeMapper;
+    }
 
     @ModelAttribute(name="employeeList")
     List<EmployeeDto> employeeDtoList(){
-        return employeeMapper.listOfEmployeesToDto((List<Employee>) employeeService.collectionOfAllEmployees());
+        return employeeMapper.convertToDto((List<Employee>) employeeServiceImp.findAll());
     }
 
     @GetMapping("/all")
@@ -41,7 +43,7 @@ public class EmployeeController {
     @PostMapping("/save")
     public ModelAndView saveEmployeeSumbit(@ModelAttribute(name = "newEmployeeDto") EmployeeDto employeeDto,
                                            ModelAndView modelAndView){
-        employeeService.saveEmployeeInRepository(employeeMapper.newEmployeeFromDto(employeeDto));
+        employeeServiceImp.saveInRepository(employeeMapper.newEmployeeFromDto(employeeDto));
 
         modelAndView.setViewName("employee");
         modelAndView.addObject("newEmployeeDto",new EmployeeDto());
