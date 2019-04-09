@@ -21,6 +21,9 @@ public class ReportDto {
         this.date = date;
     }
 
+    public ReportDto() {
+    }
+
     public String getEmployeeId() {
         return employeeId;
     }

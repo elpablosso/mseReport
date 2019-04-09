@@ -17,16 +17,34 @@
     <li class="right"><a href="#about">About</a></li>
 </ul>
 
-<form action="#" th:action="@{/reports/save}" th:object="${newReportDto}"
-      method="post">
+<form action="#" th:action="@{/reports/save}" th:object="${newReportDto}" method='POST'>
+            <td>Select Project:</td>
+            <td>
+                <select th:field="*{projectId}">
+                    <option value=""> -- </option>
+                    <option th:each="project : ${projectList}"
+                            th:value="${project.number}"
+                            th:utext="${project.number}"/>
+                </select>
+            </td>
+            <td>Select Employee:</td>
+            <td>
+                <select th:field="*{employeeId}">
+                    <option value=""> -- </option>
+                    <option th:each="employee : ${employeeList}"
+                            th:value="${employee.id}"
+                            th:utext="${employee.id}"/>
+                </select>
+            </td>
 
-<select>
-    <th:<tr th:each="project : ${projectList}">
-    <option><td><span th:text="${project.number}"></span></td>
-    </option>
-</tr>
-</select>
+    <label for="time">TIME</label>
+    <input type="text" id="time" th:field="*{time}" />
 
+
+        <tr>
+        <td><input name="submit" type="submit" value="submit" /></td>
+        </tr>
+</form>
 
 </body>
 

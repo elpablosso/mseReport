@@ -16,14 +16,21 @@
     <li><a th:href="@{/reports/all}">Reports</a></li>
     <li class="right"><a href="#about">About</a></li>
 </ul>
-
+<div class="row">
+<div class ="column middle">
+    <p>
 <table>
     <thead>
     <tr>
-        <th >PROJECT NUMBER</th>
-        <th>NAME</th>
-        <th>BUDGET</th>
+        <th>NUMBER</th>
+        <th>TITLE</th>
         <th>STATUS</th>
+        <th>MODEL</th>
+        <th>DRAWINGS</th>
+        <th>DOCUMENTATION</th>
+        <th>CORRESPONDENCE</th>
+        <th>EXTRA HOURS</th>
+        <th>BUDGET</th>
         <th>DELETE</th>
     </tr>
     </thead>
@@ -31,15 +38,23 @@
     <tr th:each="project: ${projectList}">
         <td th:text="${project.number}"></td>
         <td th:text="${project.title}"></td>
-        <td th:text="${project.budget}"></td>
         <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
+        <td th:text="${project.modelling}"></td>
+        <td th:text="${project.drawings}"></td>
+        <td th:text="${project.documentation}"></td>
+        <td th:text="${project.correspondence}"></td>
+        <td th:text="${project.additionalHours}"></td>
+        <td th:text="${project.budget}"></td>
         <td>
             <a th:href="@{/projects/delete(projectNumber=${project.number})}" class="btn btn-danger">Delete</a>
-
         </td>
     </tr>
     </tbody>
 </table>
+    </p>
+</div>
+
+<div class="column side">
 <form action="#" th:action="@{/projects/save}" th:object="${newProjectDto}" method="post">
     <label for="number">NUMBER</label>
     <input type="text" id="number" th:field="*{number}" />
@@ -50,6 +65,8 @@
 
     <input type="submit" value="Submit" />
 </form>
+</div>
+</div>
 
 
 </body>

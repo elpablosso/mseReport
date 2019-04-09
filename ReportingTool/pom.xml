@@ -11,16 +11,13 @@
 	<groupId>com.maven.pablo</groupId>
 	<artifactId>reportingtool</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<title>Demo project for Spring Boot</title>
-	<title>msereportool</title>
+
 
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
 
 		<dependencies>
-
-			<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
 			<dependency>
 				<groupId>org.mapstruct</groupId>
 				<artifactId>mapstruct</artifactId>
@@ -52,7 +49,6 @@
 				<version>1.4.197</version>
 			</dependency>
 
-
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
@@ -64,7 +60,6 @@
 				<artifactId>spring-boot-starter-test</artifactId>
 				<scope>test</scope>
 			</dependency>
-
 
 		<dependency>
 			<groupId>javax.persistence</groupId>

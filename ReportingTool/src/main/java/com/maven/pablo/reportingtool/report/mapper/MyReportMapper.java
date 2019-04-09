@@ -26,6 +26,6 @@ public class MyReportMapper implements ReportMapper {
 
     @Override
     public ReportDto emptyReportDto() {
-        return null;
+        return new ReportDto();
     }
 }
