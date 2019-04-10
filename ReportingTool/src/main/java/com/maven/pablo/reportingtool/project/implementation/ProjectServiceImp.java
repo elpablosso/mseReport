@@ -1,4 +1,5 @@
 package com.maven.pablo.reportingtool.project.implementation;
+import com.maven.pablo.reportingtool.project.ProjectForm;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import com.maven.pablo.reportingtool.project.entity.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -91,6 +95,14 @@ public class ProjectServiceImp implements com.maven.pablo.reportingtool.project.
     public void increaseCorrespondence(String projectId, BigDecimal value) {
         Project project = findProjectByProjectNumber(projectId);
         project.setCorrespondence(project.getCorrespondence().add(value));
+    }
+
+    @Override
+    public List<Project> findProjectByForm(ProjectForm form) {
+        return getAllProjects().stream()
+                .filter(c-> c.getNumber().contains(form.getNumber()))
+                .filter(c->c.getTitle().contains(form.getTitle()))
+                .collect(Collectors.toList());
     }
 }
 

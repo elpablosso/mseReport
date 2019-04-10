@@ -3,6 +3,7 @@ import com.maven.pablo.reportingtool.project.entity.Project;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
 
 public interface ProjectService {
 
@@ -15,6 +16,7 @@ public interface ProjectService {
     Collection<Project> getProjectsWithNameContaining(String name);
 
     Project findProjectByProjectNumber(String number);
+    List<Project> findProjectByForm(ProjectForm form);
 
     void saveProjectInRepository(Project project);
     void removeProjectByNumber(String projectNumber);

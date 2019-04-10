@@ -1,9 +1,44 @@
+*{
+  box-sizing: border-box;
+}
 .header {
   background-color: #f1f1f1;
   padding: 20px;
   text-align: center;
 }
 
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+/* Left and right column */
+.column.side {
+  color: white;
+  font-family:Lucida Sans Unicode, Lucida Grande;
+  font-size:12px;
+  width: 25%;
+  background: #262626;
+  border: 1px solid white;
+}
+
+/* Middle column */
+.column.middle {
+  width: 75%;
+  color: white;
+    font-family:Lucida Sans Unicode, Lucida Grande;
+    font-size:12px;
+    background: #262626;
+    border: 1px solid white;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 body{
 background-color:  #d9d9d9 ;
 }
@@ -52,7 +87,7 @@ ul.topnav li.right {float: right;}
 
 table {
   border-collapse: collapse;
-  width: 100%;
+  width:100%;
 }
 
 th, td {
@@ -60,17 +95,72 @@ th, td {
   padding: 8px;
 }
 
+th.fit{
+  text-vertical-align: middle;
+  text-align: left;
+  padding: 8px;
+}
+
+
 tr:nth-child(even) {
 background-color: #7c7c7c;
 }
 
-input[type=text] {
-  padding: 12px 20px;
-  margin: 8px 0;
+label {
+
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+    float:right;
+  text-vertical-align: middle;
+}
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+a.link{
+  background-color: #d9d9d9 ;
+  color: black;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+input[type=submit] {
+  width:100%;
   box-sizing: border-box;
   border: none;
-  color: white;
+  border-radius: 4px;
   background-color: #404040;
   color: white;
 }
+
+input[type=text] {
+  padding: 10px 20px;
+  vertical-align:middle;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #404040;
+  color: white;
+  float:left;
+}
+
+
 

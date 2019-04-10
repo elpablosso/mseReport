@@ -31,28 +31,47 @@ public class ProjectController {
 
     @GetMapping("/all")
     public ModelAndView home(ModelAndView modelAndView){
+        modelAndView.addObject("projectList",projectDtoList());
+        modelAndView.setViewName("project/all");
+        return modelAndView;
+    }
 
-        modelAndView.setViewName("project");
-        modelAndView.addObject("newProjectDto", mapper.emptyDto());
+    @GetMapping("/add")
+    public ModelAndView addProject(ModelAndView modelAndView){
+        modelAndView.setViewName("project/add");
+        modelAndView.addObject("projectForm", new ProjectForm());
+        return modelAndView;
+    }
+
+    @GetMapping("/find")
+    public ModelAndView findProject(ModelAndView modelAndView){
+        modelAndView.setViewName("project/find");
+        modelAndView.addObject("projectForm", new ProjectForm());
         return modelAndView;
     }
 
     @PostMapping("/save")
-    public ModelAndView saveProjectSumbit(@ModelAttribute("newProjectDto") ProjectDto projectDto,
+    public ModelAndView saveProjectSumbit(@ModelAttribute("projectForm") ProjectForm projectForm,
                                           ModelAndView modelAndView){
-
-        logger.info(projectDto.getNumber());
-        logger.info(projectDto.getTitle());
-        Project project = mapper.newProjectFromDto(projectDto);
+        logger.info(projectForm.getNumber());
+        logger.info(projectForm.getTitle());
+        Project project = mapper.newProjectFromForm(projectForm);
         service.saveProjectInRepository(project);
-        modelAndView.setViewName("project");
-        modelAndView.addObject("newProjectDto",mapper.emptyDto());
+        modelAndView.setViewName("project/add");
+        modelAndView.addObject("projectForm",new ProjectForm());
         modelAndView.addObject("projectList",projectDtoList());
-
         return modelAndView;
     }
 
-
+    @PostMapping("/find")
+    public ModelAndView findProjectSumbit(@ModelAttribute("projectForm") ProjectForm projectForm,
+                                          ModelAndView modelAndView){
+        List<Project> projects = service.findProjectByForm(projectForm);
+        modelAndView.setViewName("project/find");
+        modelAndView.addObject("projectForm", new ProjectForm());
+        modelAndView.addObject("projectList", projects);
+        return modelAndView;
+    }
 
     @GetMapping(value = "/delete")
     public ModelAndView deleteProject(@RequestParam("projectNumber") String projectNumber,

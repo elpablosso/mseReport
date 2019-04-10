@@ -1,5 +1,6 @@
 package com.maven.pablo.reportingtool.project.mapper;
 import com.maven.pablo.reportingtool.project.ProjectDto;
+import com.maven.pablo.reportingtool.project.ProjectForm;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
@@ -14,9 +15,19 @@ public class MyProjectMapper implements ProjectMapper{
     public MyProjectMapper() {
     }
 
+    @Override
+    public Project newProjectFromForm(ProjectForm form) {
+        Project project = openNewProject();
+        project.setNumber(form.getNumber());
+        project.setTitle(form.getTitle());
+        project.setBudget(BigDecimal.valueOf(form.getBudget()));
+
+        return project;
+    }
+
     public Project newProjectFromDto(ProjectDto projectDto){
 
-        Project project = new Project();
+        Project project = openNewProject();
         project.setNumber(projectDto.getNumber());
 
         if(projectDto.getTitle()!=null)
@@ -24,15 +35,6 @@ public class MyProjectMapper implements ProjectMapper{
 
         if(projectDto.getBudget()!=0)
         project.setBudget(BigDecimal.valueOf(projectDto.getBudget()));
-
-        project.setClosed(false);
-        project.setDateStarted(LocalDate.now());
-
-        project.setAdditionalHours(BigDecimal.ZERO);
-        project.setCorrespondence(BigDecimal.ZERO);
-        project.setDrawings(BigDecimal.ZERO);
-        project.setModelling(BigDecimal.ZERO);
-        project.setDocumentation(BigDecimal.ZERO);
 
         return project;
     }
@@ -56,7 +58,15 @@ public class MyProjectMapper implements ProjectMapper{
     }
 
     @Override
-    public ProjectDto emptyDto() {
-        return new ProjectDto();
+    public Project openNewProject() {
+        Project project = new Project();
+        project.setClosed(false);
+        project.setDateStarted(LocalDate.now());
+        project.setAdditionalHours(BigDecimal.ZERO);
+        project.setCorrespondence(BigDecimal.ZERO);
+        project.setDrawings(BigDecimal.ZERO);
+        project.setModelling(BigDecimal.ZERO);
+        project.setDocumentation(BigDecimal.ZERO);
+        return project;
     }
 }
