@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reporting center</title>
+    <meta charset="UTF-8" />
+    <meta title="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+
+<ul class="topnav">
+    <li><a th:href="@{/home}">Home</a></li>
+    <li><a class="active">Projects</a></li>
+    <li><a th:href="@{/employee/all}">Employees</a></li>
+    <li><a th:href="@{/reports/all}">Reports</a></li>
+    <li class="right"><a href="#about">About</a></li>
+</ul>
+<div class="row">
+<div class ="column middle">
+    <p>
+<table>
+    <thead>
+    <tr>
+        <th>NUMBER</th>
+        <th>TITLE</th>
+        <th>STATUS</th>
+        <th>BUDGET</th>
+        <th>DETAILS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project: ${projectList}">
+        <td th:text="${project.number}"></td>
+        <td th:text="${project.title}"></td>
+        <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
+        <td th:text="${project.budget}"></td>
+        <td>
+            <a th:href="@{/projects/details/(projectNumber=${project.number})}"
+               class="link"> Details </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    </p>
+
+</div>
+    <div class="column side">
+        <ul class="topnav">
+            <li><a class="active">ADD PROJECT</a></li>
+            <li><a th:href="@{/projects/find}">FIND PROJECT</a></li>
+        </ul>
+        <form action="#" th:action="@{/projects/save}" th:object="${projectForm}" method="post">
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="number">PROJECT<br>NUMBER</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="number" th:field="*{number}" />
+                </div></div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="title">PROJECT<br>TITLE</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="title" th:field="*{title}" />
+                </div></div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="budget">PROJECT<br>BUDGET</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="budget" th:field="*{budget}"/>
+                </div></div>
+
+            <input type="submit" value="Submit" />
+
+        </form>
+    </div></div>
+
+</div>
+</div>
+
+
+</body>
+
+</html>

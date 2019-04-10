@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reporting center</title>
+    <meta charset="UTF-8" />
+    <meta title="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+
+<ul class="topnav">
+    <li><a th:href="@{/home}">Home</a></li>
+    <li><a class="active">Projects</a></li>
+    <li><a th:href="@{/employee/all}">Employees</a></li>
+    <li><a th:href="@{/reports/all}">Reports</a></li>
+    <li class="right"><a href="#about">About</a></li>
+</ul>
+<div class="row">
+<div class ="column middle">
+    <p>
+<table>
+    <thead>
+    <tr>
+        <th>NUMBER</th>
+        <th>TITLE</th>
+        <th>STATUS</th>
+        <th>BUDGET</th>
+        <th>DELETE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project: ${projectList}">
+        <td th:text="${project.number}"></td>
+        <td th:text="${project.title}"></td>
+        <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
+        <td th:text="${project.budget}"></td>
+        <td th:href="@{/projects/details/(projectNumber=${project.number})}">Details</td>
+        <td>
+            <a th:href="@{/projects/delete(projectNumber=${project.number})}" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    </p>
+</div>
+
+<div class="column side">
+    <ul class="topnav">
+        <li><a th:href="@{/home}">ADD PROJECT</a></li>
+        <li><a th:href="@{/home}">FIND PROJECT</a></li>
+    </ul>
+<form action="#" th:action="@{/projects/save}" th:object="${newProjectDto}" method="post">
+    <label for="number">NUMBER</label>
+    <input type="text" id="number" th:field="*{number}" />
+    <label for="title">TITLE</label>
+    <input type="text" id="title" th:field="*{title}" />
+    <label for="budget">BUDGET</label>
+    <input type="text" id="budget" th:field="*{budget}"/>
+
+    <input type="submit" value="Submit" />
+</form>
+</div>
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reporting center</title>
+    <meta charset="UTF-8" />
+    <meta title="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body>
+
+<ul class="topnav">
+    <li><a th:href="@{/home}">Home</a></li>
+    <li><a th:href="@{/projects/all}">Projects</a></li>
+    <li><a th:href="@{/employee/all}">Employees</a></li>
+    <li><a class="active">Reports</a></li>
+    <li class="right"><a href="#about">About</a></li>
+</ul>
+
+<form action="#" th:action="@{/reports/save}" th:object="${newReportDto}" method='POST'>
+            <td>Select Project:</td>
+            <td>
+                <select th:field="*{projectId}">
+                    <option value=""> -- </option>
+                    <option th:each="project : ${projectList}"
+                            th:value="${project.number}"
+                            th:utext="${project.number}"/>
+                </select>
+            </td>
+            <td>Select Employee:</td>
+            <td>
+                <select th:field="*{employeeId}">
+                    <option value=""> -- </option>
+                    <option th:each="employee : ${employeeList}"
+                            th:value="${employee.id}"
+                            th:utext="${employee.id}"/>
+                </select>
+            </td>
+
+    <label for="time">TIME</label>
+    <input type="text" id="time" th:field="*{time}" />
+
+
+        <tr>
+        <td><input name="submit" type="submit" value="submit" /></td>
+        </tr>
+</form>
+
+</body>
+
+</html>
