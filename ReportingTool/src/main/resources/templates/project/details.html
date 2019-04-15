@@ -18,49 +18,31 @@
 </ul>
 <div class="row">
 <div class ="column middle">
-    <p>
-<table>
-    <thead>
-    <tr>
-        <th>NUMBER</th>
-        <th>TITLE</th>
-        <th>STATUS</th>
-        <th>BUDGET</th>
-        <th>DELETE</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="project: ${projectList}">
-        <td th:text="${project.number}"></td>
-        <td th:text="${project.title}"></td>
-        <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
-        <td th:text="${project.budget}"></td>
-        <td th:href="@{/projects/details/(projectNumber=${project.number})}">Details</td>
-        <td>
-            <a th:href="@{/projects/delete(projectNumber=${project.number})}" class="btn btn-danger">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-    </p>
+
+    <h4>
+    Details of project : <td th:text="${project.number}"></td>
+    </h4>
+    <p>Project name : <td th:text="${project.title}"></td></p>
+    <p>Modelling : <td th:text="${project.modelling}"></td></p>
+    <p>Drawings : <td th:text="${project.drawings}"></td></p>
+    <p>Documentation : <td th:text="${project.documentation}"></td></p>
+    <p>Correspondence : <td th:text="${project.correspondence}"></td></p>
+    <p>Additional Hours : <td th:text="${project.additionalHours}"></td></p>
+
+    <td>
+        <a th:href="@{/projects/delete(projectNumber=${project.number})}"
+           class="link"> DELETE PROJECT </a>
+    </td>
+
 </div>
 
-<div class="column side">
-    <ul class="topnav">
-        <li><a th:href="@{/home}">ADD PROJECT</a></li>
-        <li><a th:href="@{/home}">FIND PROJECT</a></li>
-    </ul>
-<form action="#" th:action="@{/projects/save}" th:object="${newProjectDto}" method="post">
-    <label for="number">NUMBER</label>
-    <input type="text" id="number" th:field="*{number}" />
-    <label for="title">TITLE</label>
-    <input type="text" id="title" th:field="*{title}" />
-    <label for="budget">BUDGET</label>
-    <input type="text" id="budget" th:field="*{budget}"/>
+    <div class="column side">
+        <ul class="topnav">
+            <li><a th:href="@{/projects/all}">BACK</a></li>
+        </ul>
 
-    <input type="submit" value="Submit" />
-</form>
-</div>
+    </div>
+
 </div>
 
 

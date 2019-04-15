@@ -73,13 +73,22 @@ public class ProjectController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/delete")
+    @GetMapping("/details")
+    public ModelAndView projectDetails(@RequestParam("projectNumber") String projectNumber,
+                                       ModelAndView modelAndView){
+        modelAndView.addObject("project",
+                mapper.convertToDto(service.findProjectByProjectNumber(projectNumber)));
+        modelAndView.setViewName("project/details");
+        return modelAndView;
+    }
+
+    @GetMapping("/delete")
     public ModelAndView deleteProject(@RequestParam("projectNumber") String projectNumber,
                                       ModelAndView modelAndView){
 
         service.removeProjectByNumber(projectNumber);
 
-        modelAndView.setViewName("project");
+        modelAndView.setViewName("project/all");
         modelAndView.addObject("newProjectDto",new ProjectDto());
         modelAndView.addObject("projectList",projectDtoList());
 
