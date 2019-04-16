@@ -11,10 +11,19 @@ public class Report {
     @Id
     private String employeeId;
     private String projectId;
+    private String description;
     private BigDecimal time;
     private Departments departments;
     private LocalDate date;
     private boolean additionalRange;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getEmployeeId() {
         return employeeId;

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<ul>
+
+    <li th:fragment="home"><a th:href="@{/home}">Home</a></li>
+    <li th:fragment="homeActive"><a class="active">Home</a></li>
+
+    <li th:fragment="projects"><a th:href="@{/projects/all}">Projects</a></li>
+    <li th:fragment="projectsActive"><a class="active">Projects</a></li>
+
+    <li th:fragment="employees"><a th:href="@{/employee/all}">Employees</a></li>
+    <li th:fragment="employeesActive"><a class="active">Employees</a></li>
+
+    <li th:fragment="reports"><a th:href="@{/reports/all}">Reports</a></li>
+    <li th:fragment="reportsActive"><a class="active">Reports</a></li>
+
+    <li th:fragment="about" class="right"><a th:href="@{/about}">About</a></li>
+    <li th:fragment="aboutActive" class="right"><a class="active">About</a></li>
+
+    <li th:fragment="addProject"><a th:href="@{/projects/add}">ADD PROJECT</a></li>
+    <li th:fragment="addProjectActive"><a class="active">ADD PROJECT</a></li>
+
+    <li th:fragment="findProject"><a th:href="@{/projects/find}">FIND PROJECT</a></li>
+    <li th:fragment="findProjectActive"><a class="active">FIND PROJECT</a></li>
+
+    <li th:fragment="backToProjects"><a th:href="@{/projects/all}">BACK</a></li>
+
+</ul>
+
+</body>
+</html>

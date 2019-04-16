@@ -1,33 +1,73 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Reporting center</title>
-    <meta charset="UTF-8" />
-    <meta title="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
-</head>
+<head th:replace="fragments/head :: head"></head>
 
 <body>
 
-<ul class="topnav">
-    <li><a th:href="@{/home}">Home</a></li>
-    <li><a th:href="@{/projects/all}">Projects</a></li>
-    <li><a th:href="@{/employee/all}">Employees</a></li>
-    <li><a class="active">Reports</a></li>
-    <li class="right"><a href="#about">About</a></li>
-</ul>
+<ul th:replace="fragments/navigation :: Reports"></ul>
 
 <div class="row">
     <div class="column middle">
-        <h3>Work in progress....</h3>
-        <p></p>
-    </div>
-
-    <div class="column side">
-        <p><i>Coming soon</i></p>
-    </div>
+        <table>
+            <thead>
+            <tr>
+                <th>EMPLOYEE ID</th>
+                <th>PROJECT NUMBER</th>
+                <th>DESCRIPTION</th>
+                <th>TIME</th>
+                <th>EXTRA SCOPE</th>
+                <th>DEPARTMENT</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="report: ${completeReport}">
+                <td th:text="${report.employeeId}"></td>
+                <td th:text="${report.projectId}"></td>
+                <td th:text="${report.description}"></td></td>
+                <td th:text="${project.time}"></td>
+                <td th:text="${report.additionalRange} ? 'Closed' : 'Open'"></td></td>
+            </tr>
+            </tbody>
+        </table>
 </div>
 
+
+<div class="column side">
+    <form action="#" th:action="@{/report/add}" th:object="${newReportDto}" method="post">
+
+        <div class="row">
+            <div class="col-50">
+                Select Project: </div>
+
+            <div class="col-50">
+           <select th:field="*{projectId}">
+                <option value=""> -- </option>
+                <option th:each="project : ${projectList}"
+                        th:value="${project.number}"
+                        th:utext="${project.number}"/>
+            </select> </div></div>
+
+        <div class="row">
+            <div class="col-50">
+        Select Employee: </div>
+
+            <div class="col-50">
+            <select th:field="*{employeeId}">
+                <option value=""> -- </option>
+                <option th:each="employee : ${employeeList}"
+                        th:value="${employee.id}"
+                        th:utext="${employee.id}"/>
+            </select>
+            </div></div>
+
+
+
+        <input type="submit" value="Submit" />
+
+    </form>
+</div>
+
+</div>
 </body>
 
 </html>

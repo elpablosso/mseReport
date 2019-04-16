@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<ul class="topnav" th:fragment="Home">
+    <li th:replace="fragments/links :: homeActive"></li>
+    <li th:replace="fragments/links :: projects"></li>
+    <li th:replace="fragments/links :: employees"></li>
+    <li th:replace="fragments/links :: reports"></li>
+    <li th:replace="fragments/links :: about"></li>
+</ul>
+
+<ul class="topnav" th:fragment="Projects">
+    <li th:replace="fragments/links :: home"></li>
+    <li th:replace="fragments/links :: projectsActive"></li>
+    <li th:replace="fragments/links :: employees"></li>
+    <li th:replace="fragments/links :: reports"></li>
+    <li th:replace="fragments/links :: about"></li>
+</ul>
+
+<ul class="topnav" th:fragment="Employees">
+    <li th:replace="fragments/links :: home"></li>
+    <li th:replace="fragments/links :: projects"></li>
+    <li th:replace="fragments/links :: employeesActive"></li>
+    <li th:replace="fragments/links :: reports"></li>
+    <li th:replace="fragments/links :: about"></li>
+</ul>
+
+<ul class="topnav" th:fragment="Reports">
+    <li th:replace="fragments/links :: home"></li>
+    <li th:replace="fragments/links :: projects"></li>
+    <li th:replace="fragments/links :: employees"></li>
+    <li th:replace="fragments/links :: reportsActive"></li>
+    <li th:replace="fragments/links :: about"></li>
+</ul>
+
+<ul class="topnav" th:fragment="About">
+    <li th:replace="fragments/links :: home"></li>
+    <li th:replace="fragments/links :: projects"></li>
+    <li th:replace="fragments/links :: employees"></li>
+    <li th:replace="fragments/links :: reports"></li>
+    <li th:replace="fragments/links :: aboutActive"></li>
+</ul>
+
+<ul class="topnav" th:fragment="projectSub">
+    <li th:replace="fragments/links :: addProject"></li>
+    <li th:replace="fragments/links :: findProject"></li>
+</ul>
+
+<ul class="topnav" th:fragment="projectSubAddActive">
+    <li th:replace="fragments/links :: addProjectActive"></li>
+    <li th:replace="fragments/links :: findProject"></li>
+</ul>
+
+<ul class="topnav" th:fragment="projectSubFindActive">
+    <li th:replace="fragments/links :: addProject"></li>
+    <li th:replace="fragments/links :: findProjectActive"></li>
+</ul>
+
+<ul class="topnav" th:fragment="projectBack">
+    <li th:replace="fragments/links :: backToProjects"></li>
+</ul>
+
+</body>
+</html>

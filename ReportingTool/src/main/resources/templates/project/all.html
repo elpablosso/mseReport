@@ -1,60 +1,23 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Reporting center</title>
-    <meta charset="UTF-8" />
-    <meta title="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
-</head>
+<head th:replace="fragments/head :: head"></head>
 
 <body>
 
-<ul class="topnav">
-    <li><a th:href="@{/home}">Home</a></li>
-    <li><a class="active">Projects</a></li>
-    <li><a th:href="@{/employee/all}">Employees</a></li>
-    <li><a th:href="@{/reports/all}">Reports</a></li>
-    <li class="right"><a href="#about">About</a></li>
-</ul>
+<ul th:replace="fragments/navigation :: Projects"></ul>
+
 <div class="row">
-<div class ="column middle">
-    <p>
-<table>
-    <thead>
-    <tr>
-        <th>NUMBER</th>
-        <th>TITLE</th>
-        <th>STATUS</th>
-        <th>BUDGET</th>
-        <th>DETAILS</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="project: ${projectList}">
-        <td th:text="${project.number}"></td>
-        <td th:text="${project.title}"></td>
-        <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
-        <td th:text="${project.budget}"></td>
-        <td>
-        <a th:href="@{/projects/details/(projectNumber=${project.number})}"
-            class="link"> Details </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-    </p>
-</div>
 
-<div class="column side">
-    <ul class="topnav">
-        <li><a th:href="@{/projects/add}">ADD PROJECT</a></li>
-        <li><a th:href="@{/projects/find}">FIND PROJECT</a></li>
-    </ul>
+    <div class ="column middle">
+    <table th:replace="fragments/project :: List"></table>
+    </div>
 
-</div>
+    <div class="column side">
+    <ul th:replace="fragments/navigation :: projectSub"></ul>
+    </div>
+
 </div>
 
 
 </body>
-
 </html>

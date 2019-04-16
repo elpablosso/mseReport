@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("reports")
 public class ReportController {
 
+    CompleteReportDto completeReportDto;
     ReportService service;
     ProjectService projectService;
     EmployeeService employeeService;
@@ -25,22 +26,22 @@ public class ReportController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    public ReportController(ReportService service, ProjectService projectService,
-                            EmployeeService employeeService, ReportMapper mapper) {
+    public ReportController(CompleteReportDto completeReportDto, ReportService service,
+                            ProjectService projectService, EmployeeService employeeService,
+                            ReportMapper mapper) {
+        this.completeReportDto = completeReportDto;
         this.service = service;
         this.projectService = projectService;
         this.employeeService = employeeService;
         this.mapper = mapper;
     }
 
-
-
     @GetMapping("/all")
     public ModelAndView allReports(ModelAndView modelAndView){
         modelAndView.addObject("newReportDto", mapper.emptyReportDto());
         modelAndView.addObject("projectList", projectService.getAllProjects());
         modelAndView.addObject("employeeList", employeeService.findAll());
-        modelAndView.addObject("reportList", mapper.convertToDto(service.findAllReports()));
+        modelAndView.addObject("reportList", completeReportDto.getReports());
         modelAndView.setViewName("reports");
         return modelAndView;
     }

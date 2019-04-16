@@ -7,18 +7,19 @@ public class ReportDto {
 
     private String employeeId;
     private String projectId;
+    private String description;
     private BigDecimal time;
     private Departments departments;
     private boolean additionalRange;
     private LocalDate date;
 
-    public ReportDto(String employeeId, String projectId, BigDecimal time, Departments departments, boolean additionalRange, LocalDate date) {
+    public ReportDto(String employeeId, String projectId, BigDecimal time, Departments departments, boolean additionalRange) {
         this.employeeId = employeeId;
         this.projectId = projectId;
         this.time = time;
         this.departments = departments;
         this.additionalRange = additionalRange;
-        this.date = date;
+        this.date = LocalDate.now();
     }
 
     public ReportDto() {
