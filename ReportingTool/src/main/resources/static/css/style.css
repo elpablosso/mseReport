@@ -169,6 +169,19 @@ input[type=text] {
   float:left;
 }
 
+input[type=password] {
+  vertical-align:middle;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #404040;
+  color: white;
+  width:100%;
+  float:left;
+}
+
 .footer{
 }
 

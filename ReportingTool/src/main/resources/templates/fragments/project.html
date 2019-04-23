@@ -70,6 +70,31 @@
 
 </form>
 
+<form th:fragment="findForm" action="#" th:action="@{/projects/find}" th:object="${projectForm}" method="post">
+
+    <div class="row">
+        <div class="col-25">
+            <label for="number">NUMBER </label>
+        </div>
+        <div class="col-75">
+            <input type="text" id="number" th:field="*{number}" />
+        </div></div>
+
+    <div class="row">
+        <div class="col-25">
+            <label for="title">TITLE </label>
+        </div>
+        <div class="col-75">
+            <input type="text" id="title" th:field="*{title}" />
+        </div></div>
+
+    <input type="submit" value="Submit" />
+
+</form>
+
+
+
+
 
 <p th:fragment="Details">
     Project Number :

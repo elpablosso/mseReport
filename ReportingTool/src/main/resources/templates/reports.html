@@ -1,34 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/head :: head"></head>
 
 <body>
 
-<ul th:replace="fragments/navigation :: Reports"></ul>
+<ul sec:authorize="hasRole('USER')" th:replace="fragments/navigation :: userReports"></ul>
+<ul sec:authorize="hasRole('LEADER')" th:replace="fragments/navigation :: leaderReports"></ul>
 
 <div class="row">
     <div class="column middle">
-        <table>
-            <thead>
-            <tr>
-                <th>EMPLOYEE ID</th>
-                <th>PROJECT NUMBER</th>
-                <th>DESCRIPTION</th>
-                <th>TIME</th>
-                <th>EXTRA SCOPE</th>
-                <th>DEPARTMENT</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="report: ${completeReport}">
-                <td th:text="${report.employeeId}"></td>
-                <td th:text="${report.projectId}"></td>
-                <td th:text="${report.description}"></td></td>
-                <td th:text="${project.time}"></td>
-                <td th:text="${report.additionalRange} ? 'Closed' : 'Open'"></td></td>
-            </tr>
-            </tbody>
-        </table>
+     <h3>Reporting section coming soon!</h3>
 </div>
 
 
@@ -46,21 +27,6 @@
                         th:value="${project.number}"
                         th:utext="${project.number}"/>
             </select> </div></div>
-
-        <div class="row">
-            <div class="col-50">
-        Select Employee: </div>
-
-            <div class="col-50">
-            <select th:field="*{employeeId}">
-                <option value=""> -- </option>
-                <option th:each="employee : ${employeeList}"
-                        th:value="${employee.id}"
-                        th:utext="${employee.id}"/>
-            </select>
-            </div></div>
-
-
 
         <input type="submit" value="Submit" />
 

@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/head :: head"></head>
 
 <body>
 
-<ul th:replace="fragments/navigation :: Home"></ul>
+<ul sec:authorize="isAnonymous()" th:replace="fragments/navigation :: unloggedHome"></ul>
+<ul sec:authorize="hasRole('USER')" th:replace="fragments/navigation :: userHome"></ul>
+<ul sec:authorize="hasRole('LEADER')" th:replace="fragments/navigation :: leaderHome"></ul>
 
 <div class="row">
     <div class="column middle">
         <h3>Welcome in Reporting Center</h3>
-        <p></p>
+        <p>Please log in to see further functions!</p>
+        <p>Have fun using this application</p>
     </div>
 
     <div class="column side">
@@ -23,6 +26,8 @@
             and can be used to create summaries, and facilitate the analysis of the project
             in its individual sectors.</i></p>
     </div>
+
+
 </div>
 </body>
 </html>

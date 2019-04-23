@@ -29,6 +29,12 @@
 
     <li th:fragment="backToProjects"><a th:href="@{/projects/all}">BACK</a></li>
 
+    <li th:fragment="logout" class="right"><a th:href="@{/logout}">LOG OUT</a></li>
+    <li th:fragment="logoutActive" class="right"><a class="active">LOG OUT</a></li>
+
+    <li th:fragment="login" class="right"><a th:href="@{/login}" method="post">LOG IN</a></li>
+    <li th:fragment="loginActive" class="right"><a class="active">LOG IN</a></li>
+
 </ul>
 
 </body>
