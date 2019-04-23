@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
@@ -51,10 +52,9 @@ public class ProjectController {
     }
 
     @PostMapping("/save")
-    public ModelAndView saveProjectSumbit(@ModelAttribute("projectForm") ProjectForm projectForm,
-                                          ModelAndView modelAndView){
-        logger.info(projectForm.getNumber());
-        logger.info(projectForm.getTitle());
+    public ModelAndView saveProjectSumbit(@ModelAttribute ProjectForm projectForm,
+                                          ModelAndView modelAndView, Errors errors){
+
         Project project = mapper.newProjectFromForm(projectForm);
         service.saveProjectInRepository(project);
         modelAndView.setViewName("project/add");
@@ -87,11 +87,8 @@ public class ProjectController {
                                       ModelAndView modelAndView){
 
         service.removeProjectByNumber(projectNumber);
-
         modelAndView.setViewName("project/all");
-        modelAndView.addObject("newProjectDto",new ProjectDto());
         modelAndView.addObject("projectList",projectDtoList());
-
         return modelAndView;
     }
 

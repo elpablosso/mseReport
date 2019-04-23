@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+
+<body>
+
+<form th:fragment="form"
+      action="#"
+      th:action="@{/login}"
+      method="post">
+
+    <div class="row">
+        <div class="col-25">
+            <label for="username">USERNAME</label>
+        </div>
+
+        <div class="col-75">
+            <input type="text" id="username" name="username" autofocus="autofocus" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-25">
+            <label for="password">PASSWORD</label>
+        </div>
+
+        <div class="col-75">
+            <input type="password" id="password" name="password" />
+        </div>
+
+    </div>
+
+
+    <input type="submit" value="Log in" />
+
+</form>
+
+</body>
+</html>

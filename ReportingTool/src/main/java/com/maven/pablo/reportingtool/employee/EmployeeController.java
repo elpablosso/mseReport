@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -31,9 +32,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/all")
-    public ModelAndView home(ModelAndView modelAndView){
+    public ModelAndView home(ModelAndView modelAndView,
+                             Principal principal){
 
         modelAndView.setViewName("employee");
+        modelAndView.addObject("username", principal.getName());
         modelAndView.addObject("employeeList", employeeDtoList());
         modelAndView.addObject("newEmployeeDto", mapper.emptyEmployeeDto());
 

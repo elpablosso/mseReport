@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+
+<ul sec:authorize="isAnonymous()" th:replace="fragments/navigation :: unloggedLogin"></ul>
+
+<div class="row">
+    <div class="column middle">
+        <h3>Welcome in Reporting Center</h3>
+        <p> Please log in to continue !</p>
+        <p> APK1 / MSE1 for USER</p>
+        <p> APK2 / MSE2 for LEADER</p>
+    </div>
+
+    <div class="column side">
+
+        <form th:replace="fragments/login :: form "></form>
+
+    </div>
+</div>
+</body>
+</html>

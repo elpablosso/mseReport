@@ -1,14 +1,12 @@
 package com.maven.pablo.reportingtool.project.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Entity
 public class Project {
 
     @Id
     private String number;
-    private LocalDate dateStarted;
     private String title;
 
     /// TOTAL TIME SPENT IN THE PROJECT IN SPECIFIED DEPARTMENTS
@@ -38,14 +36,6 @@ public class Project {
 
     public void setNumber(String number) {
         this.number = number;
-    }
-
-    public LocalDate getDateStarted() {
-        return dateStarted;
-    }
-
-    public void setDateStarted(LocalDate dateStarted) {
-        this.dateStarted = dateStarted;
     }
 
     public String getTitle() {

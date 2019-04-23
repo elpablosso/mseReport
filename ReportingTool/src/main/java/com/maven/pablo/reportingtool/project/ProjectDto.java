@@ -1,10 +1,8 @@
 package com.maven.pablo.reportingtool.project;
-import java.time.LocalDate;
 
 public class ProjectDto {
 
     private String number;
-    private LocalDate date;
     private String title;
     private int modelling;
     private int correspondence;
@@ -14,100 +12,114 @@ public class ProjectDto {
     private int budget;
     private boolean closed;
 
-    public ProjectDto() {
+    public ProjectDto(Builder builder){
+        number = builder.number;
+        title = builder.title;
+        modelling = builder.modelling;
+        correspondence = builder.correspondence;
+        documentation = builder.documentation;
+        drawings = builder.drawings;
+        additionalHours = builder.additionalHours;
+        budget = builder.budget;
+        closed = builder.closed;
     }
 
-    public ProjectDto(String number, LocalDate date, String title, int modelling,
-                      int correspondence, int documentation, int drawings, int budget, int additionalHours, boolean closed) {
-        this.number = number;
-        this.date = date;
-        this.title = title;
-        this.modelling = modelling;
-        this.correspondence = correspondence;
-        this.documentation = documentation;
-        this.drawings = drawings;
-        this.budget = budget;
-        this.additionalHours=additionalHours;
-        this.closed = closed;
+    public static class Builder {
+
+        private final String number;
+
+        private String title = "";
+        private int modelling = 0;
+        private int correspondence = 0;
+        private int documentation = 0;
+        private int drawings = 0;
+        private int additionalHours = 0;
+        private int budget = 0;
+        private boolean closed = false;
+
+
+        public Builder(String number) {
+            this.number = number;
+        }
+
+        public Builder title(String val) {
+            title = val;
+            return this;
+        }
+
+        public Builder modelling(int val) {
+            modelling = val;
+            return this;
+        }
+
+        public Builder correspondence(int val) {
+            correspondence = val;
+            return this;
+        }
+
+        public Builder documentation(int val) {
+            documentation = val;
+            return this;
+        }
+
+        public Builder drawings(int val) {
+            drawings = val;
+            return this;
+        }
+
+        public Builder additionalHours(int val) {
+            additionalHours = val;
+            return this;
+        }
+
+        public Builder budget(int val) {
+            budget = val;
+            return this;
+        }
+
+        public Builder closed(boolean val) {
+            closed = val;
+            return this;
+        }
+
+        public ProjectDto build() {
+            return new ProjectDto(this);
+        }
     }
 
     public String getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getModelling() {
-        return modelling;
-    }
-
-    public void setModelling(int modelling) {
-        this.modelling = modelling;
-    }
-
-    public int getCorrespondence() {
-        return correspondence;
-    }
-
-    public void setCorrespondence(int correspondence) {
-        this.correspondence = correspondence;
-    }
-
-    public int getDocumentation() {
-        return documentation;
-    }
-
-    public void setDocumentation(int documentation) {
-        this.documentation = documentation;
-    }
-
-    public int getDrawings() {
-        return drawings;
-    }
-
-    public void setDrawings(int drawings) {
-        this.drawings = drawings;
-    }
-
-    public int getAdditionalHours() {
-        return additionalHours;
-    }
-
-    public void setAdditionalHours(int additionalHours) {
-        this.additionalHours = additionalHours;
     }
 
     public int getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
-        this.budget = budget;
+    public int getModelling() {
+        return modelling;
+    }
+
+    public int getCorrespondence() {
+        return correspondence;
+    }
+
+    public int getDocumentation() {
+        return documentation;
+    }
+
+    public int getDrawings() {
+        return drawings;
+    }
+
+    public int getAdditionalHours() {
+        return additionalHours;
     }
 
     public boolean isClosed() {
         return closed;
-    }
-
-    public void setClosed(boolean closed) {
-        this.closed = closed;
     }
 }

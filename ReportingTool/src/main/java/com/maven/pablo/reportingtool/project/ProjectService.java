@@ -21,12 +21,9 @@ public interface ProjectService {
     void saveProjectInRepository(Project project);
     void removeProjectByNumber(String projectNumber);
 
-
     void increaseModelling(String projectId, BigDecimal value);
     void increaseDrawings(String projectId, BigDecimal value);
     void increaseDocumentation(String projectId, BigDecimal value);
     void increaseCorrespondence(String projectId, BigDecimal value);
-
-
 
 }

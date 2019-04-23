@@ -4,7 +4,6 @@ import com.maven.pablo.reportingtool.project.ProjectForm;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,28 +28,21 @@ public class MyProjectMapper implements ProjectMapper{
 
         Project project = openNewProject();
         project.setNumber(projectDto.getNumber());
-
-        if(projectDto.getTitle()!=null)
         project.setTitle(projectDto.getTitle());
-
-        if(projectDto.getBudget()!=0)
         project.setBudget(BigDecimal.valueOf(projectDto.getBudget()));
-
         return project;
     }
 
     public ProjectDto convertToDto(Project project){
-        return new ProjectDto(
-                project.getNumber(),
-                project.getDateStarted(),
-                project.getTitle(),
-                project.getModelling().intValue(),
-                project.getCorrespondence().intValue(),
-                project.getDocumentation().intValue(),
-                project.getDrawings().intValue(),
-                project.getBudget().intValue(),
-                project.getAdditionalHours().intValue(),
-                project.isClosed());
+                return new ProjectDto.Builder(project.getNumber())
+                .title(project.getTitle())
+                .modelling(project.getModelling().intValue())
+                .drawings(project.getDrawings().intValue())
+                .documentation(project.getDocumentation().intValue())
+                .correspondence(project.getCorrespondence().intValue())
+                .additionalHours(project.getAdditionalHours().intValue())
+                .budget(project.getBudget().intValue())
+                .closed(project.isClosed()).build();
     }
 
     public List<ProjectDto> convertToDto(Collection<Project> projects){
@@ -61,7 +53,6 @@ public class MyProjectMapper implements ProjectMapper{
     public Project openNewProject() {
         Project project = new Project();
         project.setClosed(false);
-        project.setDateStarted(LocalDate.now());
         project.setAdditionalHours(BigDecimal.ZERO);
         project.setCorrespondence(BigDecimal.ZERO);
         project.setDrawings(BigDecimal.ZERO);

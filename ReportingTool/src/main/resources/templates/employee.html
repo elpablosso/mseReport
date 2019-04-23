@@ -4,13 +4,14 @@
 
 <body>
 
-<ul th:replace="fragments/navigation::Employees"></ul>
+<ul th:replace="fragments/navigation::leaderEmployees"></ul>
 
 
 <div class="row">
     <div class="column middle">
         <h3>Work in progress....</h3>
-        <p></p>
+        <p>Logged as <td th:text="${username}"></td></p>
+
     </div>
 
     <div class="column side">
