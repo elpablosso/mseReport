@@ -5,9 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -52,19 +54,21 @@ public class ProjectController {
     }
 
     @PostMapping("/save")
-    public ModelAndView saveProjectSumbit(@ModelAttribute ProjectForm projectForm,
-                                          ModelAndView modelAndView, Errors errors){
-
-        Project project = mapper.newProjectFromForm(projectForm);
-        service.saveProjectInRepository(project);
+    public ModelAndView saveProjectSumbit(@Valid ProjectForm projectForm,
+                                          BindingResult bindingResult,
+                                          ModelAndView modelAndView){
         modelAndView.setViewName("project/add");
+        if(bindingResult.hasErrors())
+            return modelAndView;
+
+        service.saveProjectInRepository(mapper.newProjectFromForm(projectForm));
         modelAndView.addObject("projectForm",new ProjectForm());
         modelAndView.addObject("projectList",projectDtoList());
         return modelAndView;
     }
 
     @PostMapping("/find")
-    public ModelAndView findProjectSumbit(@ModelAttribute("projectForm") ProjectForm projectForm,
+    public ModelAndView findProjectSumbit(@ModelAttribute ProjectForm projectForm,
                                           ModelAndView modelAndView){
         List<Project> projects = service.findProjectByForm(projectForm);
         modelAndView.setViewName("project/find");
