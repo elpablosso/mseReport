@@ -43,6 +43,8 @@
 
             <div class="col-75">
             <input type="text" id="number" th:field="*{number}" />
+                <td th:if="${#fields.hasErrors('number')}" th:errors="*{number}">
+                    Number Error</td>
             </div>
     </div>
 
@@ -53,6 +55,8 @@
 
             <div class="col-75">
             <input type="text" id="title" th:field="*{title}" />
+                <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                    Title not correct</td>
             </div>
     </div>
 
@@ -63,6 +67,8 @@
 
             <div class="col-75">
             <input type="text" id="budget" th:field="*{budget}"/>
+                <td th:if="${#fields.hasErrors('budget')}" th:errors="*{budget}">
+                    Budget?</td>
             </div>
     </div>
 
@@ -70,7 +76,10 @@
 
 </form>
 
-<form th:fragment="findForm" action="#" th:action="@{/projects/find}" th:object="${projectForm}" method="post">
+<form th:fragment="findForm" action="#"
+      th:action="@{/projects/find}"
+      th:object="${projectForm}"
+      method="post">
 
     <div class="row">
         <div class="col-25">
@@ -91,9 +100,6 @@
     <input type="submit" value="Submit" />
 
 </form>
-
-
-
 
 
 <p th:fragment="Details">

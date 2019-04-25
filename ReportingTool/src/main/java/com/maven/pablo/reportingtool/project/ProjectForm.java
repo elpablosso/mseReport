@@ -5,15 +5,15 @@ import javax.validation.constraints.Size;
 
 public class ProjectForm {
 
-    @NotNull
-    @Size(min=3, max=20)
+    @NotNull(message = "Project number can not be empty!")
+    @Size(min=3, max=20, message = "Number must be between 3 and 20")
     private String number;
 
-    @NotNull
-    @Size(min=5, max=50)
+    @NotNull(message = "Title can not be empty!")
+    @Size(min=5, max=50, message = "Title must be between 5 and 50")
     private String title;
 
-    @NotNull
+    @NotNull(message = "Budget can not be empty!")
     private Integer budget;
 
     public ProjectForm() {
