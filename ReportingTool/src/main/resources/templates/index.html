@@ -6,8 +6,9 @@
 <body>
 
 <ul sec:authorize="isAnonymous()" th:replace="fragments/navigation :: unloggedHome"></ul>
-<ul sec:authorize="hasRole('USER')" th:replace="fragments/navigation :: userHome"></ul>
-<ul sec:authorize="hasRole('LEADER')" th:replace="fragments/navigation :: leaderHome"></ul>
+<ul sec:authorize="hasAuthority('USER')" th:replace="fragments/navigation :: userHome"></ul>
+<ul sec:authorize="hasAuthority('LEADER')" th:replace="fragments/navigation :: leaderHome"></ul>
+<ul sec:authorize="hasAuthority('ADMIN')" th:replace="fragments/navigation :: adminHome"></ul>
 
 <div class="row">
     <div class="column middle">

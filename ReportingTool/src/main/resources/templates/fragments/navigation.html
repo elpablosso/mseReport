@@ -30,7 +30,6 @@
 <ul class="topnav" th:fragment="leaderHome">
     <li th:replace="fragments/links :: homeActive"></li>
     <li th:replace="fragments/links :: projects"></li>
-    <li th:replace="fragments/links :: employees"></li>
     <li th:replace="fragments/links :: reports"></li>
     <li th:replace="fragments/links :: logout"></li>
 </ul>
@@ -38,15 +37,6 @@
 <ul class="topnav" th:fragment="leaderProjects">
     <li th:replace="fragments/links :: home"></li>
     <li th:replace="fragments/links :: projectsActive"></li>
-    <li th:replace="fragments/links :: employees"></li>
-    <li th:replace="fragments/links :: reports"></li>
-    <li th:replace="fragments/links :: logout"></li>
-</ul>
-
-<ul class="topnav" th:fragment="leaderEmployees">
-    <li th:replace="fragments/links :: home"></li>
-    <li th:replace="fragments/links :: projects"></li>
-    <li th:replace="fragments/links :: employeesActive"></li>
     <li th:replace="fragments/links :: reports"></li>
     <li th:replace="fragments/links :: logout"></li>
 </ul>
@@ -54,10 +44,31 @@
 <ul class="topnav" th:fragment="leaderReports">
     <li th:replace="fragments/links :: home"></li>
     <li th:replace="fragments/links :: projects"></li>
-    <li th:replace="fragments/links :: employees"></li>
     <li th:replace="fragments/links :: reportsActive"></li>
     <li th:replace="fragments/links :: logout"></li>
 </ul>
+
+<ul class="topnav" th:fragment="adminHome">
+    <li th:replace="fragments/links :: homeActive"></li>
+    <li th:replace="fragments/links :: projects"></li>
+    <li th:replace="fragments/links :: employees"></li>
+    <li th:replace="fragments/links :: logout"></li>
+</ul>
+
+<ul class="topnav" th:fragment="adminProjects">
+    <li th:replace="fragments/links :: home"></li>
+    <li th:replace="fragments/links :: projectsActive"></li>
+    <li th:replace="fragments/links :: employees"></li>
+    <li th:replace="fragments/links :: logout"></li>
+</ul>
+
+<ul class="topnav" th:fragment="adminEmployees">
+    <li th:replace="fragments/links :: home"></li>
+    <li th:replace="fragments/links :: projects"></li>
+    <li th:replace="fragments/links :: employeesActive"></li>
+    <li th:replace="fragments/links :: logout"></li>
+</ul>
+
 
 <ul class="topnav" th:fragment="projectSub">
     <li th:replace="fragments/links :: addProject"></li>

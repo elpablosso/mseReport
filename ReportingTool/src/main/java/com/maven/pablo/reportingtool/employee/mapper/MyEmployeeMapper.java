@@ -15,7 +15,8 @@ public class MyEmployeeMapper implements EmployeeMapper {
         return new EmployeeDto(
                 employee.getId(),
                 employee.getEmail(),
-                employee.getName());}
+                employee.getName(),
+                employee.getRole());}
 
     @Override
     public List<EmployeeDto> convertToDto(List<Employee> employees) {

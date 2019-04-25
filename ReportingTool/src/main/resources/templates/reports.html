@@ -4,8 +4,9 @@
 
 <body>
 
-<ul sec:authorize="hasRole('USER')" th:replace="fragments/navigation :: userReports"></ul>
-<ul sec:authorize="hasRole('LEADER')" th:replace="fragments/navigation :: leaderReports"></ul>
+<ul sec:authorize="hasAuthority('USER')" th:replace="fragments/navigation :: userReports"></ul>
+<ul sec:authorize="hasAuthority('LEADER')" th:replace="fragments/navigation :: leaderReports"></ul>
+
 
 <div class="row">
     <div class="column middle">
