@@ -1,19 +1,32 @@
 package com.maven.pablo.reportingtool.security;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private
+    UserDetailsService userDetailsMy;
+
+    @SuppressWarnings("deprecation")
+    @Bean
+    public static NoOpPasswordEncoder passwordEncoder() {
+        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsMy).passwordEncoder(passwordEncoder());
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -21,10 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/css/**","/index" )
                 .permitAll()
+                .antMatchers("/projects/**")
+                .hasAnyAuthority("LEADER","ADMIN")
                 .antMatchers("/reports/**")
-                .hasAnyRole("USER","LEADER")
-                .antMatchers("/projects/**", "/employees/**")
-                .hasRole("LEADER")
+                .hasAnyAuthority("USER","LEADER","ADMIN")
+                .antMatchers("/employees/**")
+                .hasAnyAuthority("ADMIN")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -32,27 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login").failureUrl("/login-error")
-        ;
+                .loginPage("/login").failureUrl("/login-error").and()
+                .csrf().disable();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-        UserDetails apk1 = User.withUsername("APK1")
-                .password(encoder.encode("MSE1"))
-                .roles("USER").build();
-
-        UserDetails apk2 = User.withUsername("APK2")
-                .password(encoder.encode("MSE2"))
-                .roles("LEADER").build();
-
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(apk1);
-        manager.createUser(apk2);
-
-        return manager;
-
-    }
 }

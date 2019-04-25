@@ -4,6 +4,7 @@ import com.maven.pablo.reportingtool.project.ProjectForm;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,8 +20,8 @@ public class MyProjectMapper implements ProjectMapper{
         Project project = openNewProject();
         project.setNumber(form.getNumber());
         project.setTitle(form.getTitle());
-        project.setBudget(BigDecimal.valueOf(form.getBudget()));
-
+        project.setBudget(BigDecimal.valueOf(form.getBudget())
+                .setScale(0,RoundingMode.HALF_DOWN));
         return project;
     }
 
@@ -29,7 +30,8 @@ public class MyProjectMapper implements ProjectMapper{
         Project project = openNewProject();
         project.setNumber(projectDto.getNumber());
         project.setTitle(projectDto.getTitle());
-        project.setBudget(BigDecimal.valueOf(projectDto.getBudget()));
+        project.setBudget(BigDecimal.valueOf(projectDto.getBudget())
+        .setScale(0,RoundingMode.HALF_DOWN));
         return project;
     }
 

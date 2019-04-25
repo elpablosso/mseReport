@@ -82,10 +82,11 @@ color: black;
 ul.topnav li.right {float: right;}
 
 @media screen and (max-width: 600px) {
-  ul.topnav li.right,
-  ul.topnav li {float: none;}
+  .col-25, .col-75, input[type=submit], input[type=text] {
+    width: 100%;
+    margin-top: 0;
+  }
 }
-
 table {
   border-collapse: collapse;
   width:100%;

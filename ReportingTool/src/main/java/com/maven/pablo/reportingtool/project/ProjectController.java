@@ -57,6 +57,7 @@ public class ProjectController {
     public ModelAndView saveProjectSumbit(@Valid ProjectForm projectForm,
                                           BindingResult bindingResult,
                                           ModelAndView modelAndView){
+
         modelAndView.setViewName("project/add");
         if(bindingResult.hasErrors())
             return modelAndView;
@@ -71,9 +72,10 @@ public class ProjectController {
     public ModelAndView findProjectSumbit(@ModelAttribute ProjectForm projectForm,
                                           ModelAndView modelAndView){
         List<Project> projects = service.findProjectByForm(projectForm);
+        List<ProjectDto> projectDtos = mapper.convertToDto(projects);
         modelAndView.setViewName("project/find");
         modelAndView.addObject("projectForm", new ProjectForm());
-        modelAndView.addObject("projectList", projects);
+        modelAndView.addObject("projectList", projectDtos);
         return modelAndView;
     }
 

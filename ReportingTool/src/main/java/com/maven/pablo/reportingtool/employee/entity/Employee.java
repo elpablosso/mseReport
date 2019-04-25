@@ -12,13 +12,11 @@ public class Employee {
 
 
     // SECURITY
-
     private String username;
     private String password;
-
+    private String role;
 
     ////////
-
     private int salary;
     private int bonus;
 
@@ -62,6 +60,13 @@ public class Employee {
         this.bonus = bonus;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getUsername() {
         return username;
