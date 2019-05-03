@@ -1,7 +1,7 @@
 package com.maven.pablo.reportingtool.employee;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
 import com.maven.pablo.reportingtool.employee.mapper.EmployeeMapper;
-import com.maven.pablo.reportingtool.employee.implementation.EmployeeServiceImp;
+import com.maven.pablo.reportingtool.employee.implementation.MyEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +17,11 @@ import java.util.List;
 @RequestMapping("employee")
 public class EmployeeController {
 
-    private EmployeeServiceImp service;
+    private MyEmployeeService service;
     private EmployeeMapper mapper;
 
     @Autowired
-    public EmployeeController(EmployeeServiceImp service, EmployeeMapper mapper) {
+    public EmployeeController(MyEmployeeService service, EmployeeMapper mapper) {
         this.service = service;
         this.mapper = mapper;
     }

@@ -13,7 +13,8 @@
         <th>TITLE</th>
         <th>STATUS</th>
         <th>BUDGET</th>
-        <th>DETAILS</th>
+        <th>LEADER</th>
+        <th>DELETE</th>
     </tr>
     </thead>
     <tbody>
@@ -22,10 +23,9 @@
         <td th:text="${project.title}"></td>
         <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
         <td th:text="${project.budget}"></td>
-        <td>
-            <a th:href="@{/projects/details/(projectNumber=${project.number})}"
-               class="link"> Details </a>
-        </td>
+        <td th:text="${project.leaderId}"></td>
+        <td><a th:href="@{/projects/delete(projectNumber=${project.number})}"
+               class="link"> Delete </a> </td>
     </tr>
     </tbody>
 </table>
@@ -72,6 +72,23 @@
             </div>
     </div>
 
+    <div class="row">
+        <div class="col-25">
+            <label for="leaderId">LEADER</label>
+        </div>
+        <div class="col-75">
+                <select th:field="*{leaderId}" id="leaderId">
+                 <option value=""> -- </option>
+                 <option th:each="employee : ${leaderList}"
+                 th:value="${employee.id}"
+                 th:utext="${employee.name}"/>
+                </select>
+            <td th:if="${#fields.hasErrors('leaderId')}" th:errors="*{leaderId}">
+                Select leader</td>
+
+        </div>
+    </div>
+
     <input type="submit" value="Submit" />
 
 </form>
@@ -102,24 +119,57 @@
 </form>
 
 
-<p th:fragment="Details">
-    Project Number :
-    <td th:text="${project.number}"/><br>
-    Project Title :
-    <td th:text="${project.title}"/><br>
-    Modelling :
-    <td th:text="${project.modelling}"/><br>
-    Drawings :
-    <td th:text="${project.drawings}"/><br>
-    Documentation :
-    <td th:text="${project.documentation}"/><br>
-    Correspondence :
-    <td th:text="${project.correspondence}"/><br>
-    Additional Hours :
-    <td th:text="${project.additionalHours}"/><br>
+<table th:fragment="EditProject">
+    <thead>
+    <tr>
+        <th></th>
+        <th>CURRENT</th>
+        <th>NEW</th>
+    </tr>
+    </thead>
+    <tbody>
+    <form th:fragment="changeForm" action="#"
+          th:action="@{/projects/change}"
+          th:object="${project}"
+          method="post">
+        <tr>
+            <td><b>PROJECT NUMBER</b></td>
+            <td th:text="${project.number}"></td>
+            <td><input type="text" placeholder="Project number.." th:field="*{number}" /></td>
+        </tr>
 
-    <td><a th:href="@{/projects/delete(projectNumber=${project.number})}"
-           class="link"> DELETE PROJECT </a> </td>
+        <tr>
+            <td><b>PROJECT TITLE</b></td>
+            <td th:text="${project.title}"></td>
+            <td><input type="text" th:field="*{title}" /></td>
+        </tr>
+
+        <tr>
+            <td><b>PROJECT BUDGET</b></td>
+            <td th:text="${project.budget}"></td>
+            <td><input type="text" th:field="*{budget}" /></td>
+        </tr>
+
+        <tr><td>
+            <input type="submit" class="link" value="Submit" />
+        </td></tr>
+
+
+    </form>
+    </tbody>
+
+</table>
+
+<p th:fragment="DeleteConfirm">
+Are you sure you want to delete : <td th:text="${projectNumber}"></td> ??
+<br><br>
+<td><a th:href="@{/projects/deleteConfirmed(projectNumber=${projectNumber})}" class="link">
+    YES, DELETE </a> </td>
+<br><br>
+<td><a th:href="@{/projects/all}" class="link">
+    NO, TAKE ME BACK </a> </td>
+</p>
+
 
 </body>
 </html>

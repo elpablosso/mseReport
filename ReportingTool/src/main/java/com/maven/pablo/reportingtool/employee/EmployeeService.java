@@ -1,7 +1,6 @@
 package com.maven.pablo.reportingtool.employee;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
 import java.util.Collection;
-import java.util.List;
 
 public interface EmployeeService {
 
@@ -9,9 +8,8 @@ public interface EmployeeService {
     Employee findByEmail(String email);
 
     Collection<Employee> findAll();
-    List<String> listOfAllIds();
-    List<String> listOfAllNames();
-    List<String> listOfAllEmails();
+    Collection<Employee> findLeaders();
+
 
     void saveInRepository(Employee employee);
     void deleteFromRepository(Employee employee);

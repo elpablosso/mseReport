@@ -1,7 +1,7 @@
 package com.maven.pablo.reportingtool.project.mapper;
 
-import com.maven.pablo.reportingtool.project.ProjectDto;
-import com.maven.pablo.reportingtool.project.ProjectForm;
+import com.maven.pablo.reportingtool.project.dto.ProjectDto;
+import com.maven.pablo.reportingtool.project.dto.ProjectForm;
 import com.maven.pablo.reportingtool.project.entity.Project;
 
 import java.util.Collection;

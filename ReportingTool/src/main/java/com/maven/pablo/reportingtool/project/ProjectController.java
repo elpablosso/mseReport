@@ -1,4 +1,9 @@
 package com.maven.pablo.reportingtool.project;
+import com.maven.pablo.reportingtool.employee.EmployeeDto;
+import com.maven.pablo.reportingtool.employee.EmployeeService;
+import com.maven.pablo.reportingtool.employee.mapper.EmployeeMapper;
+import com.maven.pablo.reportingtool.project.dto.ProjectDto;
+import com.maven.pablo.reportingtool.project.dto.ProjectForm;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import com.maven.pablo.reportingtool.project.mapper.ProjectMapper;
 import org.slf4j.Logger;
@@ -8,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -17,12 +21,16 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ProjectController {
 
+    private EmployeeService employeeService;
+    private EmployeeMapper employeeMapper;
     private ProjectService service;
     private ProjectMapper mapper;
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    public ProjectController(ProjectService service, ProjectMapper mapper) {
+    public ProjectController(EmployeeService employeeService, EmployeeMapper employeeMapper, ProjectService service, ProjectMapper mapper) {
+        this.employeeService = employeeService;
+        this.employeeMapper = employeeMapper;
         this.service = service;
         this.mapper = mapper;
     }
@@ -30,6 +38,10 @@ public class ProjectController {
     @ModelAttribute(name="projectList")
     List<ProjectDto> projectDtoList(){
         return mapper.convertToDto(service.getAllProjects());
+    }
+    @ModelAttribute
+    List<EmployeeDto> leaderList(){
+        return employeeMapper.convertToDto(employeeService.findLeaders());
     }
 
     @GetMapping("/all")
@@ -43,6 +55,7 @@ public class ProjectController {
     public ModelAndView addProject(ModelAndView modelAndView){
         modelAndView.setViewName("project/add");
         modelAndView.addObject("projectForm", new ProjectForm());
+        modelAndView.addObject("leaderList", leaderList());
         return modelAndView;
     }
 
@@ -59,6 +72,7 @@ public class ProjectController {
                                           ModelAndView modelAndView){
 
         modelAndView.setViewName("project/add");
+        modelAndView.addObject("leaderList", leaderList());
         if(bindingResult.hasErrors())
             return modelAndView;
 
@@ -90,7 +104,32 @@ public class ProjectController {
         return modelAndView;
     }
 
+    @GetMapping("/edit")
+    public ModelAndView projectEdit(@RequestParam("projectNumber") String projectNumber,
+                                       ModelAndView modelAndView){
+        modelAndView.addObject("project",
+                mapper.convertToDto(service.findProjectByProjectNumber(projectNumber)));
+        modelAndView.setViewName("project/edit");
+        return modelAndView;
+    }
+
+    @PostMapping("/change")
+    public ModelAndView projectEditSubmit(@ModelAttribute("project") ProjectDto projectDto,
+                                          ModelAndView modelAndView){
+
+        return modelAndView;
+    }
+
     @GetMapping("/delete")
+    public ModelAndView deleteConfirmation(@RequestParam("projectNumber") String projectNumber,
+                                      ModelAndView modelAndView){
+
+        modelAndView.setViewName("project/delete");
+        modelAndView.addObject("projectNumber", projectNumber);
+        return modelAndView;
+    }
+
+    @GetMapping("/deleteConfirmed")
     public ModelAndView deleteProject(@RequestParam("projectNumber") String projectNumber,
                                       ModelAndView modelAndView){
 
@@ -99,8 +138,6 @@ public class ProjectController {
         modelAndView.addObject("projectList",projectDtoList());
         return modelAndView;
     }
-
-
 
 
 }

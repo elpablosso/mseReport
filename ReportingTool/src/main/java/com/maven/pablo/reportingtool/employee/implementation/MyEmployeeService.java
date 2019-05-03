@@ -10,13 +10,23 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class EmployeeServiceImp implements EmployeeService {
+public class MyEmployeeService implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeServiceImp(EmployeeRepository employeeRepository) {
+    public MyEmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
+    }
+
+    @Override
+    public Employee findByEmail(String email) {
+        return employeeRepository.findByEmail(email).orElse(null);
+    }
+
+    @Override
+    public Collection<Employee> findLeaders() {
+        return employeeRepository.findByRole("LEADER");
     }
 
     @Override
@@ -24,33 +34,11 @@ public class EmployeeServiceImp implements EmployeeService {
         return employeeRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public Employee findByEmail(String email) {
-        return employeeRepository.findByEmailContaining(email).orElse(null);
-    }
-
-    @Override
+        @Override
     public Collection<Employee> findAll() {
         return employeeRepository.findAll();
     }
 
-    @Override
-    public List<String> listOfAllIds() {
-        return findAll().stream().map(Employee::getId).
-                collect(Collectors.toList());
-    }
-
-    @Override
-    public List<String> listOfAllNames() {
-        return findAll().stream().map(Employee::getName).
-                collect(Collectors.toList());
-    }
-
-    @Override
-    public List<String> listOfAllEmails() {
-        return findAll().stream().map(Employee::getEmail).
-                collect(Collectors.toList());
-    }
 
     @Override
     public void saveInRepository(Employee employee) {

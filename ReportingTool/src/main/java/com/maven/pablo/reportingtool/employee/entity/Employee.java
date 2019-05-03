@@ -1,24 +1,23 @@
 package com.maven.pablo.reportingtool.employee.entity;
 import javax.persistence.*;
 
+
 @Entity
-@Table(name = "employee")
-public class Employee {
+    @Table(name = "employee")
+    public class Employee {
 
-    @Id
-    private String id;
-    private String email;
-    private String name;
+        @Id
+        private String id;
+        private String email;
+        private String name;
 
+        // SECURITY
+        private String username;
+        private String password;
+        private String role;
 
-    // SECURITY
-    private String username;
-    private String password;
-    private String role;
-
-    ////////
-    private int salary;
-    private int bonus;
+        private int salary;
+        private int bonus;
 
     public String getId() {
         return id;

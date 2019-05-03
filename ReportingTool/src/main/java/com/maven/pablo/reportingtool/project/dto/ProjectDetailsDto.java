@@ -1,51 +1,43 @@
-package com.maven.pablo.reportingtool.project;
+package com.maven.pablo.reportingtool.project.dto;
 
-public class ProjectDto {
+public class ProjectDetailsDto {
 
-    private String number;
-    private String title;
+    private String projectNumber;
+    private String employeeId;
+
     private int modelling;
     private int correspondence;
     private int documentation;
     private int drawings;
     private int additionalHours;
-    private int budget;
-    private boolean closed;
 
-    public ProjectDto(Builder builder){
-        number = builder.number;
-        title = builder.title;
+
+    public ProjectDetailsDto(Builder builder){
+        projectNumber = builder.projectNumber;
+        employeeId = builder.employeeId;
         modelling = builder.modelling;
         correspondence = builder.correspondence;
         documentation = builder.documentation;
         drawings = builder.drawings;
         additionalHours = builder.additionalHours;
-        budget = builder.budget;
-        closed = builder.closed;
     }
 
     public static class Builder {
 
-        private final String number;
+        private final String projectNumber;
+        private final String employeeId;
 
-        private String title = "";
         private int modelling = 0;
         private int correspondence = 0;
         private int documentation = 0;
         private int drawings = 0;
         private int additionalHours = 0;
-        private int budget = 0;
-        private boolean closed = false;
 
-
-        public Builder(String number) {
-            this.number = number;
+        public Builder(String projectNumber, String employeeId) {
+            this.projectNumber = projectNumber;
+            this.employeeId = employeeId;
         }
 
-        public Builder title(String val) {
-            title = val;
-            return this;
-        }
 
         public Builder modelling(int val) {
             modelling = val;
@@ -72,31 +64,17 @@ public class ProjectDto {
             return this;
         }
 
-        public Builder budget(int val) {
-            budget = val;
-            return this;
-        }
-
-        public Builder closed(boolean val) {
-            closed = val;
-            return this;
-        }
-
-        public ProjectDto build() {
-            return new ProjectDto(this);
+        public ProjectDetailsDto build() {
+            return new ProjectDetailsDto(this);
         }
     }
 
-    public String getNumber() {
-        return number;
+    public String getProjectNumber() {
+        return projectNumber;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public int getBudget() {
-        return budget;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
     public int getModelling() {
@@ -117,9 +95,5 @@ public class ProjectDto {
 
     public int getAdditionalHours() {
         return additionalHours;
-    }
-
-    public boolean isClosed() {
-        return closed;
     }
 }

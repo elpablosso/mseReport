@@ -1,10 +1,12 @@
 package com.maven.pablo.reportingtool.project.mapper;
-import com.maven.pablo.reportingtool.project.ProjectDto;
-import com.maven.pablo.reportingtool.project.ProjectForm;
+import com.maven.pablo.reportingtool.employee.EmployeeService;
+import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.project.dto.ProjectDto;
+import com.maven.pablo.reportingtool.project.dto.ProjectForm;
 import com.maven.pablo.reportingtool.project.entity.Project;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,39 +14,37 @@ import java.util.stream.Collectors;
 @Component
 public class MyProjectMapper implements ProjectMapper{
 
+    @Autowired
+    EmployeeService employeeService;
+
     public MyProjectMapper() {
     }
 
     @Override
     public Project newProjectFromForm(ProjectForm form) {
-        Project project = openNewProject();
+        Project project = new Project();
+
         project.setNumber(form.getNumber());
+        project.setBudget(BigDecimal.valueOf(form.getBudget()));
         project.setTitle(form.getTitle());
-        project.setBudget(BigDecimal.valueOf(form.getBudget())
-                .setScale(0,RoundingMode.HALF_DOWN));
+        Employee employee = employeeService.findById(form.getLeaderId());
+        project.setLeader(employee);
+        project.setClosed(false);
+
         return project;
     }
 
     public Project newProjectFromDto(ProjectDto projectDto){
 
-        Project project = openNewProject();
-        project.setNumber(projectDto.getNumber());
-        project.setTitle(projectDto.getTitle());
-        project.setBudget(BigDecimal.valueOf(projectDto.getBudget())
-        .setScale(0,RoundingMode.HALF_DOWN));
-        return project;
+        return null;
     }
 
     public ProjectDto convertToDto(Project project){
-                return new ProjectDto.Builder(project.getNumber())
-                .title(project.getTitle())
-                .modelling(project.getModelling().intValue())
-                .drawings(project.getDrawings().intValue())
-                .documentation(project.getDocumentation().intValue())
-                .correspondence(project.getCorrespondence().intValue())
-                .additionalHours(project.getAdditionalHours().intValue())
-                .budget(project.getBudget().intValue())
-                .closed(project.isClosed()).build();
+        return new ProjectDto(project.getNumber(),
+                                project.getTitle(),
+                                project.getBudget().intValue(),
+                                project.isClosed(),
+                                project.getLeader().getId());
     }
 
     public List<ProjectDto> convertToDto(Collection<Project> projects){
@@ -54,12 +54,7 @@ public class MyProjectMapper implements ProjectMapper{
     @Override
     public Project openNewProject() {
         Project project = new Project();
-        project.setClosed(false);
-        project.setAdditionalHours(BigDecimal.ZERO);
-        project.setCorrespondence(BigDecimal.ZERO);
-        project.setDrawings(BigDecimal.ZERO);
-        project.setModelling(BigDecimal.ZERO);
-        project.setDocumentation(BigDecimal.ZERO);
+
         return project;
     }
 }

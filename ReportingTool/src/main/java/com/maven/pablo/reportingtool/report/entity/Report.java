@@ -1,6 +1,10 @@
 package com.maven.pablo.reportingtool.report.entity;
 import com.maven.pablo.reportingtool.employee.enums.Departments;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,6 +13,9 @@ import java.time.LocalDate;
 public class Report {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     private String employeeId;
     private String projectId;
     private String description;

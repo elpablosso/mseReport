@@ -1,5 +1,5 @@
-package com.maven.pablo.reportingtool.project;
-
+package com.maven.pablo.reportingtool.project.dto;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -16,9 +16,10 @@ public class ProjectForm {
     @NotNull(message = "Budget can not be empty!")
     private Integer budget;
 
+    @NotEmpty(message = "Select leader!")
+    private String leaderId;
+
     public ProjectForm() {
-        setNumber("");
-        setTitle("");
     }
 
     public String getNumber() {
@@ -43,5 +44,13 @@ public class ProjectForm {
 
     public void setBudget(Integer budget) {
         this.budget = budget;
+    }
+
+    public String getLeaderId() {
+        return leaderId;
+    }
+
+    public void setLeaderId(String leaderId) {
+        this.leaderId = leaderId;
     }
 }

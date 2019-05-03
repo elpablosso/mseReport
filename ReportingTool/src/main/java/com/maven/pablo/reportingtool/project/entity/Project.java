@@ -1,6 +1,8 @@
 package com.maven.pablo.reportingtool.project.entity;
+import com.maven.pablo.reportingtool.employee.entity.Employee;
 import javax.persistence.*;
 import java.math.BigDecimal;
+
 
 @Entity
 public class Project {
@@ -8,29 +10,24 @@ public class Project {
     @Id
     private String number;
     private String title;
-
-    /// TOTAL TIME SPENT IN THE PROJECT IN SPECIFIED DEPARTMENTS
-    private BigDecimal modelling;
-    private BigDecimal correspondence;
-    private BigDecimal documentation;
-    private BigDecimal drawings;
     private BigDecimal budget;
-    private BigDecimal additionalHours;
 
+    @ManyToOne
+    private Employee leader;
     private boolean closed;
 
     public Project() {
     }
 
-    public BigDecimal getAdditionalHours() {
-        return additionalHours;
+    public Employee getLeader() {
+        return leader;
     }
 
-    public void setAdditionalHours(BigDecimal additionalHours) {
-        this.additionalHours = additionalHours;
+    public void setLeader(Employee leader) {
+        this.leader = leader;
     }
 
-    public String getNumber() {
+       public String getNumber() {
         return number;
     }
 
@@ -46,36 +43,12 @@ public class Project {
         this.title = title;
     }
 
-    public BigDecimal getModelling() {
-        return modelling;
+    public boolean isClosed() {
+        return closed;
     }
 
-    public void setModelling(BigDecimal modelling) {
-        this.modelling = modelling;
-    }
-
-    public BigDecimal getCorrespondence() {
-        return correspondence;
-    }
-
-    public void setCorrespondence(BigDecimal correspondence) {
-        this.correspondence = correspondence;
-    }
-
-    public BigDecimal getDocumentation() {
-        return documentation;
-    }
-
-    public void setDocumentation(BigDecimal documentation) {
-        this.documentation = documentation;
-    }
-
-    public BigDecimal getDrawings() {
-        return drawings;
-    }
-
-    public void setDrawings(BigDecimal drawings) {
-        this.drawings = drawings;
+    public void setClosed(boolean closed) {
+        this.closed = closed;
     }
 
     public BigDecimal getBudget() {
@@ -84,13 +57,5 @@ public class Project {
 
     public void setBudget(BigDecimal budget) {
         this.budget = budget;
-    }
-
-    public boolean isClosed() {
-        return closed;
-    }
-
-    public void setClosed(boolean closed) {
-        this.closed = closed;
     }
 }
