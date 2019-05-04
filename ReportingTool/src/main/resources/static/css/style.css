@@ -116,21 +116,21 @@ label {
 }
 
 .col-25 {
-  overflow: scroll;
+  overflow: hidden;
   float: left;
   width: 25%;
   margin-top: 6px;
 }
 
 .col-50 {
-  overflow: scroll;
+  overflow: hidden;
   float: left;
   width: 50%;
   margin-top: 6px;
 }
 
 .col-75 {
-  overflow: scroll;
+  overflow: hidden;
   float: left;
   width: 75%;
   margin-top: 6px;
