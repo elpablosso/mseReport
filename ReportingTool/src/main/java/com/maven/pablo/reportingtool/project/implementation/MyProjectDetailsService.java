@@ -22,7 +22,7 @@ public class MyProjectDetailsService implements ProjectDetailsService {
 
     @Override
     public void increaseDrawings(String projectId, String employeeId, BigDecimal value) {
-
+        System.out.println("Increased");
     }
 
     @Override

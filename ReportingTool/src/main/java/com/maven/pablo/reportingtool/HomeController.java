@@ -23,13 +23,14 @@ public class HomeController {
     public String logout() {
         return "logout";
     }
+
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String postLogout() {
         return "redirect:/logout";
     }
 
     @RequestMapping("/login-error")
-    public String loginError(Model model) {
+    public String errorLogin(Model model) {
         model.addAttribute("loginError", true);
         return "login";
     }
