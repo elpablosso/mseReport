@@ -6,8 +6,6 @@ import com.maven.pablo.reportingtool.project.dto.ProjectDto;
 import com.maven.pablo.reportingtool.project.dto.ProjectForm;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import com.maven.pablo.reportingtool.project.mapper.ProjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,21 +21,20 @@ public class ProjectController {
 
     private EmployeeService employeeService;
     private EmployeeMapper employeeMapper;
-    private ProjectService service;
-    private ProjectMapper mapper;
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private ProjectService projectService;
+    private ProjectMapper projectMapper;
 
     @Autowired
-    public ProjectController(EmployeeService employeeService, EmployeeMapper employeeMapper, ProjectService service, ProjectMapper mapper) {
+    public ProjectController(EmployeeService employeeService, EmployeeMapper employeeMapper, ProjectService projectService, ProjectMapper projectMapper) {
         this.employeeService = employeeService;
         this.employeeMapper = employeeMapper;
-        this.service = service;
-        this.mapper = mapper;
+        this.projectService = projectService;
+        this.projectMapper = projectMapper;
     }
 
-    @ModelAttribute(name="projectList")
+    @ModelAttribute
     List<ProjectDto> projectDtoList(){
-        return mapper.convertToDto(service.getAllProjects());
+        return projectMapper.convertToDto(projectService.getAllProjects());
     }
     @ModelAttribute
     List<EmployeeDto> leaderList(){
@@ -54,6 +51,7 @@ public class ProjectController {
     @GetMapping("/add")
     public ModelAndView addProject(ModelAndView modelAndView){
         modelAndView.setViewName("project/add");
+        modelAndView.addObject("projectList",projectDtoList());
         modelAndView.addObject("projectForm", new ProjectForm());
         modelAndView.addObject("leaderList", leaderList());
         return modelAndView;
@@ -62,6 +60,7 @@ public class ProjectController {
     @GetMapping("/find")
     public ModelAndView findProject(ModelAndView modelAndView){
         modelAndView.setViewName("project/find");
+        modelAndView.addObject("projectList",projectDtoList());
         modelAndView.addObject("projectForm", new ProjectForm());
         return modelAndView;
     }
@@ -76,8 +75,8 @@ public class ProjectController {
         if(bindingResult.hasErrors())
             return modelAndView;
 
-        if(service.findProjectByProjectNumber(projectForm.getNumber())==null)
-        service.saveProjectInRepository(mapper.newProjectFromForm(projectForm));
+        if(projectService.findProjectByProjectNumber(projectForm.getNumber())==null)
+        projectService.saveProjectInRepository(projectMapper.newProjectFromForm(projectForm));
 
         modelAndView.addObject("projectForm",new ProjectForm());
         modelAndView.addObject("projectList",projectDtoList());
@@ -87,36 +86,12 @@ public class ProjectController {
     @PostMapping("/find")
     public ModelAndView findProjectSumbit(@ModelAttribute ProjectForm projectForm,
                                           ModelAndView modelAndView){
-        List<Project> projects = service.findProjectByForm(projectForm);
-        List<ProjectDto> projectDtos = mapper.convertToDto(projects);
+
+        List<Project> projects = projectService.findProjectByForm(projectForm);
+        List<ProjectDto> projectDtos = projectMapper.convertToDto(projects);
         modelAndView.setViewName("project/find");
         modelAndView.addObject("projectForm", new ProjectForm());
         modelAndView.addObject("projectList", projectDtos);
-        return modelAndView;
-    }
-
-    @GetMapping("/details")
-    public ModelAndView projectDetails(@RequestParam("projectNumber") String projectNumber,
-                                       ModelAndView modelAndView){
-        modelAndView.addObject("project",
-                mapper.convertToDto(service.findProjectByProjectNumber(projectNumber)));
-        modelAndView.setViewName("project/details");
-        return modelAndView;
-    }
-
-    @GetMapping("/edit")
-    public ModelAndView projectEdit(@RequestParam("projectNumber") String projectNumber,
-                                       ModelAndView modelAndView){
-        modelAndView.addObject("project",
-                mapper.convertToDto(service.findProjectByProjectNumber(projectNumber)));
-        modelAndView.setViewName("project/edit");
-        return modelAndView;
-    }
-
-    @PostMapping("/change")
-    public ModelAndView projectEditSubmit(@ModelAttribute("project") ProjectDto projectDto,
-                                          ModelAndView modelAndView){
-
         return modelAndView;
     }
 
@@ -133,7 +108,7 @@ public class ProjectController {
     public ModelAndView deleteProject(@RequestParam("projectNumber") String projectNumber,
                                       ModelAndView modelAndView){
 
-        service.removeProjectByNumber(projectNumber);
+        projectService.removeProjectByNumber(projectNumber);
         modelAndView.setViewName("project/all");
         modelAndView.addObject("projectList",projectDtoList());
         return modelAndView;

@@ -21,26 +21,23 @@ public class ReportController {
     CompleteReportDto completeReportDto;
     ReportService service;
     ProjectService projectService;
-    EmployeeService employeeService;
     ReportMapper mapper;
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     public ReportController(CompleteReportDto completeReportDto, ReportService service,
-                            ProjectService projectService, EmployeeService employeeService,
-                            ReportMapper mapper) {
+                            ProjectService projectService, ReportMapper mapper) {
         this.completeReportDto = completeReportDto;
         this.service = service;
         this.projectService = projectService;
-        this.employeeService = employeeService;
         this.mapper = mapper;
     }
 
     @GetMapping("/all")
     public ModelAndView allReports(ModelAndView modelAndView){
+
+        modelAndView.addObject("departmentList", service.departmentList());
         modelAndView.addObject("newReportDto", mapper.emptyReportDto());
         modelAndView.addObject("projectList", projectService.getAllProjects());
-        modelAndView.addObject("employeeList", employeeService.findAll());
         modelAndView.addObject("reportList", completeReportDto.getReports());
         modelAndView.setViewName("reports");
         return modelAndView;
@@ -49,8 +46,6 @@ public class ReportController {
     @PostMapping("/save")
     public ModelAndView saveReportPart(@ModelAttribute("newReportDto")ReportDto reportDto,
                                        ModelAndView modelAndView, BindingResult bindingResult){
-        logger.info(reportDto.getEmployeeId());
-        logger.info(reportDto.getProjectId());
         return modelAndView;
     }
 

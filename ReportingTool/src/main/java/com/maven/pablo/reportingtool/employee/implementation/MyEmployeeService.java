@@ -50,9 +50,4 @@ public class MyEmployeeService implements EmployeeService {
         employeeRepository.delete(employee);
     }
 
-    @Override
-    public void deleteFromRepository(String employeeId) {
-            Employee employee = employeeRepository.findById(employeeId).orElse(null);
-            employeeRepository.delete(employee);
-    }
 }

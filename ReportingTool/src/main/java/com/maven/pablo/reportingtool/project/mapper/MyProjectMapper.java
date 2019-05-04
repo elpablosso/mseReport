@@ -34,11 +34,6 @@ public class MyProjectMapper implements ProjectMapper{
         return project;
     }
 
-    public Project newProjectFromDto(ProjectDto projectDto){
-
-        return null;
-    }
-
     public ProjectDto convertToDto(Project project){
         return new ProjectDto(project.getNumber(),
                                 project.getTitle(),
@@ -51,10 +46,4 @@ public class MyProjectMapper implements ProjectMapper{
         return projects.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
-    @Override
-    public Project openNewProject() {
-        Project project = new Project();
-
-        return project;
-    }
 }

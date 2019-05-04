@@ -18,16 +18,41 @@
     <form action="#" th:action="@{/report/add}" th:object="${newReportDto}" method="post">
 
         <div class="row">
-            <div class="col-50">
-                Select Project: </div>
+            <div class="col-25">
+                <label for="projectId">PROJECT</label>
+            </div>
 
-            <div class="col-50">
-           <select th:field="*{projectId}">
+            <div class="col-75">
+           <select th:field="*{projectId}" id="projectId">
                 <option value=""> -- </option>
                 <option th:each="project : ${projectList}"
                         th:value="${project.number}"
                         th:utext="${project.number}"/>
             </select> </div></div>
+
+
+        <div class="row">
+            <div class="col-25">
+                <label for="department">DEPARTMENT</label>
+            </div>
+            <div class="col-75">
+                <select th:field="*{department}" id="department">
+                    <option value=""> -- </option>
+                    <option th:each="department : ${departmentList}"
+                            th:value="${department}"
+                            th:utext="${department}"/>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="description">DESCRIPTION </label>
+            </div>
+            <div class="col-75">
+                <textarea id="description" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+            </div></div>
 
     </form>
 </div>

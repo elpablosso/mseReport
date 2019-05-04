@@ -8,10 +8,7 @@ import java.util.List;
 
 public interface EmployeeMapper {
 
-
     EmployeeDto convertToDto(Employee employee);
     List<EmployeeDto> convertToDto(Collection<Employee> employees);
-    Employee newEmployeeFromDto(EmployeeDto employeeDto);
-    EmployeeDto emptyEmployeeDto();
 
 }

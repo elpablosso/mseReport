@@ -11,6 +11,8 @@ public interface ReportService {
     void deleteReportFromRepository(Report report);
     void saveListOfReportPartsInRepository(List<Report> reports);
 
+    public List<String> departmentList();
+
     List<Report> findAllReports();
     List<Report> findAllReportsOfEmployee(String employeeId);
     List<Report> findAllReportsOfProject(String projectId);

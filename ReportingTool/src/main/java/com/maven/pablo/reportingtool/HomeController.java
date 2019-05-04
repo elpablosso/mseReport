@@ -14,6 +14,7 @@ public class HomeController {
         return "login";
     }
 
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String postLogin() {
         return "redirect:/login-error";

@@ -13,6 +13,5 @@ public interface EmployeeService {
 
     void saveInRepository(Employee employee);
     void deleteFromRepository(Employee employee);
-    void deleteFromRepository(String employeeId);
 
 }

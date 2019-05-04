@@ -7,9 +7,10 @@ public class ReportDto {
 
     private String employeeId;
     private String projectId;
+
     private String description;
     private BigDecimal time;
-    private Departments departments;
+    private String department;
     private boolean additionalRange;
     private LocalDate date;
 
@@ -17,7 +18,7 @@ public class ReportDto {
         this.employeeId = employeeId;
         this.projectId = projectId;
         this.time = time;
-        this.departments = departments;
+        this.department = departments.toString();
         this.additionalRange = additionalRange;
         this.date = LocalDate.now();
     }
@@ -49,12 +50,20 @@ public class ReportDto {
         this.time = time;
     }
 
-    public Departments getDepartments() {
-        return departments;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDepartments(Departments departments) {
-        this.departments = departments;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public LocalDate getDate() {

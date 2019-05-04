@@ -17,23 +17,14 @@ public class MyEmployeeMapper implements EmployeeMapper {
                 employee.getId(),
                 employee.getEmail(),
                 employee.getName(),
-                employee.getRole());}
+                employee.getRole());
+    }
 
     @Override
     public List<EmployeeDto> convertToDto(Collection<Employee> employees) {
-        return employees.stream().map(this::convertToDto).collect(Collectors.toList()) ;}
-
-    @Override
-    public Employee newEmployeeFromDto(EmployeeDto employeeDto) {
-        Employee employee = new Employee();
-        employee.setId(employeeDto.getId());
-        employee.setName(employeeDto.getName());
-        employee.setEmail(employeeDto.getEmail());
-        return employee;
+        return employees.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
-    @Override
-    public EmployeeDto emptyEmployeeDto() {
-        return new EmployeeDto();
-    }
 }
+
+

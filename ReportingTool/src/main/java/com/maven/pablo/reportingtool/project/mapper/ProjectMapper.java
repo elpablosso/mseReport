@@ -9,9 +9,7 @@ import java.util.List;
 
 public interface ProjectMapper {
 
-    Project newProjectFromDto(ProjectDto projectDto);
     Project newProjectFromForm(ProjectForm form);
-    Project openNewProject();
 
     ProjectDto convertToDto(Project project);
     List<ProjectDto> convertToDto(Collection<Project> projects);

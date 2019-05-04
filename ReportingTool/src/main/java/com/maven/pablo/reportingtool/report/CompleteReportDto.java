@@ -10,7 +10,8 @@ import java.util.List;
 public class CompleteReportDto {
 
     private List<ReportDto> reports;
-    private List<String> recieversEmails;
+    private List<String> recieversIds;
+
     boolean isComplete;
 
     BigDecimal modelling;
@@ -27,13 +28,6 @@ public class CompleteReportDto {
         this.reports = reports;
     }
 
-    public List<String> getRecieversEmails() {
-        return recieversEmails;
-    }
-
-    public void setRecieversEmails(List<String> recieversEmails) {
-        this.recieversEmails = recieversEmails;
-    }
 
     public boolean isComplete() {
         return isComplete;

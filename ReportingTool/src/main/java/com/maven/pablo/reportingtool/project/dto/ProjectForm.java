@@ -1,7 +1,7 @@
 package com.maven.pablo.reportingtool.project.dto;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import org.springframework.format.annotation.NumberFormat;
+
+import javax.validation.constraints.*;
 
 public class ProjectForm {
 
@@ -14,6 +14,8 @@ public class ProjectForm {
     private String title;
 
     @NotNull(message = "Budget can not be empty!")
+    @DecimalMin(value = "0", message = "Budget must be number higher than 0!")
+    @DecimalMax(value = "1000000", message = "Budget must be lower than 1000000!")
     private Integer budget;
 
     @NotEmpty(message = "Select leader!")

@@ -119,47 +119,6 @@
 </form>
 
 
-<table th:fragment="EditProject">
-    <thead>
-    <tr>
-        <th></th>
-        <th>CURRENT</th>
-        <th>NEW</th>
-    </tr>
-    </thead>
-    <tbody>
-    <form th:fragment="changeForm" action="#"
-          th:action="@{/projects/change}"
-          th:object="${project}"
-          method="post">
-        <tr>
-            <td><b>PROJECT NUMBER</b></td>
-            <td th:text="${project.number}"></td>
-            <td><input type="text" placeholder="Project number.." th:field="*{number}" /></td>
-        </tr>
-
-        <tr>
-            <td><b>PROJECT TITLE</b></td>
-            <td th:text="${project.title}"></td>
-            <td><input type="text" th:field="*{title}" /></td>
-        </tr>
-
-        <tr>
-            <td><b>PROJECT BUDGET</b></td>
-            <td th:text="${project.budget}"></td>
-            <td><input type="text" th:field="*{budget}" /></td>
-        </tr>
-
-        <tr><td>
-            <input type="submit" class="link" value="Submit" />
-        </td></tr>
-
-
-    </form>
-    </tbody>
-
-</table>
-
 <p th:fragment="DeleteConfirm">
 Are you sure you want to delete : <td th:text="${projectNumber}"></td> ??
 <br><br>

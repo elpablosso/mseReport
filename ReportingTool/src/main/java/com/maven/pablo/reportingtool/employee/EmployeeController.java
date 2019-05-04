@@ -28,7 +28,7 @@ public class EmployeeController {
 
     @ModelAttribute(name="employeeList")
     List<EmployeeDto> employeeDtoList(){
-        return mapper.convertToDto((List<Employee>) service.findAll());
+        return mapper.convertToDto(service.findAll());
     }
 
     @GetMapping("/all")
@@ -38,21 +38,8 @@ public class EmployeeController {
         modelAndView.setViewName("employee");
         modelAndView.addObject("username", principal.getName());
         modelAndView.addObject("employeeList", employeeDtoList());
-        modelAndView.addObject("newEmployeeDto", mapper.emptyEmployeeDto());
-
         return modelAndView;
     }
 
-    @PostMapping("/save")
-    public ModelAndView saveEmployeeSumbit(@ModelAttribute(name = "newEmployeeDto") EmployeeDto employeeDto,
-                                           ModelAndView modelAndView){
-
-        service.saveInRepository(mapper.newEmployeeFromDto(employeeDto));
-        modelAndView.setViewName("employee");
-        modelAndView.addObject("newEmployeeDto", mapper.emptyEmployeeDto());
-        modelAndView.addObject("employeeList",employeeDtoList());
-
-        return modelAndView;
-    }
 
 }
