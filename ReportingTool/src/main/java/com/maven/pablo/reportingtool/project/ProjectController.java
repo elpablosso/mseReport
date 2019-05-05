@@ -72,8 +72,10 @@ public class ProjectController {
 
         modelAndView.setViewName("project/add");
         modelAndView.addObject("leaderList", leaderList());
-        if(bindingResult.hasErrors())
-            return modelAndView;
+
+        if(bindingResult.hasErrors()) {
+            modelAndView.addObject("projectList",projectDtoList());
+            return modelAndView; }
 
         if(projectService.findProjectByProjectNumber(projectForm.getNumber())==null)
         projectService.saveProjectInRepository(projectMapper.newProjectFromForm(projectForm));
