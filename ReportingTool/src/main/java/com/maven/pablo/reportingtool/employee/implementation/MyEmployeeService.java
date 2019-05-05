@@ -2,6 +2,8 @@ package com.maven.pablo.reportingtool.employee.implementation;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
 import com.maven.pablo.reportingtool.employee.entity.EmployeeRepository;
+import com.maven.pablo.reportingtool.employee.enums.Role;
+import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
@@ -26,7 +28,7 @@ public class MyEmployeeService implements EmployeeService {
 
     @Override
     public Collection<Employee> findLeaders() {
-        return employeeRepository.findByRole("LEADER");
+        return employeeRepository.findByRole(Role.LEADER.name());
     }
 
     @Override
@@ -34,20 +36,28 @@ public class MyEmployeeService implements EmployeeService {
         return employeeRepository.findById(id).orElse(null);
     }
 
-        @Override
+    @Override
     public Collection<Employee> findAll() {
         return employeeRepository.findAll();
     }
 
+    @Override
+    public Employee findByName(String name){
+        return employeeRepository.findByName(name).orElse(null);
+    }
 
     @Override
-    public void saveInRepository(Employee employee) {
+    public void saveEmployee(Employee employee) {
         employeeRepository.save(employee);
     }
 
     @Override
-    public void deleteFromRepository(Employee employee) {
+    public void deleteEmployee(Employee employee) {
         employeeRepository.delete(employee);
     }
 
+    @Override
+    public Employee findByUsername(String username) {
+        return employeeRepository.findByUsername(username).orElse(null);
+    }
 }

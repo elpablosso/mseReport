@@ -83,8 +83,7 @@
                  th:value="${employee.id}"
                  th:utext="${employee.name}"/>
                 </select>
-            <td th:if="${#fields.hasErrors('leaderId')}" th:errors="*{leaderId}">
-                Select leader</td>
+            <td th:if="${#fields.hasErrors('leaderId')}" th:errors="*{leaderId}"></td>
 
         </div>
     </div>

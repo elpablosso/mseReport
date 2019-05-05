@@ -13,6 +13,7 @@ public interface EmployeeRepository extends CrudRepository<Employee,String> {
 
     Optional<Employee> findById(String id);
     Optional<Employee> findByEmail(String email);
+    Optional<Employee> findByName(String name);
     Optional<Employee> findByUsername(String username);
 
 }
