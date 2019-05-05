@@ -1,8 +1,7 @@
 package com.maven.pablo.reportingtool.report.entity;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
-import com.maven.pablo.reportingtool.employee.enums.Departments;
+import com.maven.pablo.reportingtool.employee.enums.Department;
 import com.maven.pablo.reportingtool.project.entity.Project;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,7 +22,7 @@ public class Report {
 
     private String description;
     private BigDecimal time;
-    private Departments departments;
+    private Department department;
     private LocalDate date;
     private boolean additionalRange;
 
@@ -44,12 +43,12 @@ public class Report {
         this.time = time;
     }
 
-    public Departments getDepartments() {
-        return departments;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartments(Departments departments) {
-        this.departments = departments;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public LocalDate getDate() {

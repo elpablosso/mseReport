@@ -1,15 +1,19 @@
 package com.maven.pablo.reportingtool.report;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Scope(scopeName = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CompleteReportDto {
 
-    private List<ReportDto> reports;
+    private List<ReportDto> reports = new ArrayList<>();
     private List<String> recieversIds;
 
     boolean isComplete;

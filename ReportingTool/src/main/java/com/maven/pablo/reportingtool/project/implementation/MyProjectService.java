@@ -21,29 +21,34 @@ public class MyProjectService implements com.maven.pablo.reportingtool.project.P
     }
 
     @Override
-    public Collection<Project> getAllProjects() {
+    public Collection<Project> findAll() {
         return projectRepository.findAll();
     }
 
     @Override
-    public Project findProjectByProjectNumber(String number) {
+    public Project findByNumber(String number) {
         return projectRepository.findByNumber(number);
     }
 
     @Override
-    public void saveProjectInRepository(Project project) {
+    public void saveProject(Project project) {
         projectRepository.save(project);
     }
 
 
     @Override
-    public void removeProjectByNumber(String projectNumber) {
-        projectRepository.delete(findProjectByProjectNumber(projectNumber));
+    public void deleteProjectByNumber(String projectNumber) {
+        deleteProject(findByNumber(projectNumber));
     }
 
     @Override
-    public List<Project> findProjectByForm(ProjectForm form) {
-        return getAllProjects().stream()
+    public void deleteProject(Project project) {
+        projectRepository.delete(project);
+    }
+
+    @Override
+    public List<Project> findByForm(ProjectForm form) {
+        return findAll().stream()
                 .filter(c-> c.getNumber().contains(form.getNumber()))
                 .filter(c->c.getTitle().contains(form.getTitle()))
                 .collect(Collectors.toList());

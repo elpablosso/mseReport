@@ -34,7 +34,7 @@ public class ProjectController {
 
     @ModelAttribute
     List<ProjectDto> projectDtoList(){
-        return projectMapper.convertToDto(projectService.getAllProjects());
+        return projectMapper.convertToDto(projectService.findAll());
     }
     @ModelAttribute
     List<EmployeeDto> leaderList(){
@@ -77,8 +77,8 @@ public class ProjectController {
             modelAndView.addObject("projectList",projectDtoList());
             return modelAndView; }
 
-        if(projectService.findProjectByProjectNumber(projectForm.getNumber())==null)
-        projectService.saveProjectInRepository(projectMapper.newProjectFromForm(projectForm));
+        if(projectService.findByNumber(projectForm.getNumber())==null)
+        projectService.saveProject(projectMapper.newProjectFromForm(projectForm));
 
         modelAndView.addObject("projectForm",new ProjectForm());
         modelAndView.addObject("projectList",projectDtoList());
@@ -89,7 +89,7 @@ public class ProjectController {
     public ModelAndView findProjectSumbit(@ModelAttribute ProjectForm projectForm,
                                           ModelAndView modelAndView){
 
-        List<Project> projects = projectService.findProjectByForm(projectForm);
+        List<Project> projects = projectService.findByForm(projectForm);
         List<ProjectDto> projectDtos = projectMapper.convertToDto(projects);
         modelAndView.setViewName("project/find");
         modelAndView.addObject("projectForm", new ProjectForm());
@@ -110,7 +110,7 @@ public class ProjectController {
     public ModelAndView deleteProject(@RequestParam("projectNumber") String projectNumber,
                                       ModelAndView modelAndView){
 
-        projectService.removeProjectByNumber(projectNumber);
+        projectService.deleteProjectByNumber(projectNumber);
         modelAndView.setViewName("project/all");
         modelAndView.addObject("projectList",projectDtoList());
         return modelAndView;

@@ -8,6 +8,6 @@ public interface ReportMapper {
     ReportDto newReportFromDto(Report report);
     List<ReportDto> convertToDto(List<Report> reports);
     Report convertToDto(ReportDto reportDto);
-    ReportDto emptyReportDto();
+
 
 }

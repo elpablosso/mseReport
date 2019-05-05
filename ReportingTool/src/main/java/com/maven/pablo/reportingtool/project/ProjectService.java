@@ -6,12 +6,13 @@ import java.util.List;
 
 public interface ProjectService {
 
-    Collection<Project> getAllProjects();
+    Collection<Project> findAll();
 
-    Project findProjectByProjectNumber(String number);
-    List<Project> findProjectByForm(ProjectForm form);
+    Project findByNumber(String number);
+    List<Project> findByForm(ProjectForm form);
 
-    void saveProjectInRepository(Project project);
-    void removeProjectByNumber(String projectNumber);
+    void saveProject(Project project);
+    void deleteProject(Project project);
+    void deleteProjectByNumber(String projectNumber);
 
 }
