@@ -19,14 +19,14 @@
   color: white;
   font-family:Lucida Sans Unicode, Lucida Grande;
   font-size:12px;
-  width: 40%;
+  width: 30%;
   background: #262626;
   border: 1px solid white;
 }
 
 /* Middle column */
 .column.middle {
-  width: 60%;
+  width: 70%;
   color: white;
     font-family:Lucida Sans Unicode, Lucida Grande;
     font-size:12px;
