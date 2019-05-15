@@ -1,8 +1,13 @@
 package com.maven.pablo.reportingtool.employee.entity;
+import com.maven.pablo.reportingtool.project.entity.Project;
+import com.maven.pablo.reportingtool.project.entity.ProjectDetails;
+import com.maven.pablo.reportingtool.report.entity.Report;
+
 import javax.persistence.*;
+import java.util.Set;
 
 
-@Entity
+    @Entity
     @Table(name = "employee")
     public class Employee {
 
@@ -11,6 +16,18 @@ import javax.persistence.*;
         private String email;
         private String name;
 
+        @OneToMany(fetch = FetchType.LAZY, mappedBy = "leader")
+        Set<Project> projects;
+
+        @OneToMany(mappedBy = "employee")
+        Set<ProjectDetails> details;
+
+        @ManyToMany
+        @JoinTable(name="unread_reports",
+        joinColumns = @JoinColumn(name="employee_id"),
+        inverseJoinColumns = @JoinColumn(name = "report_id"))
+        Set<Report> unreadReports;
+
         private String username;
         private String password;
         private String role;
@@ -18,7 +35,15 @@ import javax.persistence.*;
         private int salary;
         private int bonus;
 
-    public String getId() {
+        public Set<ProjectDetails> getDetails() {
+            return details;
+        }
+
+        public void setDetails(Set<ProjectDetails> details) {
+            this.details = details;
+        }
+
+        public String getId() {
         return id;
     }
 
@@ -82,4 +107,19 @@ import javax.persistence.*;
         this.password = password;
     }
 
-}
+        public Set<Project> getProjects() {
+            return projects;
+        }
+
+        public void setProjects(Set<Project> projects) {
+            this.projects = projects;
+        }
+
+        public Set<Report> getUnreadReports() {
+            return unreadReports;
+        }
+
+        public void setUnreadReports(Set<Report> unreadReports) {
+            this.unreadReports = unreadReports;
+        }
+    }

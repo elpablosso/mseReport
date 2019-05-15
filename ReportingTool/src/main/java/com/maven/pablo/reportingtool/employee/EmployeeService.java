@@ -1,5 +1,6 @@
 package com.maven.pablo.reportingtool.employee;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.report.entity.Report;
 
 import java.util.Collection;
 
@@ -13,6 +14,10 @@ public interface EmployeeService {
     Collection<Employee> findAll();
     Collection<Employee> findLeaders();
 
+    void addUnreadReport(Collection<Report> reports);
+    void addUnreadReport(Report report);
+    void markReportAsRead(Report report);
+    void markAllReportsAsRead(Employee employee);
 
     void saveEmployee(Employee employee);
     void deleteEmployee(Employee employee);

@@ -22,7 +22,7 @@ public class ReportDto {
 
     @NotNull(message = "How long?")
     @Min(value = 15, message = "Minimum time is 15 minutes!")
-    private Integer time;
+    private BigDecimal time;
 
     @NotEmpty(message = "Please select department!")
     private String department;
@@ -32,7 +32,7 @@ public class ReportDto {
     public ReportDto(String employeeId, String projectId, BigDecimal time, Department department, boolean additionalRange) {
         this.employeeId = employeeId;
         this.projectId = projectId;
-        this.time = time.intValue();
+        this.time = time;
         this.department = department.toString();
         this.additionalRange = additionalRange;
         this.date = LocalDate.now();
@@ -58,11 +58,11 @@ public class ReportDto {
         this.projectId = projectId;
     }
 
-    public Integer getTime() {
+    public BigDecimal getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(BigDecimal time) {
         this.time = time;
     }
 

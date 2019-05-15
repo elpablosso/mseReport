@@ -1,7 +1,12 @@
 package com.maven.pablo.reportingtool.project.implementation;
+import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.project.ProjectDetailsService;
 import com.maven.pablo.reportingtool.project.dto.ProjectForm;
 import com.maven.pablo.reportingtool.project.entity.Project;
+import com.maven.pablo.reportingtool.project.entity.ProjectDetails;
 import com.maven.pablo.reportingtool.project.entity.repository.ProjectRepository;
+import com.maven.pablo.reportingtool.report.ReportDto;
+import com.maven.pablo.reportingtool.report.entity.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

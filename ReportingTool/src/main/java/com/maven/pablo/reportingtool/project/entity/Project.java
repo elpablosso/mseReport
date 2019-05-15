@@ -2,6 +2,7 @@ package com.maven.pablo.reportingtool.project.entity;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 
 @Entity
@@ -13,10 +14,23 @@ public class Project {
     private BigDecimal budget;
 
     @ManyToOne
+    @JoinColumn(name = "leader_id")
     private Employee leader;
+
+    @OneToMany(mappedBy = "project")
+    Set<ProjectDetails> details;
+
     private boolean closed;
 
     public Project() {
+    }
+
+    public Set<ProjectDetails> getDetails() {
+        return details;
+    }
+
+    public void setDetails(Set<ProjectDetails> details) {
+        this.details = details;
     }
 
     public Employee getLeader() {
@@ -58,4 +72,6 @@ public class Project {
     public void setBudget(BigDecimal budget) {
         this.budget = budget;
     }
+
+
 }

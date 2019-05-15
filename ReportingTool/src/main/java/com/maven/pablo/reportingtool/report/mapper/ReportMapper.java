@@ -5,9 +5,8 @@ import java.util.List;
 
 public interface ReportMapper {
 
-    ReportDto newReportFromDto(Report report);
-    List<ReportDto> convertToDto(List<Report> reports);
-    Report convertToDto(ReportDto reportDto);
+    Report convertFromDto(ReportDto reportDto);
+    List<Report> convertFromDto(List<ReportDto> reports);
 
 
 }

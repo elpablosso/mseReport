@@ -13,15 +13,26 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class ReportServiceImp implements ReportService {
+public class MyReportService implements ReportService {
 
     private ReportRepository reportRepository;
 
     @Autowired
-    public ReportServiceImp(ReportRepository reportRepository) {
+    public MyReportService(ReportRepository reportRepository) {
         this.reportRepository = reportRepository;
     }
 
+    @Override
+    public void save(List<Report> reports) {
+        for(Report report : reports){
+            reportRepository.save(report);
+        }
+    }
+
+    @Override
+    public void save(Report report) {
+        reportRepository.save(report);
+    }
 
     public List<String> departmentList(){
         List<String> departments = new ArrayList<>();

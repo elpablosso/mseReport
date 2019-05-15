@@ -4,6 +4,7 @@ import com.maven.pablo.reportingtool.employee.entity.Employee;
 import com.maven.pablo.reportingtool.employee.entity.EmployeeRepository;
 import com.maven.pablo.reportingtool.employee.enums.Role;
 import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
+import com.maven.pablo.reportingtool.report.entity.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
@@ -19,6 +20,37 @@ public class MyEmployeeService implements EmployeeService {
     @Autowired
     public MyEmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
+    }
+
+    @Override
+    public void addUnreadReport(Collection<Report> reports) {
+        for(Report report : reports) {
+            Employee employee = report.getProject().getLeader();
+            employee.getUnreadReports().add(report);
+            saveEmployee(employee);
+        } }
+
+
+    @Override
+    public void addUnreadReport(Report report) {
+            Employee employee = report.getProject().getLeader();
+            employee.getUnreadReports().add(report);
+            saveEmployee(employee);
+        }
+
+    @Override
+    public void markReportAsRead(Report report) {
+            Employee employee = report.getProject().getLeader();
+            employee.getUnreadReports().remove(report);
+            saveEmployee(employee);
+        }
+
+    @Override
+    public void markAllReportsAsRead(Employee employee) {
+        if(employee!=null){
+            employee.getUnreadReports().clear();
+            saveEmployee(employee);
+        }
     }
 
     @Override

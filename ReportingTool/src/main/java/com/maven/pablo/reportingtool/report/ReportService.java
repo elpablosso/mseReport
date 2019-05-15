@@ -12,4 +12,6 @@ public interface ReportService {
 
     List<String> departmentList();
 
+    void save(List<Report> reports);
+    void save(Report report);
 }

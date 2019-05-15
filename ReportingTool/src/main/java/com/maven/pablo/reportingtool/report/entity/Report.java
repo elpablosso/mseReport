@@ -6,6 +6,7 @@ import com.maven.pablo.reportingtool.project.entity.Project;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 public class Report {
@@ -19,6 +20,9 @@ public class Report {
 
     @ManyToOne
     Employee employee;
+
+    @ManyToMany(mappedBy = "unreadReports")
+    Set<Employee> employeesToRead;
 
     private String description;
     private BigDecimal time;
@@ -65,5 +69,37 @@ public class Report {
 
     public void setAdditionalRange(boolean additionalRange) {
         this.additionalRange = additionalRange;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Set<Employee> getEmployeesToRead() {
+        return employeesToRead;
+    }
+
+    public void setEmployeesToRead(Set<Employee> employeesToRead) {
+        this.employeesToRead = employeesToRead;
     }
 }
