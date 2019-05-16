@@ -8,9 +8,6 @@ import java.math.BigDecimal;
 @Entity
 public class ProjectDetails {
 
-    //@EmbeddedId
-    //private ProjectEmployeeKey projectEmployeeKey;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
