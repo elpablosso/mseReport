@@ -1,4 +1,4 @@
-package com.maven.pablo.reportingtool.project.entity.repository;
+package com.maven.pablo.reportingtool.project.entity;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Collection;

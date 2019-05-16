@@ -1,6 +1,6 @@
 package com.maven.pablo.reportingtool.project.entity;
-
 import com.maven.pablo.reportingtool.employee.entity.Employee;
+
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -8,15 +8,18 @@ import java.math.BigDecimal;
 @Entity
 public class ProjectDetails {
 
+    //@EmbeddedId
+    //private ProjectEmployeeKey projectEmployeeKey;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    private int id;
 
     @ManyToOne
-    Project project;
+    private Project project;
 
     @ManyToOne
-    Employee employee;
+    private Employee employee;
 
     private BigDecimal modelling;
     private BigDecimal correspondence;
@@ -24,13 +27,6 @@ public class ProjectDetails {
     private BigDecimal drawings;
     private BigDecimal additionalHours;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Project getProject() {
         return project;

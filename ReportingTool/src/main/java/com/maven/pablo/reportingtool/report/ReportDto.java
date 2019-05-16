@@ -1,6 +1,5 @@
 package com.maven.pablo.reportingtool.report;
 import com.maven.pablo.reportingtool.employee.enums.Department;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -29,6 +28,8 @@ public class ReportDto {
     private boolean additionalRange;
     private LocalDate date;
 
+    private int id;
+
     public ReportDto(String employeeId, String projectId, BigDecimal time, Department department, boolean additionalRange) {
         this.employeeId = employeeId;
         this.projectId = projectId;
@@ -41,6 +42,13 @@ public class ReportDto {
     public ReportDto() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getEmployeeId() {
         return employeeId;

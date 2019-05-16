@@ -9,33 +9,15 @@
 
 
 <div class="row">
+
     <div class="column middle">
-
-        <table th:fragment="List">
-            <thead>
-            <tr>
-                <th>EMPLOYEE</th>
-                <th>PROJECT</th>
-                <th>DEPARTMENT</th>
-                <th>DESCRIPTION</th>
-                <th>DURATION</th>
-                <th>EXTRA SCOPE</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="report: ${reportList}">
-                <td th:text="${report.employeeId}"></td>
-                <td th:text="${report.projectId}"></td>
-                <td th:text="${report.department}"></td>
-                <td th:text="${report.description}"></td>
-                <td th:text="${report.time}"></td>
-                <td th:text="${report.additionalRange} ? 'X' : ''"></td></td>
-            </tr>
-            </tbody>
-        </table>
+        <table th:replace="fragments/report :: List"></table>
+        <br>
+        <a th:href="@{/reports/send}" class="longlink"> SEND REPORT </a>
+    </div>
 
 
-</div>
+
 
 
 <div class="column side">

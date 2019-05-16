@@ -30,11 +30,24 @@ public class MyCompleteReport {
         totalDuration = BigDecimal.ZERO;
     }
 
+    public void rearangeIds(){
+        for(int i=0; i<reports.size(); i++){
+            reports.get(i).setId(i);
+        }
+    }
+
+    public void clear(){
+        reports.clear();
+        setModelling(BigDecimal.ZERO);
+        setDrawings(BigDecimal.ZERO);
+        setDocumentation(BigDecimal.ZERO);
+        setCorrespondence(BigDecimal.ZERO);
+    }
+
     public void addReport(ReportDto reportDto){
         reports.add(reportDto);
         increaseDepartment(reportDto.getDepartment(),reportDto.getTime());
     }
-
 
     private void increaseDepartment(String departmentName, BigDecimal value){
 

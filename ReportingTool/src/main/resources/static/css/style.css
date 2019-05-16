@@ -135,6 +135,13 @@ label {
   width: 75%;
   margin-top: 6px;
 }
+.col-100 {
+  overflow: hidden;
+  float: left;
+  width: 100%;
+  margin-top: 6px;
+}
+
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -145,6 +152,16 @@ label {
 a.link{
   background-color: #d9d9d9 ;
   color: black;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a.longlink{
+  background-color: #d9d9d9 ;
+  color: black;
+  width: 300px;
   padding: 10px 15px;
   text-align: center;
   text-decoration: none;

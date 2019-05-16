@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+
+<body>
+
+<table th:fragment="List">
+    <thead>
+    <tr>
+        <th>EMPLOYEE</th>
+        <th>PROJECT</th>
+        <th>DEPARTMENT</th>
+        <th>DESCRIPTION</th>
+        <th>DURATION</th>
+        <th>EXTRA SCOPE</th>
+        <th>DELETE</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="report: ${reportList}">
+        <td th:text="${report.employeeId}"></td>
+        <td th:text="${report.projectId}"></td>
+        <td th:text="${report.department}"></td>
+        <td th:text="${report.description}"></td>
+        <td th:text="${report.time}"></td>
+        <td th:text="${report.additionalRange} ? 'X' : ''"></td></td>
+        <td><a th:href="@{/reports/delete(id=${report.id})}"
+               class="link"> X </a> </td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>
