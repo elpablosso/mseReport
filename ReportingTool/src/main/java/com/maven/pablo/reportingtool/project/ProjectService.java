@@ -1,5 +1,5 @@
 package com.maven.pablo.reportingtool.project;
-import com.maven.pablo.reportingtool.project.dto.ProjectForm;
+import com.maven.pablo.reportingtool.project.dto.ProjectDto;
 import com.maven.pablo.reportingtool.project.entity.Project;
 
 import java.util.Collection;
@@ -10,7 +10,7 @@ public interface ProjectService {
     Collection<Project> findAll();
 
     Project findByNumber(String number);
-    List<Project> findByForm(ProjectForm form);
+    List<Project> findByForm(ProjectDto form);
 
     void saveProject(Project project);
     void deleteProject(Project project);

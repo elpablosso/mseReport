@@ -1,10 +1,9 @@
 package com.maven.pablo.reportingtool.report.implementation;
 
-import com.maven.pablo.reportingtool.report.ReportDto;
+import com.maven.pablo.reportingtool.report.dto.ReportDto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

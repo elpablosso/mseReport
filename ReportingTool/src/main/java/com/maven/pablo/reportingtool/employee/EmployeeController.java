@@ -1,19 +1,16 @@
 package com.maven.pablo.reportingtool.employee;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
-import com.maven.pablo.reportingtool.employee.mapper.EmployeeMapper;
 import com.maven.pablo.reportingtool.employee.implementation.MyEmployeeService;
+import com.maven.pablo.reportingtool.mapper.MyMapper;
 import com.maven.pablo.reportingtool.project.ProjectService;
-import com.maven.pablo.reportingtool.project.entity.Project;
-import com.maven.pablo.reportingtool.report.ReportService;
-import com.maven.pablo.reportingtool.report.entity.Report;
 import com.maven.pablo.reportingtool.report.entity.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.security.Principal;
 import java.util.List;
 
@@ -22,16 +19,19 @@ import java.util.List;
 public class EmployeeController {
 
     private MyEmployeeService employeeService;
-    private EmployeeMapper employeeMapper;
     private ProjectService projectService;
     private ReportRepository reportService;
 
+    @Qualifier("myEmployeeMapper")
+    private MyMapper<Employee,EmployeeDto> employeeMapper;
+
     @Autowired
-    public EmployeeController(MyEmployeeService employeeService, EmployeeMapper employeeMapper, ProjectService projectService, ReportRepository reportService) {
+    public EmployeeController(MyEmployeeService employeeService, ProjectService projectService,
+                              ReportRepository reportService, MyMapper<Employee, EmployeeDto> employeeMapper) {
         this.employeeService = employeeService;
-        this.employeeMapper = employeeMapper;
         this.projectService = projectService;
         this.reportService = reportService;
+        this.employeeMapper = employeeMapper;
     }
 
     @ModelAttribute(name="employeeList")

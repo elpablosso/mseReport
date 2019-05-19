@@ -115,4 +115,13 @@ public class MyProjectDetailsService implements ProjectDetailsService {
         return projectDetails;
     }
 
+    @Override
+    public List<ProjectDetails> findByEmployeeId(String employeeId) {
+        return projectDetailsRepository.findByEmployeeId(employeeId);
+    }
+
+    @Override
+    public List<ProjectDetails> findByProjectNumber(String projectNumber) {
+        return projectDetailsRepository.findByProjectNumber(projectNumber);
+    }
 }

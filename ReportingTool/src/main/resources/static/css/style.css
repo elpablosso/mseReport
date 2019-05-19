@@ -188,7 +188,7 @@ input[type=checkbox]{
   *overflow: hidden;
 }
 
-input[type=password], input[type=text], textarea, select {
+input[type=password], input[type=text],input[type=date], textarea, select {
   vertical-align:middle;
   margin: 8px 0;
   box-sizing: border-box;

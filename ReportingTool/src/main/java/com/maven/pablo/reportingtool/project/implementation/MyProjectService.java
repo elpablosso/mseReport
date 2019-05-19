@@ -1,5 +1,5 @@
 package com.maven.pablo.reportingtool.project.implementation;
-import com.maven.pablo.reportingtool.project.dto.ProjectForm;
+import com.maven.pablo.reportingtool.project.dto.ProjectDto;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import com.maven.pablo.reportingtool.project.entity.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class MyProjectService implements com.maven.pablo.reportingtool.project.P
     }
 
     @Override
-    public List<Project> findByForm(ProjectForm form) {
+    public List<Project> findByForm(ProjectDto form) {
         return findAll().stream()
                 .filter(c-> c.getNumber().contains(form.getNumber()))
                 .filter(c->c.getTitle().contains(form.getTitle()))

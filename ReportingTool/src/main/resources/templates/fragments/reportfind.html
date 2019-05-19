@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+
+<body>
+
+<form th:fragment="FindForm"
+      action="#"
+      th:action="@{/reports/find}"
+      th:object="${reportFindForm}"
+      method="post">
+
+    <div class="row">
+        <div class="col-25">
+            <label for="project">PROJECT</label>
+        </div>
+
+        <div class="col-75">
+            <select th:field="*{project}" id="project">
+                <option value=""> -- </option>
+                <option th:each="project : ${projectList}"
+                        th:value="${project.number}"
+                        th:utext="${project.number}"></option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-25">
+            <label for="departmentName">DEPARTMENT</label>
+        </div>
+        <div class="col-75">
+            <select th:field="*{departmentName}" id="departmentName">
+                <option value=""> -- </option>
+                <option th:each="department : ${departmentList}"
+                        th:value="${department}"
+                        th:utext="${department}"></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-25">
+            <label for="dateFrom">DATE FROM</label>
+        </div>
+        <div class="col-25">
+            <input type="date" id="dateFrom" th:field="*{dateFrom}" />
+        </div>
+
+        <div class="col-25">
+            <label for="dateTo">DATE TO </label>
+        </div>
+        <div class="col-25">
+            <input type="date" id="dateTo" th:field="*{dateTo}" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-25"></div>
+        <div class="col-75">
+            <input type="submit" value="FIND REPORTS" />
+        </div></div>
+</form>
+
+</body>
+</html>

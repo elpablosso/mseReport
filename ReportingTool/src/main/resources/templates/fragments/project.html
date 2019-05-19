@@ -6,6 +6,29 @@
 
 <body>
 
+<table th:fragment="ProjectDetailsList">
+    <thead>
+    <tr>
+        <th>PROJECT</th>
+        <th>MODELLING</th>
+        <th>DRAWINGS</th>
+        <th>DOCUMENTATION</th>
+        <th>CORRESPONDENCE</th>
+        <th>ADDITIONAL HOURS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project: ${projectDetailsList}">
+        <td th:text="${project.projectNumber}"></td>
+        <td th:text="${project.modelling}"></td>
+        <td th:text="${project.drawings}"></td>
+        <td th:text="${project.documentation}"></td>
+        <td th:text="${project.correspondence}"></td>
+        <td th:text="${project.additionalHours}"></td>
+    </tr>
+    </tbody>
+</table>
+
 <table th:fragment="List">
     <thead>
     <tr>
@@ -33,7 +56,7 @@
 <form th:fragment="addForm"
       action="#"
       th:action="@{/projects/save}"
-      th:object="${projectForm}"
+      th:object="${projectDto}"
       method="post">
 
     <div class="row">
@@ -94,7 +117,7 @@
 
 <form th:fragment="findForm" action="#"
       th:action="@{/projects/find}"
-      th:object="${projectForm}"
+      th:object="${projectDto}"
       method="post">
 
     <div class="row">

@@ -9,14 +9,35 @@
     <li th:fragment="home"><a th:href="@{/home}">Home</a></li>
     <li th:fragment="homeActive"><a class="active">Home</a></li>
 
-    <li th:fragment="projects"><a th:href="@{/projects/all}">Projects</a></li>
-    <li th:fragment="projectsActive"><a class="active">Projects</a></li>
+    <li th:fragment="allProjects"><a th:href="@{/projects/all}">All Projects</a></li>
+    <li th:fragment="allProjectsActive"><a class="active">All Projects</a></li>
+
+    <li th:fragment="myProjects"><a th:href="@{/projects/my}">My Projects</a></li>
+    <li th:fragment="myProjectsActive"><a class="active">My Projects</a></li>
+
+    <li th:fragment="sendReport"><a th:href="@{/reports/create}">Send Report</a></li>
+    <li th:fragment="sendReportActive"><a class="active">Send Report</a></li>
+
+    <li th:fragment="myReports"><a th:href="@{/reports/my}">My Reports</a></li>
+    <li th:fragment="myReportsActive"><a class="active">My Reports</a></li>
+
 
     <li th:fragment="employees"><a th:href="@{/employee/all}">Employees</a></li>
     <li th:fragment="employeesActive"><a class="active">Employees</a></li>
 
-    <li th:fragment="reports"><a th:href="@{/reports/all}">Reports</a></li>
-    <li th:fragment="reportsActive"><a class="active">Reports</a></li>
+
+
+
+
+
+    <li th:fragment="leaderSendReport"><a th:href="@{/reports/all}">Send Report</a></li>
+    <li th:fragment="leaderSendReportActive"><a class="active">Send Report</a></li>
+
+    <li th:fragment="leaderMyReports"><a th:href="@{/user/reports}">My Reports</a></li>
+    <li th:fragment="userMyReportsActive"><a class="active">My Reports</a></li>
+
+    <li th:fragment="leaderProjects"><a th:href="@{/user/project}">My Projects</a></li>
+    <li th:fragment="userProjectsActive"><a class="active">My Projects</a></li>
 
     <li th:fragment="about" class="right"><a th:href="@{/about}">About</a></li>
     <li th:fragment="aboutActive" class="right"><a class="active">About</a></li>

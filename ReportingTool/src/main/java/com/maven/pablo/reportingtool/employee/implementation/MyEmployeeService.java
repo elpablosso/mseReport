@@ -3,14 +3,10 @@ import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
 import com.maven.pablo.reportingtool.employee.entity.EmployeeRepository;
 import com.maven.pablo.reportingtool.employee.enums.Role;
-import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
 import com.maven.pablo.reportingtool.report.entity.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
 
 @Service
 public class MyEmployeeService implements EmployeeService {
@@ -23,17 +19,15 @@ public class MyEmployeeService implements EmployeeService {
     }
 
     @Override
-    public void addUnreadReport(Collection<Report> reports) {
+    public void addUnreadReport(Collection<Report> reports)  {
         for(Report report : reports) {
-            Employee employee = report.getProject().getLeader();
-            employee.getUnreadReports().add(report);
-            saveEmployee(employee);
+            addUnreadReport(report);
         } }
 
 
     @Override
     public void addUnreadReport(Report report) {
-            Employee employee = report.getProject().getLeader();
+            Employee employee = employeeRepository.findById(report.getEmployee().getId()).orElse(null);
             employee.getUnreadReports().add(report);
             saveEmployee(employee);
         }

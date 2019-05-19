@@ -1,5 +1,6 @@
 package com.maven.pablo.reportingtool.employee;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
 import com.maven.pablo.reportingtool.report.entity.Report;
 
 import java.util.Collection;

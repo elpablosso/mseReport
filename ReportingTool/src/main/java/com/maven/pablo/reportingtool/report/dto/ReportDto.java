@@ -1,5 +1,7 @@
-package com.maven.pablo.reportingtool.report;
+package com.maven.pablo.reportingtool.report.dto;
+import com.maven.pablo.reportingtool.employee.entity.Employee;
 import com.maven.pablo.reportingtool.employee.enums.Department;
+import com.maven.pablo.reportingtool.project.entity.Project;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -10,6 +12,8 @@ import java.time.LocalDate;
 public class ReportDto {
 
     private String employeeId;
+    private Employee employee;
+    private Project project;
 
     @NotNull
     @NotEmpty(message = "Please select any project !")
@@ -40,6 +44,22 @@ public class ReportDto {
     }
 
     public ReportDto() {
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public int getId() {

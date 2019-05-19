@@ -16,21 +16,45 @@
 
 <ul class="topnav" th:fragment="userHome">
     <li th:replace="fragments/links :: homeActive"></li>
-    <li th:replace="fragments/links :: reports"></li>
+    <li th:replace="fragments/links :: sendReport"></li>
+    <li th:replace="fragments/links :: myReports"></li>
+    <li th:replace="fragments/links :: myProjects"></li>
     <li th:replace="fragments/links :: logout"></li>
 </ul>
 
-<ul class="topnav" th:fragment="userReports">
+<ul class="topnav" th:fragment="userSendReport">
     <li th:replace="fragments/links :: home"></li>
-    <li th:replace="fragments/links :: reportsActive"></li>
+    <li th:replace="fragments/links :: sendReportActive"></li>
+    <li th:replace="fragments/links :: myReports"></li>
+    <li th:replace="fragments/links :: myProjects"></li>
     <li th:replace="fragments/links :: logout"></li>
 </ul>
+
+<ul class="topnav" th:fragment="userMyReports">
+    <li th:replace="fragments/links :: home"></li>
+    <li th:replace="fragments/links :: sendReport"></li>
+    <li th:replace="fragments/links :: myReportsActive"></li>
+    <li th:replace="fragments/links :: myProjects"></li>
+    <li th:replace="fragments/links :: logout"></li>
+</ul>
+
+<ul class="topnav" th:fragment="userMyProjects">
+    <li th:replace="fragments/links :: home"></li>
+    <li th:replace="fragments/links :: sendReport"></li>
+    <li th:replace="fragments/links :: myReports"></li>
+    <li th:replace="fragments/links :: myProjectsActive"></li>
+    <li th:replace="fragments/links :: logout"></li>
+</ul>
+
+
+
 
 
 <ul class="topnav" th:fragment="leaderHome">
     <li th:replace="fragments/links :: homeActive"></li>
     <li th:replace="fragments/links :: projects"></li>
-    <li th:replace="fragments/links :: reports"></li>
+    <li th:replace="fragments/links :: leaderSendReport"></li>
+
     <li th:replace="fragments/links :: logout"></li>
 </ul>
 

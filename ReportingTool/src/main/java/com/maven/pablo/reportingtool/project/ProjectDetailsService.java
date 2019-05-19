@@ -14,6 +14,8 @@ public interface ProjectDetailsService {
     void increaseAdditionalHours(ProjectDetails projectDetails, Report report);
     void increaseDepartment(ProjectDetails projectDetails, Report report);
 
+    List<ProjectDetails> findByEmployeeId(String employeeId);
+    List<ProjectDetails> findByProjectNumber(String projectNumber);
 
     ProjectDetails findByProjectNumberAndEmployeeId(String projectNumber, String employeeId);
     ProjectDetails findByProjectAndEmployee(Project project, Employee employee);

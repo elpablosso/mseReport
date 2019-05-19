@@ -1,17 +1,20 @@
 package com.maven.pablo.reportingtool.project;
 import com.maven.pablo.reportingtool.employee.EmployeeDto;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
-import com.maven.pablo.reportingtool.employee.mapper.EmployeeMapper;
+import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.mapper.MyMapper;
+import com.maven.pablo.reportingtool.project.dto.ProjectDetailsDto;
 import com.maven.pablo.reportingtool.project.dto.ProjectDto;
-import com.maven.pablo.reportingtool.project.dto.ProjectForm;
 import com.maven.pablo.reportingtool.project.entity.Project;
-import com.maven.pablo.reportingtool.project.mapper.ProjectMapper;
+import com.maven.pablo.reportingtool.project.entity.ProjectDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -20,24 +23,34 @@ import java.util.List;
 public class ProjectController {
 
     private EmployeeService employeeService;
-    private EmployeeMapper employeeMapper;
     private ProjectService projectService;
-    private ProjectMapper projectMapper;
+    private ProjectDetailsService projectDetailsService;
+
+
+    @Qualifier("myProjectDetailsMapper")
+    private MyMapper<ProjectDetails, ProjectDetailsDto> projectDetailsMapper;
+    @Qualifier("myEmployeeMapper")
+    private MyMapper<Employee,EmployeeDto> employeeMapper;
+    @Qualifier("myProjectMapper")
+    private MyMapper<Project,ProjectDto> projectMapper;
 
     @Autowired
-    public ProjectController(EmployeeService employeeService, EmployeeMapper employeeMapper, ProjectService projectService, ProjectMapper projectMapper) {
+    public ProjectController(EmployeeService employeeService, ProjectService projectService, ProjectDetailsService projectDetailsService, MyMapper<ProjectDetails, ProjectDetailsDto> projectDetailsMapper, MyMapper<Employee,
+            EmployeeDto> employeeMapper, MyMapper<Project, ProjectDto> projectMapper1) {
         this.employeeService = employeeService;
-        this.employeeMapper = employeeMapper;
         this.projectService = projectService;
-        this.projectMapper = projectMapper;
+        this.projectDetailsService = projectDetailsService;
+        this.projectDetailsMapper = projectDetailsMapper;
+        this.employeeMapper = employeeMapper;
+        this.projectMapper = projectMapper1;
     }
 
     @ModelAttribute
-    List<ProjectDto> projectDtoList(){
+    private List<ProjectDto> projectDtoList(){
         return projectMapper.convertToDto(projectService.findAll());
     }
     @ModelAttribute
-    List<EmployeeDto> leaderList(){
+    private List<EmployeeDto> leaderList(){
         return employeeMapper.convertToDto(employeeService.findLeaders());
     }
 
@@ -48,11 +61,22 @@ public class ProjectController {
         return modelAndView;
     }
 
+    @GetMapping("/my")
+    public ModelAndView myProjects(ModelAndView modelAndView, Principal principal){
+
+        List<ProjectDetails> myProjectDetails = projectDetailsService.findByEmployeeId(principal.getName());
+        List<ProjectDetailsDto> projectDetailsList = projectDetailsMapper.convertToDto(myProjectDetails);
+
+        modelAndView.addObject("projectDetailsList",projectDetailsList);
+        modelAndView.setViewName("project/my");
+        return modelAndView;
+    }
+
     @GetMapping("/add")
     public ModelAndView addProject(ModelAndView modelAndView){
         modelAndView.setViewName("project/add");
         modelAndView.addObject("projectList",projectDtoList());
-        modelAndView.addObject("projectForm", new ProjectForm());
+        modelAndView.addObject("projectForm", new ProjectDto());
         modelAndView.addObject("leaderList", leaderList());
         return modelAndView;
     }
@@ -61,12 +85,12 @@ public class ProjectController {
     public ModelAndView findProject(ModelAndView modelAndView){
         modelAndView.setViewName("project/find");
         modelAndView.addObject("projectList",projectDtoList());
-        modelAndView.addObject("projectForm", new ProjectForm());
+        modelAndView.addObject("projectForm", new ProjectDto());
         return modelAndView;
     }
 
     @PostMapping("/save")
-    public ModelAndView saveProjectSumbit(@Valid ProjectForm projectForm,
+    public ModelAndView saveProjectSumbit(@Valid ProjectDto projectDto,
                                           BindingResult bindingResult,
                                           ModelAndView modelAndView){
 
@@ -77,22 +101,22 @@ public class ProjectController {
             modelAndView.addObject("projectList",projectDtoList());
             return modelAndView; }
 
-        if(projectService.findByNumber(projectForm.getNumber())==null)
-        projectService.saveProject(projectMapper.newProjectFromForm(projectForm));
+        if(projectService.findByNumber(projectDto.getNumber())==null)
+        projectService.saveProject(projectMapper.newInstanceFromDto(projectDto));
 
-        modelAndView.addObject("projectForm",new ProjectForm());
+        modelAndView.addObject("projectDto",new ProjectDto());
         modelAndView.addObject("projectList",projectDtoList());
         return modelAndView;
     }
 
     @PostMapping("/find")
-    public ModelAndView findProjectSumbit(@ModelAttribute ProjectForm projectForm,
+    public ModelAndView findProjectSumbit(@ModelAttribute ProjectDto projectDto,
                                           ModelAndView modelAndView){
 
-        List<Project> projects = projectService.findByForm(projectForm);
+        List<Project> projects = projectService.findByForm(projectDto);
         List<ProjectDto> projectDtos = projectMapper.convertToDto(projects);
         modelAndView.setViewName("project/find");
-        modelAndView.addObject("projectForm", new ProjectForm());
+        modelAndView.addObject("projectDto", new ProjectDto());
         modelAndView.addObject("projectList", projectDtos);
         return modelAndView;
     }
