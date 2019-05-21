@@ -10,6 +10,9 @@ import java.util.List;
 @Service
 public interface ReportService {
 
+    Report findById(Integer id);
+    Report findByEmployeeIdAndProjectNumber(String employeeId, String projectNumber);
+
     List<Report> findAll();
     List<Report> findByEmployeeId(String employeeId);
     List<Report> findByProjectNumber(String projectNumber);

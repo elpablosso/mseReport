@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -78,6 +77,13 @@ public class ReportController {
     @ModelAttribute("unsentReports")
     private List<ReportDto> unsendReports(){
         return myCompleteReport.getReports();
+    }
+
+    @ModelAttribute
+    private List<ReportDto> unreadReports(Principal principal){
+        Employee employee = employeeService.findById(principal.getName());
+        List<Report> unreadReports = employeeService.getUnreadReports(employee);
+        return reportMapper.convertToDto(unreadReports);
     }
 
 
@@ -165,14 +171,36 @@ public class ReportController {
     }
 
     @GetMapping("/my")
-    public ModelAndView myReports(ModelAndView modelAndView,
-                                  Principal principal){
+    public ModelAndView myReports(ModelAndView modelAndView){
 
         modelAndView.addObject("loggedUserReports");
         modelAndView.addObject("reportFindForm");
         modelAndView.addObject("projectList");
         modelAndView.addObject("departmentList");
         modelAndView.setViewName("report/my");
+        return modelAndView;
+    }
+
+    @GetMapping("/unread")
+    public ModelAndView unreadReports(ModelAndView modelAndView,
+                                  Principal principal){
+
+        modelAndView.addObject("unreadReports",unreadReports(principal));
+        modelAndView.setViewName("report/unread");
+        return modelAndView;
+    }
+
+    @GetMapping("/read")
+    public ModelAndView readReport(@RequestParam("reportId") Integer reportId,
+                                           ModelAndView modelAndView,Principal principal){
+
+
+        Report report = reportService.findById(reportId);
+        employeeService.markReportAsRead(report);
+
+        modelAndView.clear();
+        modelAndView.setViewName("report/unread");
+        modelAndView.addObject("unreadReports",unreadReports(principal));
         return modelAndView;
     }
 

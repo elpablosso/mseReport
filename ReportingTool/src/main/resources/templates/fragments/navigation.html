@@ -47,52 +47,65 @@
 </ul>
 
 
-
-
-
 <ul class="topnav" th:fragment="leaderHome">
     <li th:replace="fragments/links :: homeActive"></li>
-    <li th:replace="fragments/links :: projects"></li>
-    <li th:replace="fragments/links :: leaderSendReport"></li>
-
+    <li th:replace="fragments/links :: sendReport"></li>
+    <li th:replace="fragments/links :: myReports"></li>
+    <li th:replace="fragments/links :: myProjects"></li>
+    <li th:replace="fragments/links :: allProjects"></li>
+    <li th:replace="fragments/links :: unreadReports"></li>
     <li th:replace="fragments/links :: logout"></li>
 </ul>
 
-<ul class="topnav" th:fragment="leaderProjects">
+<ul class="topnav" th:fragment="leaderSendReport">
     <li th:replace="fragments/links :: home"></li>
-    <li th:replace="fragments/links :: projectsActive"></li>
-    <li th:replace="fragments/links :: reports"></li>
+    <li th:replace="fragments/links :: sendReportActive"></li>
+    <li th:replace="fragments/links :: myReports"></li>
+    <li th:replace="fragments/links :: myProjects"></li>
+    <li th:replace="fragments/links :: allProjects"></li>
+    <li th:replace="fragments/links :: unreadReports"></li>
     <li th:replace="fragments/links :: logout"></li>
 </ul>
 
-<ul class="topnav" th:fragment="leaderReports">
+<ul class="topnav" th:fragment="leaderMyReports">
     <li th:replace="fragments/links :: home"></li>
-    <li th:replace="fragments/links :: projects"></li>
-    <li th:replace="fragments/links :: reportsActive"></li>
+    <li th:replace="fragments/links :: sendReport"></li>
+    <li th:replace="fragments/links :: myReportsActive"></li>
+    <li th:replace="fragments/links :: myProjects"></li>
+    <li th:replace="fragments/links :: allProjects"></li>
+    <li th:replace="fragments/links :: unreadReports"></li>
     <li th:replace="fragments/links :: logout"></li>
 </ul>
 
-<ul class="topnav" th:fragment="adminHome">
-    <li th:replace="fragments/links :: homeActive"></li>
-    <li th:replace="fragments/links :: projects"></li>
-    <li th:replace="fragments/links :: employees"></li>
-    <li th:replace="fragments/links :: logout"></li>
-</ul>
-
-<ul class="topnav" th:fragment="adminProjects">
+<ul class="topnav" th:fragment="leaderMyProjects">
     <li th:replace="fragments/links :: home"></li>
-    <li th:replace="fragments/links :: projectsActive"></li>
-    <li th:replace="fragments/links :: employees"></li>
+    <li th:replace="fragments/links :: sendReport"></li>
+    <li th:replace="fragments/links :: myReports"></li>
+    <li th:replace="fragments/links :: myProjectsActive"></li>
+    <li th:replace="fragments/links :: allProjects"></li>
+    <li th:replace="fragments/links :: unreadReports"></li>
     <li th:replace="fragments/links :: logout"></li>
 </ul>
 
-<ul class="topnav" th:fragment="adminEmployees">
+<ul class="topnav" th:fragment="leaderAllProjects">
     <li th:replace="fragments/links :: home"></li>
-    <li th:replace="fragments/links :: projects"></li>
-    <li th:replace="fragments/links :: employeesActive"></li>
+    <li th:replace="fragments/links :: sendReport"></li>
+    <li th:replace="fragments/links :: myReports"></li>
+    <li th:replace="fragments/links :: myProjects"></li>
+    <li th:replace="fragments/links :: allProjectsActive"></li>
+    <li th:replace="fragments/links :: unreadReports"></li>
     <li th:replace="fragments/links :: logout"></li>
 </ul>
 
+<ul class="topnav" th:fragment="leaderUnreadReports">
+    <li th:replace="fragments/links :: home"></li>
+    <li th:replace="fragments/links :: sendReport"></li>
+    <li th:replace="fragments/links :: myReports"></li>
+    <li th:replace="fragments/links :: myProjects"></li>
+    <li th:replace="fragments/links :: allProjects"></li>
+    <li th:replace="fragments/links :: unreadReportsActive"></li>
+    <li th:replace="fragments/links :: logout"></li>
+</ul>
 
 <ul class="topnav" th:fragment="projectSub">
     <li th:replace="fragments/links :: addProject"></li>
@@ -109,9 +122,7 @@
     <li th:replace="fragments/links :: findProjectActive"></li>
 </ul>
 
-<ul class="topnav" th:fragment="projectBack">
-    <li th:replace="fragments/links :: backToProjects"></li>
-</ul>
+
 
 </body>
 </html>

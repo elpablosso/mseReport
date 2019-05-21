@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 public class ReportDto {
 
+    private Integer repoId;
     private String employeeId;
     private Employee employee;
     private Project project;
@@ -44,6 +45,14 @@ public class ReportDto {
     }
 
     public ReportDto() {
+    }
+
+    public Integer getRepoId() {
+        return repoId;
+    }
+
+    public void setRepoId(Integer repoId) {
+        this.repoId = repoId;
     }
 
     public Employee getEmployee() {

@@ -33,6 +33,7 @@ public class MyReportMapper implements MyMapper<Report,ReportDto> {
         reportDto.setEmployeeId(report.getEmployee().getId());
         reportDto.setProject(report.getProject());
         reportDto.setProjectId(report.getProject().getNumber());
+        reportDto.setRepoId(report.getId());
 
         reportDto.setDepartment(report.getDepartment().name());
         reportDto.setTime(report.getTime());

@@ -7,6 +7,7 @@ import com.maven.pablo.reportingtool.report.entity.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class MyEmployeeService implements EmployeeService {
@@ -19,6 +20,11 @@ public class MyEmployeeService implements EmployeeService {
     }
 
     @Override
+    public List<Report> getUnreadReports(Employee employee) {
+        return employee.getUnreadReports();
+    }
+
+    @Override
     public void addUnreadReport(Collection<Report> reports)  {
         for(Report report : reports) {
             addUnreadReport(report);
@@ -27,15 +33,16 @@ public class MyEmployeeService implements EmployeeService {
 
     @Override
     public void addUnreadReport(Report report) {
-            Employee employee = employeeRepository.findById(report.getEmployee().getId()).orElse(null);
+            Employee employee = employeeRepository.findById(report.getProject().getLeader().getId()).orElse(null);
             employee.getUnreadReports().add(report);
             saveEmployee(employee);
         }
 
     @Override
     public void markReportAsRead(Report report) {
-            Employee employee = report.getProject().getLeader();
-            employee.getUnreadReports().remove(report);
+            Employee employee = employeeRepository.
+                    findById(report.getProject().getLeader().getId()).orElse(null);
+                employee.getUnreadReports().remove(report);
             saveEmployee(employee);
         }
 

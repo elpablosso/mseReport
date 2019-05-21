@@ -4,8 +4,7 @@
 
 <body>
 
-<ul sec:authorize="hasAuthority('LEADER')" th:replace="fragments/navigation :: leaderProjects"></ul>
-<ul sec:authorize="hasAuthority('ADMIN')" th:replace="fragments/navigation :: adminProjects"></ul>
+<ul sec:authorize="hasAuthority('LEADER')" th:replace="fragments/navigation :: leaderAllProjects"></ul>
 
 <div class="row">
 

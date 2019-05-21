@@ -5,7 +5,7 @@
 <body>
 
 <ul sec:authorize="hasAuthority('USER')" th:replace="fragments/navigation :: userSendReport"></ul>
-<ul sec:authorize="hasAuthority('LEADER')" th:replace="fragments/navigation :: leaderReports"></ul>
+<ul sec:authorize="hasAuthority('LEADER')" th:replace="fragments/navigation :: leaderSendReport"></ul>
 
 
 <div class="row">
@@ -13,11 +13,12 @@
     <div class="column middle">
         <table th:replace="fragments/report :: List"></table>
         <br>
-        <div class="col-25">
-        <ul class="topnav">
-            <li class="left"><a th:href="@{/reports/confirm}">SEND REPORT</a></li>
-        </ul>
+
+        <div class="col-100">
+         <td>   <a th:href="@{/reports/confirm}" class="link">
+                SEND REPORT </a> </td>
         </div>
+
     </div>
 
 <div class="column side">

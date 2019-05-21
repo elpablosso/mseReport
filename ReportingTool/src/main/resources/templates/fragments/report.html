@@ -58,6 +58,36 @@
     </tbody>
 </table>
 
+
+<table th:fragment="UnreadReports">
+    <thead>
+    <tr>
+        <th>DATE</th>
+        <th>EMPLOYEE</th>
+        <th>PROJECT</th>
+        <th>DEPARTMENT</th>
+        <th>DESCRIPTION</th>
+        <th>DURATION</th>
+        <th>EXTRA SCOPE</th>
+        <th>MARK AS READ</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="report: ${unreadReports}">
+        <td th:text="${report.date}"></td>
+        <td th:text="${report.employee.getName()}"></td>
+        <td th:text="${report.projectId}"></td>
+        <td th:text="${report.department}"></td>
+        <td th:text="${report.description}"></td>
+        <td th:text="${report.time}"></td>
+        <td th:text="${report.additionalRange} ? 'X' : ''"></td></td>
+        <td><a th:href="@{/reports/read(reportId=${report.repoId})}"
+               class="link"> X </a> </td>
+    </tr>
+    </tbody>
+</table>
+
 <form th:fragment="Form"
       action="#"
       th:action="@{/reports/save}"
@@ -128,6 +158,7 @@
             <input type="submit" value="Submit" />
         </div></div>
 </form>
+
 
 </body>
 </html>

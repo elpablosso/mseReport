@@ -4,6 +4,7 @@ import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
 import com.maven.pablo.reportingtool.report.entity.Report;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface EmployeeService {
 
@@ -14,6 +15,8 @@ public interface EmployeeService {
 
     Collection<Employee> findAll();
     Collection<Employee> findLeaders();
+
+    List<Report> getUnreadReports(Employee employee);
 
     void addUnreadReport(Collection<Report> reports);
     void addUnreadReport(Report report);

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -76,7 +77,7 @@ public class ProjectController {
     public ModelAndView addProject(ModelAndView modelAndView){
         modelAndView.setViewName("project/add");
         modelAndView.addObject("projectList",projectDtoList());
-        modelAndView.addObject("projectForm", new ProjectDto());
+        modelAndView.addObject("projectDto", new ProjectDto());
         modelAndView.addObject("leaderList", leaderList());
         return modelAndView;
     }
@@ -85,7 +86,7 @@ public class ProjectController {
     public ModelAndView findProject(ModelAndView modelAndView){
         modelAndView.setViewName("project/find");
         modelAndView.addObject("projectList",projectDtoList());
-        modelAndView.addObject("projectForm", new ProjectDto());
+        modelAndView.addObject("projectDto", new ProjectDto());
         return modelAndView;
     }
 
@@ -101,8 +102,11 @@ public class ProjectController {
             modelAndView.addObject("projectList",projectDtoList());
             return modelAndView; }
 
-        if(projectService.findByNumber(projectDto.getNumber())==null)
-        projectService.saveProject(projectMapper.newInstanceFromDto(projectDto));
+        if(projectService.findByNumber(projectDto.getNumber())==null) {
+            Employee leader = employeeService.findById(projectDto.getLeaderId());
+            projectDto.setLeader(leader);
+            projectService.saveProject(projectMapper.newInstanceFromDto(projectDto));
+        }
 
         modelAndView.addObject("projectDto",new ProjectDto());
         modelAndView.addObject("projectList",projectDtoList());

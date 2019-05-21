@@ -21,26 +21,8 @@
     <li th:fragment="myReports"><a th:href="@{/reports/my}">My Reports</a></li>
     <li th:fragment="myReportsActive"><a class="active">My Reports</a></li>
 
-
-    <li th:fragment="employees"><a th:href="@{/employee/all}">Employees</a></li>
-    <li th:fragment="employeesActive"><a class="active">Employees</a></li>
-
-
-
-
-
-
-    <li th:fragment="leaderSendReport"><a th:href="@{/reports/all}">Send Report</a></li>
-    <li th:fragment="leaderSendReportActive"><a class="active">Send Report</a></li>
-
-    <li th:fragment="leaderMyReports"><a th:href="@{/user/reports}">My Reports</a></li>
-    <li th:fragment="userMyReportsActive"><a class="active">My Reports</a></li>
-
-    <li th:fragment="leaderProjects"><a th:href="@{/user/project}">My Projects</a></li>
-    <li th:fragment="userProjectsActive"><a class="active">My Projects</a></li>
-
-    <li th:fragment="about" class="right"><a th:href="@{/about}">About</a></li>
-    <li th:fragment="aboutActive" class="right"><a class="active">About</a></li>
+    <li th:fragment="unreadReports"><a th:href="@{/reports/unread}">Unread Reports</a></li>
+    <li th:fragment="unreadReportsActive"><a class="active">Unread Reports</a></li>
 
     <li th:fragment="addProject"><a th:href="@{/projects/add}">ADD PROJECT</a></li>
     <li th:fragment="addProjectActive"><a class="active">ADD PROJECT</a></li>
@@ -48,10 +30,7 @@
     <li th:fragment="findProject"><a th:href="@{/projects/find}">FIND PROJECT</a></li>
     <li th:fragment="findProjectActive"><a class="active">FIND PROJECT</a></li>
 
-    <li th:fragment="backToProjects"><a th:href="@{/projects/all}">BACK</a></li>
-
     <li th:fragment="logout" class="right"><a th:href="@{/logout}">LOG OUT</a></li>
-    <li th:fragment="logoutActive" class="right"><a class="active">LOG OUT</a></li>
 
     <li th:fragment="login" class="right"><a th:href="@{/login}" method="post">LOG IN</a></li>
     <li th:fragment="loginActive" class="right"><a class="active">LOG IN</a></li>

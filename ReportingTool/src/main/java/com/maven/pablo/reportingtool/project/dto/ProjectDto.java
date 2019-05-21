@@ -1,7 +1,5 @@
 package com.maven.pablo.reportingtool.project.dto;
-
 import com.maven.pablo.reportingtool.employee.entity.Employee;
-
 import javax.validation.constraints.*;
 
 public class ProjectDto {

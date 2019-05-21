@@ -4,6 +4,8 @@ import com.maven.pablo.reportingtool.project.entity.ProjectDetails;
 import com.maven.pablo.reportingtool.report.entity.Report;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -26,7 +28,7 @@ import java.util.Set;
         @JoinTable(name="unread_reports",
         joinColumns = @JoinColumn(name="employee_id"),
         inverseJoinColumns = @JoinColumn(name = "report_id"))
-        Set<Report> unreadReports;
+        List<Report> unreadReports = new ArrayList<>();
 
         private String username;
         private String password;
@@ -115,11 +117,11 @@ import java.util.Set;
             this.projects = projects;
         }
 
-        public Set<Report> getUnreadReports() {
+        public List<Report> getUnreadReports() {
             return unreadReports;
         }
 
-        public void setUnreadReports(Set<Report> unreadReports) {
+        public void setUnreadReports(List<Report> unreadReports) {
             this.unreadReports = unreadReports;
         }
     }

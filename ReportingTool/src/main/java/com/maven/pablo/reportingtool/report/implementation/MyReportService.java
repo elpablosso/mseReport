@@ -25,6 +25,16 @@ public class MyReportService implements ReportService {
         this.reportRepository = reportRepository;
     }
 
+
+    public Report findByEmployeeIdAndProjectNumber(String employeeId, String projectNumber){
+        return reportRepository.findByEmployeeIdAndProjectNumber(employeeId,projectNumber);
+    }
+
+    @Override
+    public Report findById(Integer id) {
+        return reportRepository.findById(id).orElse(null);
+    }
+
     @Override
     public void save(List<Report> reports) {
         for(Report report : reports){
