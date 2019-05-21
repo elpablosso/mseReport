@@ -24,6 +24,9 @@ public class ProjectDto {
     private Employee leader;
 
     public ProjectDto() {
+        this.number="";
+        this.title="";
+        this.leaderId="";
         this.closed=false;
 
     }

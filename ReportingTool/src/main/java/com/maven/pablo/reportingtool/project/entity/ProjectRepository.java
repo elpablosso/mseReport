@@ -1,10 +1,11 @@
 package com.maven.pablo.reportingtool.project.entity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
+import java.util.Optional;
 
 public interface ProjectRepository extends JpaRepository<Project,String> {
 
-    Project findByNumber(String number);
+    Optional<Project> findByNumber(String number);
     List<Project> findAll();
 
 }

@@ -1,6 +1,7 @@
 package com.maven.pablo.reportingtool.report;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.exceptions.ProjectNotFoundException;
 import com.maven.pablo.reportingtool.mapper.MyMapper;
 import com.maven.pablo.reportingtool.project.ProjectDetailsService;
 import com.maven.pablo.reportingtool.project.ProjectService;
@@ -100,7 +101,7 @@ public class ReportController {
 
     @PostMapping("/save")
     public ModelAndView saveReportPart(@Valid @ModelAttribute("reportDto") ReportDto reportDto, BindingResult bindingResult,
-                                       Principal principal, ModelAndView modelAndView ){
+                                       Principal principal, ModelAndView modelAndView ) throws ProjectNotFoundException {
 
         modelAndView.addObject("departmentList");
         modelAndView.addObject("projectList");

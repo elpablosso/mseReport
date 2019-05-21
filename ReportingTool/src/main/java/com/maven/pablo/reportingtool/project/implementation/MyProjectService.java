@@ -1,4 +1,5 @@
 package com.maven.pablo.reportingtool.project.implementation;
+import com.maven.pablo.reportingtool.exceptions.ProjectNotFoundException;
 import com.maven.pablo.reportingtool.project.dto.ProjectDto;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import com.maven.pablo.reportingtool.project.entity.ProjectRepository;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -21,13 +23,13 @@ public class MyProjectService implements com.maven.pablo.reportingtool.project.P
     }
 
     @Override
-    public Collection<Project> findAll() {
+    public List<Project> findAll() {
         return projectRepository.findAll();
     }
 
     @Override
-    public Project findByNumber(String number) {
-        return projectRepository.findByNumber(number);
+    public Project findByNumber(String number) throws ProjectNotFoundException {
+        return projectRepository.findByNumber(number).orElseThrow(ProjectNotFoundException::new);
     }
 
     @Override
@@ -35,9 +37,13 @@ public class MyProjectService implements com.maven.pablo.reportingtool.project.P
         projectRepository.save(project);
     }
 
+    @Override
+    public boolean projectOfNumberExist(String number) {
+        return projectRepository.findByNumber(number).isPresent();
+    }
 
     @Override
-    public void deleteProjectByNumber(String projectNumber) {
+    public void deleteProjectByNumber(String projectNumber) throws ProjectNotFoundException {
         deleteProject(findByNumber(projectNumber));
     }
 
