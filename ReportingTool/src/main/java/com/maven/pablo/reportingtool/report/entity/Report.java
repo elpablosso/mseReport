@@ -27,6 +27,7 @@ public class Report {
     private String description;
     private BigDecimal time;
     private Department department;
+
     private LocalDate date;
     private boolean additionalRange;
 

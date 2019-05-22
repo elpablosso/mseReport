@@ -96,7 +96,6 @@ public class ProjectController {
                 projectService.saveProject(projectMapper.newInstanceFromDto(projectDto));
             }
 
-        //modelAndView.addObject("projectDto",new ProjectDto());
         modelAndView.addObject("projectList",allProjects());
         return modelAndView;
     }
@@ -105,7 +104,7 @@ public class ProjectController {
     public ModelAndView findProject(ModelAndView modelAndView){
         modelAndView.setViewName("project/find");
         modelAndView.addObject("projectList",allProjects());
-        modelAndView.addObject("projectDto", new ProjectDto());
+        //modelAndView.addObject("projectDto", new ProjectDto());
         return modelAndView;
     }
 
