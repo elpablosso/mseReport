@@ -1,13 +1,17 @@
 package com.maven.pablo.reportingtool.report.dto;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class ReportFindForm {
 
     private String project;
     private String employee;
     private String departmentName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateFrom;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateTo;
 
     public String getProject() {

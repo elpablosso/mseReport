@@ -160,7 +160,7 @@ public class ReportController {
     }
 
     @PostMapping("/find")
-    public ModelAndView findReport(@ModelAttribute ReportFindForm reportFindForm, BindingResult bindingResult,
+    public ModelAndView findReport(@ModelAttribute ReportFindForm reportFindForm,
                                    ModelAndView modelAndView,Principal principal){
 
         reportFindForm.setEmployee(principal.getName());

@@ -5,6 +5,7 @@ import com.maven.pablo.reportingtool.report.entity.Report;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Component("myReportMapper")
 @Scope(scopeName = "prototype")
@@ -17,7 +18,7 @@ public class MyReportMapper implements MyMapper<Report,ReportDto> {
         report.setEmployee(reportDto.getEmployee());
         report.setProject(reportDto.getProject());
         report.setDepartment(Department.valueOf(reportDto.getDepartment()));
-        report.setDate(LocalDate.now());
+        report.setDate(LocalDate.now(ZoneId.of("Europe/Berlin")));
         report.setTime(reportDto.getTime());
         report.setAdditionalRange(reportDto.isAdditionalRange());
         report.setDescription(reportDto.getDescription());
