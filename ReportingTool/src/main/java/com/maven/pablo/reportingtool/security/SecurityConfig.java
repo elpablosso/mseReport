@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/css/**" )
                 .permitAll()
-                .antMatchers("index.html","/**")
+                .antMatchers("/**")
                 .hasAnyAuthority("USER","LEADER","ADMIN")
                 .and()
                 .logout()

@@ -21,7 +21,7 @@ public class Attachment {
         File file = new File(FILE_PATH);
         File[] files = file.listFiles();
         List<File> filesToSend = new ArrayList<>();
-        if(files.length>0){
+        if(files!=null && files.length>0){
         filesToSend = Arrays.asList(files);
         }
         return filesToSend;
