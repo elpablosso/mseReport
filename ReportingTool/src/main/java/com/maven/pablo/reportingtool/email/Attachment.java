@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Attachment {
 
-    private static final String FILE_PATH = "C:\\Report";
+    private static final String FILE_PATH = System.getProperty("user.home") + "/Desktop/Report";
 
 
     public static void clear(){
