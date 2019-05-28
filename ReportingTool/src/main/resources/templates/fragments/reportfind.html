@@ -12,57 +12,39 @@
       th:object="${reportFindForm}"
       method="post">
 
-    <div class="row">
-        <div class="col-25">
-            <label for="project">PROJECT</label>
-        </div>
+    <label>EMPLOYEE</label><br>
+            <select th:field="*{employee}" id="employee">
+                <option value=""> -- </option>
+                <option th:each="employee : ${employeeList}"
+                        th:value="${employee.id}"
+                        th:utext="${employee.name}"></option>
+            </select>
 
-        <div class="col-75">
+
+    <label>PROJECT</label><br>
             <select th:field="*{project}" id="project">
                 <option value=""> -- </option>
                 <option th:each="project : ${projectList}"
                         th:value="${project.number}"
                         th:utext="${project.number}"></option>
             </select>
-        </div>
-    </div>
 
-
-    <div class="row">
-        <div class="col-25">
-            <label for="departmentName">DEPARTMENT</label>
-        </div>
-        <div class="col-75">
+    <label>DEPARTMENT</label><br>
             <select th:field="*{departmentName}" id="departmentName">
                 <option value=""> -- </option>
                 <option th:each="department : ${departmentList}"
                         th:value="${department}"
                         th:utext="${department}"></option>
             </select>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-25">
-            <label for="dateFrom">DATE FROM</label>
-        </div>
-        <div class="col-25">
+            <label>DATE FROM</label><br>
             <input type="date" id="dateFrom" th:field="*{dateFrom}" />
-        </div>
 
-        <div class="col-25">
-            <label for="dateTo">DATE TO </label>
-        </div>
-        <div class="col-25">
+            <label>DATE TO </label><br>
             <input type="date" id="dateTo" th:field="*{dateTo}" />
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-25"></div>
-        <div class="col-75">
+            <br><br>
             <input type="submit" value="FIND REPORTS" />
-        </div></div>
 </form>
 
 </body>

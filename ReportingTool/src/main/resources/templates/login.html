@@ -4,26 +4,12 @@
 <head th:replace="fragments/head :: head"></head>
 
 <body>
-
-<ul sec:authorize="isAnonymous()" th:replace="fragments/navigation :: unloggedLogin"></ul>
-
-<div class="row">
-    <div class="column middle">
-        <h3>Welcome in Reporting Center</h3>
-        <p> Please log in to continue !</p>
-        <h3>USER FUNCTIONS</h3>
-        <p> LOGIN : APK1</p>
-        <p> PASSWORD : MSE1</p>
-        <h3> LEADER FUNCTIONS</h3>
-        <p> LOGIN : APK2</p>
-        <p> PASSWORD : MSE2</p>
-    </div>
-
-    <div class="column side">
-
-        <form th:replace="fragments/login :: form "></form>
-
-    </div>
+<div id="smallcontainer">
+        <div id="logintopwindow">Reporting Tool</div>
+            <div id="loginbotwindow">
+                <form th:replace="fragments/login :: form "></form>
+            </div>
+        </div>
 </div>
 </body>
 </html>

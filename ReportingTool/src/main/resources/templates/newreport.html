@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:a="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+
+<div id="container">
+<div id="logo">
+    Reporting tool
+</div>
+    <div id="navbar">
+        <div class="navfieldactive">
+            NEW REPORT
+        </div>
+        <div class="navfield"><a class="fieldlink" th:href="@{/reports/my}">MY DETAILS</a></div>
+        <div class="navfieldR">
+        <a class="fieldlink" th:href="@{/logout}">LOG OUT</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+
+    <div id="leftbox">
+        <form th:replace="fragments/report :: Form"></form>
+        <form th:action="@{/reports/confirm}"
+              th:method="GET">
+            <input type="submit" value="SEND COMPLETE REPORT"/>
+        </form>
+    </div>
+
+    <div id="rightbox">
+    <table th:replace="fragments/report :: unsentReports"></table>
+
+    </div>
+    <div id="footerleft"><i>Created by Paweł Muniak</i></div>
+    <div id="footerright">
+        <div class="botbarfield"> ATTACHED FILES :</div>
+        <div th:each="file:${fileList}">
+            <div class="botbarfield" th:text="${file.getName()}"> </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

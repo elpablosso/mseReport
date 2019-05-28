@@ -117,7 +117,6 @@ public class ProjectController {
     }
 
 
-
     @GetMapping("/my")
     public ModelAndView myProjects(ModelAndView modelAndView, Principal principal){
 
@@ -128,13 +127,6 @@ public class ProjectController {
         modelAndView.setViewName("project/my");
         return modelAndView;
     }
-
-
-
-
-
-
-
 
 
     @GetMapping("/delete")

@@ -11,36 +11,19 @@
       th:action="@{/login}"
       method="post">
 
-    <div class="row">
-        <div class="col-25">
-            <label for="username">USERNAME</label>
-        </div>
-
-        <div class="col-75">
-            <input type="text"
-                   id="username"
-                   name="username"
-                   placeholder="Username(Try APK1)"
-                   autofocus="autofocus" />
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-25">
-            <label for="password">PASSWORD</label>
-        </div>
-
-        <div class="col-75">
-            <input type="password"
-                   id="password"
-                   name="password"
-                   placeholder="Password(Try MSE1)"/>
-        </div>
-
-    </div>
-
-
-    <input type="submit" value="Log in" />
+    <label>LOGIN:</label>
+    <br />
+    <input type="text" id="username" name="username" placeholder="Username(Try APK1)"
+                   autofocus="autofocus" style="border:1px solid orange;"/>
+    <br />
+    <label>PASSWORD:</label>
+    <br />
+    <input type="password" id="password" name="password" placeholder="Password(Try MSE1)"
+           style="border:1px solid orange;"/>
+    <br />
+    <br />
+    <br />
+    <input type="submit" style="border:1px solid white;" value="LOG IN"/>
 
 </form>
 

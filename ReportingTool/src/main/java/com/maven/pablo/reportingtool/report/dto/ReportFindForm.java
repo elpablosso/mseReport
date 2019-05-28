@@ -1,8 +1,7 @@
 package com.maven.pablo.reportingtool.report.dto;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
-import java.util.Date;
+
 
 public class ReportFindForm {
 

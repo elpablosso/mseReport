@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Reporting center</title>
+<meta charset="UTF-8" />
+<meta title="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+.body{
+background-color: #1c1611;
+}
+
+table{
+border-collapse: collapse;
+width: 100%;
+}
+
+#loginbotwindow{
+color:white;
+margin-top:20px;
+background-color:#544f4a;
+padding:40px;
+text-align:left;
+border: 1px solid orange;
+}
+
+th, td {
+padding:10px;
+border: 1px solid #ddd;
+}
+
+    </style>
+</head>
+<body>
+
+
+<div id="loginbotwindow">
+<table>
+    <thead>
+    <tr>
+        <th>DATE</th>
+        <th>PROJECT</th>
+        <th>DEPARTMENT</th>
+        <th>DESCRIPTION</th>
+        <th>DURATION</th>
+        <th>EXTRA SCOPE</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="report: ${reportList}">
+        <td th:text="${report.date}"></td>
+        <td th:text="${report.projectId}"></td>
+        <td th:text="${report.department}"></td>
+        <td th:text="${report.description}"></td>
+        <td th:text="${report.time}"></td>
+        <td th:text="${report.additionalRange} ? 'X' : ''"></td></td>
+    </tr>
+    </tbody>
+</table>
+    <br><br>
+    <table>
+        <thead>
+        <tr>
+            <th>MODELLING</th>
+            <th>DRAWINGS</th>
+            <th>DOCUMENTATION</th>
+            <th>CORRESPONDENCE</th>
+            <th>TOTAL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${summary.getTotalModelling()}"></td>
+            <td th:text="${summary.getTotalDrawings()}"></td>
+            <td th:text="${summary.getTotalDocumentation()}"></td>
+            <td th:text="${summary.getTotalCorrespondence()}"></td>
+            <td th:text="${summary.getTotalSum()}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</div>
+</body>
+</html>

@@ -6,7 +6,7 @@
 
 <body>
 
-<table th:fragment="List">
+<table th:fragment="unsentReports">
     <thead>
     <tr>
         <th>EMPLOYEE</th>
@@ -15,7 +15,7 @@
         <th>DESCRIPTION</th>
         <th>DURATION</th>
         <th>EXTRA SCOPE</th>
-        <th>DELETE</th>
+        <th></th>
 
     </tr>
     </thead>
@@ -28,7 +28,7 @@
         <td th:text="${report.time}"></td>
         <td th:text="${report.additionalRange} ? 'X' : ''"></td></td>
         <td><a th:href="@{/reports/delete(id=${report.id})}"
-               class="link"> X </a> </td>
+               class="fieldlink" style="border:2px solid orange; text-align:center"> DELETE </a> </td>
 
     </tr>
     </tbody>
@@ -47,7 +47,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="report: ${loggedUserReports}">
+    <tr th:each="report: ${allReports}">
         <td th:text="${report.date}"></td>
         <td th:text="${report.projectId}"></td>
         <td th:text="${report.department}"></td>
@@ -94,69 +94,52 @@
       th:object="${reportDto}"
       method="post">
 
-    <div class="row">
-        <div class="col-25">
-            <label for="projectId">PROJECT</label>
-        </div>
-
-        <div class="col-75">
-            <select th:field="*{projectId}" id="projectId">
+    <label>PROJECT</label>
+    <i class="orange">
+    <td th:if="${#fields.hasErrors('projectId')}" th:errors="*{projectId}"/>
+    </i>
+        <br />
+                <select th:field="*{projectId}" id="projectId">
                 <option value=""> -- </option>
                 <option th:each="project : ${projectList}"
                         th:value="${project.number}"
                         th:utext="${project.number}"></option>
             </select>
-            <td th:if="${#fields.hasErrors('projectId')}" th:errors="*{projectId}">ERROR</td>
-        </div>
-    </div>
 
 
-    <div class="row">
-        <div class="col-25">
-            <label for="department">DEPARTMENT</label>
-        </div>
-        <div class="col-75">
-            <select th:field="*{department}" id="department">
+
+    <label>DEPARTMENT</label>
+    <i class="orange">
+        <td th:if="${#fields.hasErrors('department')}" th:errors="*{department}"/></i>
+    <br />
+                <select th:field="*{department}" id="department">
                 <option value=""> -- </option>
                 <option th:each="department : ${departmentList}"
                         th:value="${department}"
                         th:utext="${department}"></option>
             </select>
-            <td th:if="${#fields.hasErrors('department')}" th:errors="*{department}">ERROR</td>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-25">
-            <label for="description">DESCRIPTION </label>
-        </div>
-        <div class="col-75">
-            <textarea id="description" name="description" placeholder="Write something.." style="height:200px"></textarea>
-            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">DESCRIPTION ERROR</td>
-        </div></div>
 
-    <div class="row">
-        <div class="col-25">
-            <label for="time">TIME </label>
-        </div>
-        <div class="col-25">
-            <input type="text" id="time" th:field="*{time}" />
-            <td th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></td>
-        </div>
-        <div class="col-25">
-            <label for="additionalRange">EXTRA? </label>
-        </div>
-        <div class="col-25">
+    <label>DESCRIPTION </label>
+    <i class="orange">
+        <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"/>
+    </i>
+    <br />
+            <textarea name="description" placeholder="Write something.." style="height:200px"></textarea>
+
+
+    <label>TIME </label>
+    <i class="orange">
+        <td th:if="${#fields.hasErrors('time')}" th:errors="*{time}"/>
+    </i>
+    <br />
+            <input type="text" th:field="*{time}" />
+
+            <label>EXTRA? </label>
             <input type="checkbox" id="additionalRange" th:field="*{additionalRange}" />
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col-25"></div>
-        <div class="col-75">
-            <input type="submit" value="Submit" />
-        </div></div>
+    <br />
+    <input type="submit" value="ADD REPORT PART"/>
+    <br /><br />
 </form>
 
 

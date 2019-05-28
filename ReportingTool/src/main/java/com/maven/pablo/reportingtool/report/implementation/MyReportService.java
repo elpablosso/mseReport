@@ -80,6 +80,7 @@ public class MyReportService implements ReportService {
     public List<Report> findByForm(ReportFindForm findForm) {
 
         List<Report> reportsOfUser = findByEmployeeId(findForm.getEmployee());
+        if(findForm.getEmployee().isEmpty()) reportsOfUser=findAll();
 
         if(!findForm.getProject().isEmpty()){
             List<Report> filteredByProject = findByProjectNumber(findForm.getProject());

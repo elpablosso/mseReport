@@ -4,38 +4,9 @@
 </head>
 <body>
 
-<ul>
 
-    <li th:fragment="home"><a th:href="@{/home}">Home</a></li>
-    <li th:fragment="homeActive"><a class="active">Home</a></li>
 
-    <li th:fragment="allProjects"><a th:href="@{/projects/all}">All Projects</a></li>
-    <li th:fragment="allProjectsActive"><a class="active">All Projects</a></li>
-
-    <li th:fragment="myProjects"><a th:href="@{/projects/my}">My Projects</a></li>
-    <li th:fragment="myProjectsActive"><a class="active">My Projects</a></li>
-
-    <li th:fragment="sendReport"><a th:href="@{/reports/create}">Send Report</a></li>
-    <li th:fragment="sendReportActive"><a class="active">Send Report</a></li>
-
-    <li th:fragment="myReports"><a th:href="@{/reports/my}">My Reports</a></li>
-    <li th:fragment="myReportsActive"><a class="active">My Reports</a></li>
-
-    <li th:fragment="unreadReports"><a th:href="@{/reports/unread}">Unread Reports</a></li>
-    <li th:fragment="unreadReportsActive"><a class="active">Unread Reports</a></li>
-
-    <li th:fragment="addProject"><a th:href="@{/projects/add}">ADD PROJECT</a></li>
-    <li th:fragment="addProjectActive"><a class="active">ADD PROJECT</a></li>
-
-    <li th:fragment="findProject"><a th:href="@{/projects/find}">FIND PROJECT</a></li>
-    <li th:fragment="findProjectActive"><a class="active">FIND PROJECT</a></li>
-
-    <li th:fragment="logout" class="right"><a th:href="@{/logout}">LOG OUT</a></li>
-
-    <li th:fragment="login" class="right"><a th:href="@{/login}" method="post">LOG IN</a></li>
-    <li th:fragment="loginActive" class="right"><a class="active">LOG IN</a></li>
-
-</ul>
+    <div class="navfieldactive" th:fragment="HomeActive">HOME</div>
 
 </body>
 </html>

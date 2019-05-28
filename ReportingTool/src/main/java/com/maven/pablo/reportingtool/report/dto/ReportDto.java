@@ -5,7 +5,6 @@ import com.maven.pablo.reportingtool.project.entity.Project;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,19 +15,20 @@ public class ReportDto {
     private Employee employee;
     private Project project;
 
+
     @NotNull
-    @NotEmpty(message = "Please select any project !")
+    @NotEmpty(message = "Select project!")
     private String projectId;
 
     @NotNull
-    @NotEmpty(message = "What did you do ?")
+    @NotEmpty(message = "Write something!")
     private String description;
 
     @NotNull(message = "How long?")
     @Min(value = 15, message = "Minimum time is 15 minutes!")
     private BigDecimal time;
 
-    @NotEmpty(message = "Please select department!")
+    @NotEmpty(message = "Select department!")
     private String department;
     private boolean additionalRange;
     private LocalDate date;

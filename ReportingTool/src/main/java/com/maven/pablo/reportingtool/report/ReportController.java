@@ -1,4 +1,6 @@
 package com.maven.pablo.reportingtool.report;
+import com.maven.pablo.reportingtool.email.Attachment;
+import com.maven.pablo.reportingtool.employee.EmployeeDto;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
 import com.maven.pablo.reportingtool.exceptions.ProjectNotFoundException;
@@ -9,6 +11,7 @@ import com.maven.pablo.reportingtool.project.dto.ProjectDto;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import com.maven.pablo.reportingtool.report.dto.ReportDto;
 import com.maven.pablo.reportingtool.report.dto.ReportFindForm;
+import com.maven.pablo.reportingtool.report.dto.Statistics;
 import com.maven.pablo.reportingtool.report.entity.Report;
 import com.maven.pablo.reportingtool.report.implementation.MyCompleteReport;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
+import java.io.File;
 import java.security.Principal;
 import java.util.List;
 
@@ -33,19 +37,22 @@ public class ReportController {
     private MyMapper<Project, ProjectDto> projectMapper;
     @Qualifier("myReportMapper")
     private MyMapper<Report, ReportDto> reportMapper;
+    @Qualifier("myEmployeeMapper")
+    private MyMapper<Employee,EmployeeDto> employeeMapper;
 
     private MyCompleteReport myCompleteReport;
 
     public ReportController(EmployeeService employeeService, ReportService reportService,
                             ProjectService projectService, ProjectDetailsService projectDetailsService,
                             MyMapper<Project, ProjectDto> projectMapper, MyMapper<Report, ReportDto> reportMapper,
-                            MyCompleteReport myCompleteReport) {
+                            MyMapper<Employee, EmployeeDto> employeeMapper, MyCompleteReport myCompleteReport) {
         this.employeeService = employeeService;
         this.reportService = reportService;
         this.projectService = projectService;
         this.projectDetailsService = projectDetailsService;
         this.projectMapper = projectMapper;
         this.reportMapper = reportMapper;
+        this.employeeMapper = employeeMapper;
         this.myCompleteReport = myCompleteReport;
     }
 
@@ -55,6 +62,20 @@ public class ReportController {
         return reportMapper.convertToDto(myReports);
     }
 
+    @ModelAttribute("fileList")
+    private List<File> fileList(){
+        return Attachment.fileList();
+    }
+
+    @ModelAttribute("allReports")
+    private List<ReportDto> allReports(){
+        return reportMapper.convertToDto(reportService.findAll());
+    }
+
+    @ModelAttribute("employeeList")
+    private List<EmployeeDto> employeeList(){
+        return employeeMapper.convertToDto(employeeService.findAll());
+    }
     @ModelAttribute("reportDto")
     private ReportDto reportDto(){
         return new ReportDto();
@@ -80,22 +101,16 @@ public class ReportController {
         return myCompleteReport.getReports();
     }
 
-    @ModelAttribute
+    @ModelAttribute("unreadReports")
     private List<ReportDto> unreadReports(Principal principal){
         Employee employee = employeeService.findById(principal.getName());
         List<Report> unreadReports = employeeService.getUnreadReports(employee);
         return reportMapper.convertToDto(unreadReports);
     }
 
-
     @GetMapping("/create")
     public ModelAndView createReport(ModelAndView modelAndView){
-
-        modelAndView.setViewName("report/send");
-        modelAndView.addObject("reportDto");
-        modelAndView.addObject("departmentList");
-        modelAndView.addObject("projectList");
-        modelAndView.addObject("unsentReports");
+         modelAndView.setViewName("newreport");
         return modelAndView;
     }
 
@@ -103,12 +118,8 @@ public class ReportController {
     public ModelAndView saveReportPart(@Valid @ModelAttribute("reportDto") ReportDto reportDto, BindingResult bindingResult,
                                        Principal principal, ModelAndView modelAndView ) throws ProjectNotFoundException {
 
-        modelAndView.addObject("departmentList");
-        modelAndView.addObject("projectList");
-
         if(bindingResult.hasErrors()){
-            modelAndView.setViewName("report/send");
-            modelAndView.addObject("unsentReports");
+            modelAndView.setViewName("newreport");
             return modelAndView; }
 
         Employee employee = employeeService.findById(principal.getName());
@@ -121,9 +132,7 @@ public class ReportController {
         reportDto.setId(myCompleteReport.getReports().size());
         myCompleteReport.addReport(reportDto);
 
-        modelAndView.setViewName("report/send");
-        modelAndView.addObject("reportDto");
-        modelAndView.addObject("unsentReports");
+        modelAndView.setViewName("newreport");
         return modelAndView;
     }
 
@@ -137,12 +146,7 @@ public class ReportController {
         projectDetailsService.addHoursFromReport(reports);
 
         myCompleteReport.clear();
-        modelAndView.setViewName("report/send");
-        modelAndView.addObject("reportDto");
-        modelAndView.addObject("unsentReports");
-        modelAndView.addObject("departmentList");
-        modelAndView.addObject("projectList");
-
+        modelAndView.setViewName("newreport");
         return modelAndView;
     }
 
@@ -151,42 +155,31 @@ public class ReportController {
                                            ModelAndView modelAndView){
         myCompleteReport.getReports().remove(id);
         myCompleteReport.rearangeIds();
-        modelAndView.setViewName("report/send");
-        modelAndView.addObject("reportDto");
-        modelAndView.addObject("unsentReports");
-        modelAndView.addObject("departmentList");
-        modelAndView.addObject("projectList");
+        modelAndView.setViewName("newreport");
         return modelAndView;
     }
 
     @PostMapping("/find")
     public ModelAndView findReport(@ModelAttribute ReportFindForm reportFindForm,
-                                   ModelAndView modelAndView,Principal principal){
+                                   ModelAndView modelAndView){
 
-        reportFindForm.setEmployee(principal.getName());
         List<ReportDto> reportList = reportMapper.convertToDto(reportService.findByForm(reportFindForm));
-        modelAndView.addObject("loggedUserReports", reportList);
-        modelAndView.addObject("reportFindFrom");
-        modelAndView.setViewName("report/find");
+        modelAndView.addObject("allReports", reportList);
+        modelAndView.addObject("summary", Statistics.of(reportList));
+        modelAndView.setViewName("mydetails");
         return modelAndView;
     }
 
     @GetMapping("/my")
-    public ModelAndView myReports(ModelAndView modelAndView){
-
-        modelAndView.addObject("loggedUserReports");
-        modelAndView.addObject("reportFindForm");
-        modelAndView.addObject("projectList");
-        modelAndView.addObject("departmentList");
-        modelAndView.setViewName("report/my");
+    public ModelAndView myReports(ModelAndView modelAndView, Principal principal){
+        modelAndView.setViewName("mydetails");
+        modelAndView.addObject("summary", Statistics.of(loggedUserReports(principal)));
         return modelAndView;
     }
 
     @GetMapping("/unread")
     public ModelAndView unreadReports(ModelAndView modelAndView,
                                   Principal principal){
-
-        modelAndView.addObject("unreadReports",unreadReports(principal));
         modelAndView.setViewName("report/unread");
         return modelAndView;
     }
@@ -194,14 +187,11 @@ public class ReportController {
     @GetMapping("/read")
     public ModelAndView readReport(@RequestParam("reportId") Integer reportId,
                                            ModelAndView modelAndView,Principal principal){
-
-
         Report report = reportService.findById(reportId);
         employeeService.markReportAsRead(report);
-
         modelAndView.clear();
+        modelAndView.addObject("unreadReports");
         modelAndView.setViewName("report/unread");
-        modelAndView.addObject("unreadReports",unreadReports(principal));
         return modelAndView;
     }
 

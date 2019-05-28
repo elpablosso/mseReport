@@ -1,34 +1,34 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:a="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/head :: head"></head>
 
 <body>
 
-<ul sec:authorize="isAnonymous()" th:replace="fragments/navigation :: unloggedHome"></ul>
-<ul sec:authorize="hasAuthority('USER')" th:replace="fragments/navigation :: userHome"></ul>
-<ul sec:authorize="hasAuthority('LEADER')" th:replace="fragments/navigation :: leaderHome"></ul>
-<ul sec:authorize="hasAuthority('ADMIN')" th:replace="fragments/navigation :: adminHome"></ul>
-
-<div class="row">
-    <div class="column middle">
-        <h3>Welcome in Reporting Center</h3>
-        <p>Please log in to see further functions!</p>
-        <p>Have fun using this application</p>
-    </div>
-
-    <div class="column side">
-        <h4>App scope</h4>
-        <p><i>Main goal of this application is to store informations
-            and details about projects and employees.
-            Information are stored in the database.
-            The main purpose of the application is to enable users to make daily reports.
-            The information contained therein will be assigned to specific projects,
-            and can be used to create summaries, and facilitate the analysis of the project
-            in its individual sectors.</i></p>
-    </div>
-
-
+<div id="container">
+<div id="logo">
+    Reporting tool
 </div>
+    <div id="navbar">
+        <div class="navfield">
+            <a class="fieldlink" th:href="@{/reports/create}">NEW REPORT</a>
+        </div>
+        <div class="navfield">MY DETAILS</div>
+        <div class="navfieldR">
+        <a class="fieldlink" th:href="@{/logout}">LOG OUT</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+
+    <div id="footerleft"><i>Created by Paweł Muniak</i></div>
+    <div id="footerright">
+        <div class="botbarfield"> Logged as:</div>
+        <div class="botbarfield" th:text="${loggedEmployee.name}"></div>
+        <div class="botbarfield"> Role :</div>
+        <div class="botbarfield" th:text="${loggedEmployee.role}"></div>
+    </div>
+</div>
+
 </body>
 </html>
