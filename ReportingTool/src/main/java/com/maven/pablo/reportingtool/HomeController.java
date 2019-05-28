@@ -38,8 +38,8 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public String login(Principal principal) {
+        return (principal == null) ? "login" : "index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
