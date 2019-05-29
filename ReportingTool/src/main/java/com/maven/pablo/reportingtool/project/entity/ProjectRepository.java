@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface ProjectRepository extends JpaRepository<Project,String> {
 
-    Optional<Project> findByNumber(String number);
     List<Project> findAll();
+    Optional<Project> findByNumber(String number);
 
 }

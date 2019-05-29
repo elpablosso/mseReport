@@ -23,10 +23,21 @@
 
     <div id="leftbox">
         <form th:replace="fragments/report :: Form"></form>
+
+        <form th:action="@{/reports/directory}"
+              th:method="POST"
+              th:object="${filePath}">
+            <input type="file" th:field="*{fileList}" webkitdirectory directory multiple/>
+            <input type="submit" value="SUBMIT"/> </form>
+
+        <br>
         <form th:action="@{/reports/confirm}"
               th:method="GET">
             <input type="submit" value="SEND COMPLETE REPORT"/>
         </form>
+
+
+
     </div>
 
     <div id="rightbox">
@@ -35,7 +46,9 @@
     </div>
     <div id="footerleft"><i>Created by Paweł Muniak</i></div>
     <div id="footerright">
-        <div class="botbarfield"> ATTACHED FILES :</div>
+        <div class="botbarfield">
+            ATTACHED FILES:
+        </div>
         <div th:each="file:${fileList}">
             <div class="botbarfield" th:text="${file.getName()}"> </div>
         </div>

@@ -1,4 +1,5 @@
 package com.maven.pablo.reportingtool.employee.entity;
+import com.maven.pablo.reportingtool.employee.enums.Role;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import com.maven.pablo.reportingtool.project.entity.ProjectDetails;
 import com.maven.pablo.reportingtool.report.entity.Report;
@@ -7,7 +8,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 
     @Entity
     @Table(name = "employee")
@@ -19,23 +19,18 @@ import java.util.Set;
         private String name;
 
         @OneToMany(fetch = FetchType.LAZY, mappedBy = "leader")
-        Set<Project> projects;
+        private Set<Project> projectsRoleLeader;
+
+        @OneToMany(fetch = FetchType.LAZY, mappedBy = "designer")
+        private Set<Project> projectsRoleDesigner;
 
         @OneToMany(mappedBy = "employee")
-        Set<ProjectDetails> details;
-
-        @ManyToMany
-        @JoinTable(name="unread_reports",
-        joinColumns = @JoinColumn(name="employee_id"),
-        inverseJoinColumns = @JoinColumn(name = "report_id"))
-        List<Report> unreadReports = new ArrayList<>();
+        private Set<ProjectDetails> details;
 
         private String username;
         private String password;
-        private String role;
+        private Role role;
 
-        private int salary;
-        private int bonus;
 
         public Set<ProjectDetails> getDetails() {
             return details;
@@ -69,27 +64,11 @@ import java.util.Set;
         this.name = name;
     }
 
-    public int getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
-    public int getBonus() {
-        return bonus;
-    }
-
-    public void setBonus(int bonus) {
-        this.bonus = bonus;
-    }
-
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -109,19 +88,19 @@ import java.util.Set;
         this.password = password;
     }
 
-        public Set<Project> getProjects() {
-            return projects;
+        public Set<Project> getProjectsRoleLeader() {
+            return projectsRoleLeader;
         }
 
-        public void setProjects(Set<Project> projects) {
-            this.projects = projects;
+        public void setProjectsRoleLeader(Set<Project> projectsRoleLeader) {
+            this.projectsRoleLeader = projectsRoleLeader;
         }
 
-        public List<Report> getUnreadReports() {
-            return unreadReports;
+        public Set<Project> getProjectsRoleDesignerr() {
+            return projectsRoleDesigner;
         }
 
-        public void setUnreadReports(List<Report> unreadReports) {
-            this.unreadReports = unreadReports;
+        public void setProjectsRoleDesignerr(Set<Project> projectsRoleDesignerr) {
+            this.projectsRoleDesigner = projectsRoleDesignerr;
         }
     }

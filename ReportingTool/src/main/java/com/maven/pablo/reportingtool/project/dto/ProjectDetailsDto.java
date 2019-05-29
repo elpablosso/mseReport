@@ -11,6 +11,8 @@ public class ProjectDetailsDto {
     private BigDecimal correspondence;
     private BigDecimal documentation;
     private BigDecimal drawings;
+    private BigDecimal staticCalculations;
+    private BigDecimal other;
     private BigDecimal additionalHours;
 
     public String getProjectNumber() {
@@ -67,5 +69,21 @@ public class ProjectDetailsDto {
 
     public void setAdditionalHours(BigDecimal additionalHours) {
         this.additionalHours = additionalHours;
+    }
+
+    public BigDecimal getStaticCalculations() {
+        return staticCalculations;
+    }
+
+    public void setStaticCalculations(BigDecimal staticCalculations) {
+        this.staticCalculations = staticCalculations;
+    }
+
+    public BigDecimal getOther() {
+        return other;
+    }
+
+    public void setOther(BigDecimal other) {
+        this.other = other;
     }
 }

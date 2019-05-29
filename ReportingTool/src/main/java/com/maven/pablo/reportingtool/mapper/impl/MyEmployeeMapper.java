@@ -1,6 +1,7 @@
-package com.maven.pablo.reportingtool.mapper;
+package com.maven.pablo.reportingtool.mapper.impl;
 import com.maven.pablo.reportingtool.employee.EmployeeDto;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.mapper.MyMapper;
 import org.springframework.stereotype.Component;
 
 @Component("myEmployeeMapper")
@@ -13,11 +14,12 @@ public class MyEmployeeMapper implements MyMapper<Employee,EmployeeDto> {
 
     @Override
     public EmployeeDto convertToDto(Employee employee) {
-        return new EmployeeDto(
-                employee.getId(),
-                employee.getEmail(),
-                employee.getName(),
-                employee.getRole());
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setName(employee.getName());
+        employeeDto.setId(employee.getId());
+        employeeDto.setRole(employee.getRole().name());
+        employeeDto.setEmail(employee.getEmail());
+        return employeeDto;
     }
 
 

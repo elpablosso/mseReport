@@ -1,5 +1,6 @@
-package com.maven.pablo.reportingtool.mapper;
+package com.maven.pablo.reportingtool.mapper.impl;
 
+import com.maven.pablo.reportingtool.mapper.MyMapper;
 import com.maven.pablo.reportingtool.project.dto.ProjectDetailsDto;
 import com.maven.pablo.reportingtool.project.entity.ProjectDetails;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,8 @@ public class MyProjectDetailsMapper implements MyMapper<ProjectDetails, ProjectD
         projectDetailsDto.setModelling(object.getModelling());
         projectDetailsDto.setDocumentation(object.getDocumentation());
         projectDetailsDto.setDrawings(object.getDrawings());
+        projectDetailsDto.setStaticCalculations(object.getStaticCalculations());
+        projectDetailsDto.setOther(object.getOther());
 
         return projectDetailsDto;
     }

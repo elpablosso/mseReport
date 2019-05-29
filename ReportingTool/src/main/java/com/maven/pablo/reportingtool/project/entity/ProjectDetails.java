@@ -22,6 +22,8 @@ public class ProjectDetails {
     private BigDecimal correspondence;
     private BigDecimal documentation;
     private BigDecimal drawings;
+    private BigDecimal staticCalculations;
+    private BigDecimal other;
     private BigDecimal additionalHours;
 
 
@@ -79,5 +81,29 @@ public class ProjectDetails {
 
     public void setAdditionalHours(BigDecimal additionalHours) {
         this.additionalHours = additionalHours;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public BigDecimal getStaticCalculations() {
+        return staticCalculations;
+    }
+
+    public void setStaticCalculations(BigDecimal staticCalculations) {
+        this.staticCalculations = staticCalculations;
+    }
+
+    public BigDecimal getOther() {
+        return other;
+    }
+
+    public void setOther(BigDecimal other) {
+        this.other = other;
     }
 }

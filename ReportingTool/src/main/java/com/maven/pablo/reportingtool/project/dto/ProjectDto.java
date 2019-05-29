@@ -20,15 +20,36 @@ public class ProjectDto {
     @NotEmpty(message = "Select leader!")
     private String leaderId;
 
+    @NotEmpty(message = "Select designer!;")
+    private String designerId;
+
     private boolean closed;
     private Employee leader;
+    private Employee designer;
 
     public ProjectDto() {
         this.number="";
         this.title="";
         this.leaderId="";
+        this.designerId="";
         this.closed=false;
 
+    }
+
+    public String getDesignerId() {
+        return designerId;
+    }
+
+    public void setDesignerId(String designerId) {
+        this.designerId = designerId;
+    }
+
+    public Employee getDesigner() {
+        return designer;
+    }
+
+    public void setDesigner(Employee designer) {
+        this.designer = designer;
     }
 
     public Employee getLeader() {

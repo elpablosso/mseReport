@@ -1,27 +1,20 @@
 package com.maven.pablo.reportingtool.employee;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.employee.enums.Role;
 import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
-import com.maven.pablo.reportingtool.report.entity.Report;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeService {
 
-    Employee findById(String id);
-    Employee findByEmail(String email);
-    Employee findByUsername(String username);
-    Employee findByName(String name);
+    Employee findById(String id) throws EmployeeNotFoundException;
+    Employee findByEmail(String email) throws EmployeeNotFoundException;
+    Employee findByUsername(String username) throws EmployeeNotFoundException;
+    Employee findByName(String name) throws EmployeeNotFoundException;
 
-    Collection<Employee> findAll();
-    Collection<Employee> findLeaders();
-
-    List<Report> getUnreadReports(Employee employee);
-
-    void addUnreadReport(Collection<Report> reports);
-    void addUnreadReport(Report report);
-    void markReportAsRead(Report report);
-    void markAllReportsAsRead(Employee employee);
+    List<Employee> findAll();
+    List<Employee> findByRole(Role role);
 
     void saveEmployee(Employee employee);
     void deleteEmployee(Employee employee);

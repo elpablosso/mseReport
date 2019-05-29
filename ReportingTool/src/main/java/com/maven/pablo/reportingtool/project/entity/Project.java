@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
-
 @Entity
 public class Project {
 
@@ -17,13 +16,14 @@ public class Project {
     @JoinColumn(name = "leader_id")
     private Employee leader;
 
+    @ManyToOne
+    @JoinColumn(name = "detailer_id")
+    private Employee designer;
+
     @OneToMany(mappedBy = "project")
-    Set<ProjectDetails> details;
+    private Set<ProjectDetails> details;
 
     private boolean closed;
-
-    public Project() {
-    }
 
     public Set<ProjectDetails> getDetails() {
         return details;
@@ -41,7 +41,7 @@ public class Project {
         this.leader = leader;
     }
 
-       public String getNumber() {
+    public String getNumber() {
         return number;
     }
 
@@ -73,5 +73,11 @@ public class Project {
         this.budget = budget;
     }
 
+    public Employee getDesigner() {
+        return designer;
+    }
 
+    public void setDesigner(Employee designer) {
+        this.designer = designer;
+    }
 }

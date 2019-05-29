@@ -1,8 +1,10 @@
 package com.maven.pablo.reportingtool.report;
 import com.maven.pablo.reportingtool.email.Attachment;
+import com.maven.pablo.reportingtool.email.FilePath;
 import com.maven.pablo.reportingtool.employee.EmployeeDto;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
 import com.maven.pablo.reportingtool.exceptions.ProjectNotFoundException;
 import com.maven.pablo.reportingtool.mapper.MyMapper;
 import com.maven.pablo.reportingtool.project.ProjectDetailsService;
@@ -101,11 +103,9 @@ public class ReportController {
         return myCompleteReport.getReports();
     }
 
-    @ModelAttribute("unreadReports")
-    private List<ReportDto> unreadReports(Principal principal){
-        Employee employee = employeeService.findById(principal.getName());
-        List<Report> unreadReports = employeeService.getUnreadReports(employee);
-        return reportMapper.convertToDto(unreadReports);
+    @ModelAttribute("filePath")
+    private FilePath filePath(){
+        return new FilePath();
     }
 
     @GetMapping("/create")
@@ -114,9 +114,18 @@ public class ReportController {
         return modelAndView;
     }
 
+    @PostMapping("/directory")
+    public ModelAndView applyDirectory(@ModelAttribute FilePath filePath, BindingResult bindingResult,
+                                       ModelAndView modelAndView){
+    modelAndView.setViewName("newreport");
+        System.out.println(filePath.getFileList().size());
+        modelAndView.addObject("fileList",filePath.getFileList());
+        return modelAndView;
+    }
+
     @PostMapping("/save")
     public ModelAndView saveReportPart(@Valid @ModelAttribute("reportDto") ReportDto reportDto, BindingResult bindingResult,
-                                       Principal principal, ModelAndView modelAndView ) throws ProjectNotFoundException {
+                                       Principal principal, ModelAndView modelAndView ) throws ProjectNotFoundException, EmployeeNotFoundException {
 
         if(bindingResult.hasErrors()){
             modelAndView.setViewName("newreport");
@@ -142,7 +151,6 @@ public class ReportController {
         List<Report> reports = reportMapper.newInstanceFromDto(myCompleteReport.getReports());
 
         reportService.save(reports);
-        employeeService.addUnreadReport(reports);
         projectDetailsService.addHoursFromReport(reports);
 
         myCompleteReport.clear();
@@ -174,24 +182,6 @@ public class ReportController {
     public ModelAndView myReports(ModelAndView modelAndView, Principal principal){
         modelAndView.setViewName("mydetails");
         modelAndView.addObject("summary", Statistics.of(loggedUserReports(principal)));
-        return modelAndView;
-    }
-
-    @GetMapping("/unread")
-    public ModelAndView unreadReports(ModelAndView modelAndView,
-                                  Principal principal){
-        modelAndView.setViewName("report/unread");
-        return modelAndView;
-    }
-
-    @GetMapping("/read")
-    public ModelAndView readReport(@RequestParam("reportId") Integer reportId,
-                                           ModelAndView modelAndView,Principal principal){
-        Report report = reportService.findById(reportId);
-        employeeService.markReportAsRead(report);
-        modelAndView.clear();
-        modelAndView.addObject("unreadReports");
-        modelAndView.setViewName("report/unread");
         return modelAndView;
     }
 

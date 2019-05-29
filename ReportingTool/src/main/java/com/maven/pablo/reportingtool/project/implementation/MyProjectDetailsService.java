@@ -29,7 +29,6 @@ public class MyProjectDetailsService implements ProjectDetailsService {
     }
     @Override
     public void addHoursFromReport(Report report) {
-
         Project project = report.getProject();
         Employee employee = report.getEmployee();
 
@@ -76,6 +75,16 @@ public class MyProjectDetailsService implements ProjectDetailsService {
     }
 
     @Override
+    public void increaseStaticCalculations(ProjectDetails projectDetails, Report report) {
+        projectDetails.setStaticCalculations(projectDetails.getStaticCalculations().add(report.getTime()));
+    }
+
+    @Override
+    public void increaseOthers(ProjectDetails projectDetails, Report report) {
+        projectDetails.setOther(projectDetails.getOther().add(report.getTime()));
+    }
+
+    @Override
     public void increaseDepartment(ProjectDetails projectDetails, Report report) {
 
         switch (report.getDepartment()) {
@@ -90,6 +99,12 @@ public class MyProjectDetailsService implements ProjectDetailsService {
                 break;
             case CORRESPONDENCE:
                 increaseCorrespondence(projectDetails, report);
+                break;
+            case STATIC:
+                increaseStaticCalculations(projectDetails,report);
+                break;
+            case OTHER:
+                increaseOthers(projectDetails,report);
                 break;
         }
     }
@@ -111,6 +126,8 @@ public class MyProjectDetailsService implements ProjectDetailsService {
         projectDetails.setDocumentation(BigDecimal.ZERO);
         projectDetails.setCorrespondence(BigDecimal.ZERO);
         projectDetails.setAdditionalHours(BigDecimal.ZERO);
+        projectDetails.setStaticCalculations(BigDecimal.ZERO);
+        projectDetails.setOther(BigDecimal.ZERO);
 
         return projectDetails;
     }

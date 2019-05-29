@@ -1,5 +1,6 @@
-package com.maven.pablo.reportingtool.mapper;
+package com.maven.pablo.reportingtool.mapper.impl;
 import com.maven.pablo.reportingtool.employee.enums.Department;
+import com.maven.pablo.reportingtool.mapper.MyMapper;
 import com.maven.pablo.reportingtool.report.dto.ReportDto;
 import com.maven.pablo.reportingtool.report.entity.Report;
 import org.springframework.context.annotation.Scope;

@@ -1,22 +1,11 @@
 package com.maven.pablo.reportingtool.employee;
 
-
 public class EmployeeDto {
 
     private String id;
     private String email;
     private String name;
     private String role;
-
-    public EmployeeDto() {
-    }
-
-    public EmployeeDto(String id, String email, String name, String role) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.role=role;
-    }
 
     public String getId() {
         return id;

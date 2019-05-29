@@ -8,7 +8,6 @@ public class Attachment {
 
     private static final String FILE_PATH = System.getProperty("user.home") + "/Desktop/Report";
 
-
     public static void clear(){
         File file = new File(FILE_PATH);
         File[] files = file.listFiles();

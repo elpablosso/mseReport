@@ -21,9 +21,6 @@ public class Report {
     @ManyToOne
     Employee employee;
 
-    @ManyToMany(mappedBy = "unreadReports")
-    Set<Employee> employeesToRead;
-
     private String description;
     private BigDecimal time;
     private Department department;
@@ -96,11 +93,4 @@ public class Report {
         this.employee = employee;
     }
 
-    public Set<Employee> getEmployeesToRead() {
-        return employeesToRead;
-    }
-
-    public void setEmployeesToRead(Set<Employee> employeesToRead) {
-        this.employeesToRead = employeesToRead;
-    }
 }

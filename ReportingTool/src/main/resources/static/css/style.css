@@ -213,7 +213,7 @@ tr:nth-child(even) {
 background-color: #7c7c7c;
 }
 
-input[type=password], input[type=text],input[type=date], textarea, select {
+input[type=password], input[type=text],input[type=date], input[type=file], textarea, select {
   vertical-align:middle;
   margin: 8px 0;
   border: none;

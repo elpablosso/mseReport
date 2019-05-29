@@ -6,9 +6,7 @@ import com.maven.pablo.reportingtool.project.entity.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -33,7 +31,7 @@ public class MyProjectService implements com.maven.pablo.reportingtool.project.P
     }
 
     @Override
-    public void saveProject(Project project) {
+    public void save(Project project) {
         projectRepository.save(project);
     }
 
@@ -43,12 +41,7 @@ public class MyProjectService implements com.maven.pablo.reportingtool.project.P
     }
 
     @Override
-    public void deleteProjectByNumber(String projectNumber) throws ProjectNotFoundException {
-        deleteProject(findByNumber(projectNumber));
-    }
-
-    @Override
-    public void deleteProject(Project project) {
+    public void delete(Project project) {
         projectRepository.delete(project);
     }
 

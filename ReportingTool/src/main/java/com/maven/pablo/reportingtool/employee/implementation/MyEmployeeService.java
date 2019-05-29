@@ -3,11 +3,12 @@ import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
 import com.maven.pablo.reportingtool.employee.entity.EmployeeRepository;
 import com.maven.pablo.reportingtool.employee.enums.Role;
-import com.maven.pablo.reportingtool.report.entity.Report;
+import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MyEmployeeService implements EmployeeService {
@@ -20,63 +21,28 @@ public class MyEmployeeService implements EmployeeService {
     }
 
     @Override
-    public List<Report> getUnreadReports(Employee employee) {
-        return employee.getUnreadReports();
+    public Employee findByEmail(String email) throws EmployeeNotFoundException {
+        return employeeRepository.findByEmail(email).orElseThrow(EmployeeNotFoundException::new);
     }
 
     @Override
-    public void addUnreadReport(Collection<Report> reports)  {
-        for(Report report : reports) {
-            addUnreadReport(report);
-        } }
-
-
-    @Override
-    public void addUnreadReport(Report report) {
-            Employee employee = employeeRepository.findById(report.getProject().getLeader().getId()).orElse(null);
-            employee.getUnreadReports().add(report);
-            saveEmployee(employee);
-        }
-
-    @Override
-    public void markReportAsRead(Report report) {
-            Employee employee = employeeRepository.
-                    findById(report.getProject().getLeader().getId()).orElse(null);
-                employee.getUnreadReports().remove(report);
-            saveEmployee(employee);
-        }
-
-    @Override
-    public void markAllReportsAsRead(Employee employee) {
-        if(employee!=null){
-            employee.getUnreadReports().clear();
-            saveEmployee(employee);
-        }
+    public List<Employee> findByRole(Role role) {
+        return employeeRepository.findByRole(role);
     }
 
     @Override
-    public Employee findByEmail(String email) {
-        return employeeRepository.findByEmail(email).orElse(null);
+    public Employee findById(String id) throws EmployeeNotFoundException {
+        return employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
     @Override
-    public Collection<Employee> findLeaders() {
-        return employeeRepository.findByRole(Role.LEADER.name());
-    }
-
-    @Override
-    public Employee findById(String id) {
-        return employeeRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public Collection<Employee> findAll() {
+    public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
 
     @Override
-    public Employee findByName(String name){
-        return employeeRepository.findByName(name).orElse(null);
+    public Employee findByName(String name) throws EmployeeNotFoundException {
+        return employeeRepository.findByName(name).orElseThrow(EmployeeNotFoundException::new);
     }
 
     @Override
@@ -90,7 +56,7 @@ public class MyEmployeeService implements EmployeeService {
     }
 
     @Override
-    public Employee findByUsername(String username) {
-        return employeeRepository.findByUsername(username).orElse(null);
+    public Employee findByUsername(String username) throws EmployeeNotFoundException {
+        return employeeRepository.findByUsername(username).orElseThrow(EmployeeNotFoundException::new);
     }
 }

@@ -12,6 +12,9 @@ public interface ProjectDetailsService {
     void increaseDocumentation(ProjectDetails projectDetails, Report report);
     void increaseCorrespondence(ProjectDetails projectDetails, Report report);
     void increaseAdditionalHours(ProjectDetails projectDetails, Report report);
+    void increaseStaticCalculations(ProjectDetails projectDetails, Report report);
+    void increaseOthers(ProjectDetails projectDetails, Report report);
+
     void increaseDepartment(ProjectDetails projectDetails, Report report);
 
     List<ProjectDetails> findByEmployeeId(String employeeId);

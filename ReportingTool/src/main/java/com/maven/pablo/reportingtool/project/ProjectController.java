@@ -2,6 +2,8 @@ package com.maven.pablo.reportingtool.project;
 import com.maven.pablo.reportingtool.employee.EmployeeDto;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
+import com.maven.pablo.reportingtool.employee.enums.Role;
+import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
 import com.maven.pablo.reportingtool.exceptions.ProjectNotFoundException;
 import com.maven.pablo.reportingtool.mapper.MyMapper;
 import com.maven.pablo.reportingtool.project.dto.ProjectDetailsDto;
@@ -48,19 +50,32 @@ public class ProjectController {
         this.employeeMapper = employeeMapper;
         this.projectMapper = projectMapper1;
     }
+    @ModelAttribute("projectDto")
+    private ProjectDto newProjectDto(){
+        return new ProjectDto(); }
 
-    @ModelAttribute
+    @ModelAttribute("leaderList")
+    private List<EmployeeDto> leaderList(){
+        return findByRole(Role.LEADER); }
+
+    @ModelAttribute("designerList")
+    private List<EmployeeDto> designerList(){
+        return findByRole(Role.DESIGNER); }
+
     private List<ProjectDto> allProjects(){
         return projectMapper.convertToDto(projectService.findAll());
     }
-    @ModelAttribute
-    private List<EmployeeDto> leaderList(){
-        return employeeMapper.convertToDto(employeeService.findLeaders());
+    private List<EmployeeDto> findByRole(Role role){
+        return employeeMapper.convertToDto(employeeService.findByRole(role));
     }
-    @ModelAttribute
     private List<ProjectDto> filteredProjects(ProjectDto projectDto){
         List<Project> projects = projectService.findByForm(projectDto);
         return projectMapper.convertToDto(projects);
+    }
+
+    private List<ProjectDetailsDto> loggedUserProjectDetails(Principal principal){
+        List<ProjectDetails> myProjectDetails = projectDetailsService.findByEmployeeId(principal.getName());
+        return projectDetailsMapper.convertToDto(myProjectDetails);
     }
 
     @GetMapping("/all")
@@ -73,19 +88,16 @@ public class ProjectController {
     @GetMapping("/add")
     public ModelAndView addProject(ModelAndView modelAndView){
         modelAndView.setViewName("project/add");
-        modelAndView.addObject("projectDto", new ProjectDto());
         modelAndView.addObject("projectList",allProjects());
-        modelAndView.addObject("leaderList", leaderList());
         return modelAndView;
     }
 
     @PostMapping("/add")
     public ModelAndView addProjectSumbit(@Valid ProjectDto projectDto,
                                           BindingResult bindingResult,
-                                          ModelAndView modelAndView) throws ProjectNotFoundException {
+                                          ModelAndView modelAndView) throws EmployeeNotFoundException {
 
         modelAndView.setViewName("project/add");
-        modelAndView.addObject("leaderList", leaderList());
 
         if(bindingResult.hasErrors()) {
             modelAndView.addObject("projectList",allProjects());
@@ -93,7 +105,8 @@ public class ProjectController {
 
             if(!projectService.projectOfNumberExist(projectDto.getNumber())) {
                 projectDto.setLeader(employeeService.findById(projectDto.getLeaderId()));
-                projectService.saveProject(projectMapper.newInstanceFromDto(projectDto));
+                projectDto.setDesigner(employeeService.findById(projectDto.getDesignerId()));
+                projectService.save(projectMapper.newInstanceFromDto(projectDto));
             }
 
         modelAndView.addObject("projectList",allProjects());
@@ -104,7 +117,6 @@ public class ProjectController {
     public ModelAndView findProject(ModelAndView modelAndView){
         modelAndView.setViewName("project/find");
         modelAndView.addObject("projectList",allProjects());
-        //modelAndView.addObject("projectDto", new ProjectDto());
         return modelAndView;
     }
 
@@ -120,10 +132,7 @@ public class ProjectController {
     @GetMapping("/my")
     public ModelAndView myProjects(ModelAndView modelAndView, Principal principal){
 
-        List<ProjectDetails> myProjectDetails = projectDetailsService.findByEmployeeId(principal.getName());
-        List<ProjectDetailsDto> projectDetailsList = projectDetailsMapper.convertToDto(myProjectDetails);
-
-        modelAndView.addObject("projectDetailsList",projectDetailsList);
+        modelAndView.addObject("projectDetailsList",loggedUserProjectDetails(principal));
         modelAndView.setViewName("project/my");
         return modelAndView;
     }
@@ -142,7 +151,8 @@ public class ProjectController {
     public ModelAndView deleteProject(@RequestParam("projectNumber") String projectNumber,
                                       ModelAndView modelAndView) throws ProjectNotFoundException {
 
-        projectService.deleteProjectByNumber(projectNumber);
+        Project project = projectService.findByNumber(projectNumber);
+        projectService.delete(project);
         modelAndView.setViewName("project/all");
         modelAndView.addObject("projectList",allProjects());
         return modelAndView;

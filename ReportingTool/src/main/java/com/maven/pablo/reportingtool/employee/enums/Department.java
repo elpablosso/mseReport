@@ -4,5 +4,7 @@ public enum Department {
     MODELLING,
     DRAWINGS,
     DOCUMENTATION,
-    CORRESPONDENCE;
+    CORRESPONDENCE,
+    STATIC,
+    OTHER;
 }

@@ -16,8 +16,6 @@ public interface ProjectService {
 
     boolean projectOfNumberExist(String number);
 
-    void saveProject(Project project);
-    void deleteProject(Project project);
-    void deleteProjectByNumber(String projectNumber) throws ProjectNotFoundException;
-
+    void save(Project project);
+    void delete(Project project);
 }
