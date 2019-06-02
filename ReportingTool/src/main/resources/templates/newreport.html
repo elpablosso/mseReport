@@ -30,7 +30,7 @@
         <br>
         ATTACHED FILES :
         <div th:each="file:${fileList}">
-            <div class="file" th:text="${file.getAbsolutePath()}"></div>
+            <div class="file" th:text="${file.getName()}"></div>
         </div>
         <br>
 

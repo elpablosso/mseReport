@@ -72,6 +72,10 @@ public class MyCompleteReport {
     public void addFiles(List<File> files){
         fileList.addAll(files);
     }
+    public void addFiles(File file){
+        fileList.add(file);
+    }
+
 
     private void increaseModelling(BigDecimal value){
         setModelling(modelling.add(value));

@@ -78,10 +78,10 @@ public class ProjectController {
         return projectDetailsMapper.convertToDto(myProjectDetails);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public ModelAndView home(ModelAndView modelAndView){
         modelAndView.addObject("projectList",allProjects());
-        modelAndView.setViewName("project/all");
+        modelAndView.setViewName("allprojects");
         return modelAndView;
     }
 

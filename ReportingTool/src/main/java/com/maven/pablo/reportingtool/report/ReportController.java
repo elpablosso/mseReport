@@ -143,7 +143,7 @@ public class ReportController {
                                        ModelAndView modelAndView) throws IOException {
 
         for(MultipartFile multipartFile : uploadingFiles) {
-            multipartFile.getContentType();
+            System.out.println(multipartFile.getContentType());
             myCompleteReport.addFiles(new File(multipartFile.getOriginalFilename()));
         }
         modelAndView.setViewName("newreport");
