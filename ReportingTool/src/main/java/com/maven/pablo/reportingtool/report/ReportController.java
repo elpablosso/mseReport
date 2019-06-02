@@ -24,12 +24,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
 
@@ -139,12 +138,13 @@ public class ReportController {
     }
 
     @PostMapping("/directory")
-    public ModelAndView applyDirectory(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
+    public ModelAndView applyDirectory(HttpServletRequest servletRequest,
+                                       @RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
                                        ModelAndView modelAndView) throws IOException {
 
         for(MultipartFile multipartFile : uploadingFiles) {
-            System.out.println(multipartFile.getContentType());
-            myCompleteReport.addFiles(new File(multipartFile.getOriginalFilename()));
+           File file = new File(multipartFile.getOriginalFilename());
+           myCompleteReport.addFiles(file);
         }
         modelAndView.setViewName("newreport");
         return modelAndView;
