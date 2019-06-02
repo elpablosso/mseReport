@@ -24,34 +24,46 @@
     <div id="leftbox">
         <form th:replace="fragments/report :: Form"></form>
 
+
+
+
+
+    </div>
+
+    <div id="middlebox">
+    <table th:replace="fragments/report :: unsentReports"></table>
+    </div>
+
+    <div id="rightbox">
+        ADD FILES TO REPORT <br>
         <form th:action="@{/reports/directory}"
               th:method="POST"
               th:object="${filePath}">
-            <input type="file" th:field="*{fileList}" webkitdirectory directory multiple/>
+            <input type="text" th:field="*{directory}"/>
             <input type="submit" value="SUBMIT"/> </form>
+        <br>
+        <form th:action="@{/reports/clear-attachment}"
+              th:method="GET">
+            <input type="submit" value="CLEAR FILES"/>
+        </form>
 
         <br>
+        ATTACHED FILES :
+        <div th:each="file:${fileList}">
+            <div class="file" th:text="${file.getName()}"></div>
+        </div>
+        <br>
+
         <form th:action="@{/reports/confirm}"
               th:method="GET">
             <input type="submit" value="SEND COMPLETE REPORT"/>
         </form>
-
-
-
     </div>
+    <div style="clear:both;"></div>
 
-    <div id="rightbox">
-    <table th:replace="fragments/report :: unsentReports"></table>
-
-    </div>
     <div id="footerleft"><i>Created by Paweł Muniak</i></div>
     <div id="footerright">
-        <div class="botbarfield">
-            ATTACHED FILES:
-        </div>
-        <div th:each="file:${fileList}">
-            <div class="botbarfield" th:text="${file.getName()}"> </div>
-        </div>
+        <div class="botbarfield">MODELLING</div>
     </div>
 </div>
 

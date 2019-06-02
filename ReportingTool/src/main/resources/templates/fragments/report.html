@@ -9,7 +9,6 @@
 <table th:fragment="unsentReports">
     <thead>
     <tr>
-        <th>EMPLOYEE</th>
         <th>PROJECT</th>
         <th>DEPARTMENT</th>
         <th>DESCRIPTION</th>
@@ -21,7 +20,6 @@
     </thead>
     <tbody>
     <tr th:each="report: ${unsentReports}">
-        <td th:text="${report.employeeId}"></td>
         <td th:text="${report.projectId}"></td>
         <td th:text="${report.department}"></td>
         <td th:text="${report.description}"></td>
@@ -125,7 +123,7 @@
         <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"/>
     </i>
     <br />
-            <textarea name="description" placeholder="Write something.." style="height:100px"></textarea>
+            <textarea name="description" placeholder="Write something.." style="height:250px"></textarea>
 
 
     <label>TIME </label>

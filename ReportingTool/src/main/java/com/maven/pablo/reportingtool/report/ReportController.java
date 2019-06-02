@@ -1,5 +1,5 @@
 package com.maven.pablo.reportingtool.report;
-import com.maven.pablo.reportingtool.email.Attachment;
+import com.maven.pablo.reportingtool.email.EmailSender;
 import com.maven.pablo.reportingtool.email.FilePath;
 import com.maven.pablo.reportingtool.employee.EmployeeDto;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
@@ -16,25 +16,34 @@ import com.maven.pablo.reportingtool.report.dto.ReportFindForm;
 import com.maven.pablo.reportingtool.report.dto.Statistics;
 import com.maven.pablo.reportingtool.report.entity.Report;
 import com.maven.pablo.reportingtool.report.implementation.MyCompleteReport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 import java.io.File;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
 @RequestMapping("/reports")
 public class ReportController {
 
+    // EMAIL SENDING //
+    private final EmailSender emailSender;
+
+    // SERVICES //
     private EmployeeService employeeService;
     private ReportService reportService;
     private ProjectService projectService;
     private ProjectDetailsService projectDetailsService;
 
+    // MAPPERS //
     @Qualifier("myProjectMapper")
     private MyMapper<Project, ProjectDto> projectMapper;
     @Qualifier("myReportMapper")
@@ -42,12 +51,15 @@ public class ReportController {
     @Qualifier("myEmployeeMapper")
     private MyMapper<Employee,EmployeeDto> employeeMapper;
 
+    // OTHER COMPONENTS //
     private MyCompleteReport myCompleteReport;
 
-    public ReportController(EmployeeService employeeService, ReportService reportService,
+    @Autowired
+    public ReportController(EmailSender emailSender, EmployeeService employeeService, ReportService reportService,
                             ProjectService projectService, ProjectDetailsService projectDetailsService,
                             MyMapper<Project, ProjectDto> projectMapper, MyMapper<Report, ReportDto> reportMapper,
                             MyMapper<Employee, EmployeeDto> employeeMapper, MyCompleteReport myCompleteReport) {
+        this.emailSender = emailSender;
         this.employeeService = employeeService;
         this.reportService = reportService;
         this.projectService = projectService;
@@ -66,7 +78,7 @@ public class ReportController {
 
     @ModelAttribute("fileList")
     private List<File> fileList(){
-        return Attachment.fileList();
+        return myCompleteReport.getFileList();
     }
 
     @ModelAttribute("allReports")
@@ -117,9 +129,11 @@ public class ReportController {
     @PostMapping("/directory")
     public ModelAndView applyDirectory(@ModelAttribute FilePath filePath, BindingResult bindingResult,
                                        ModelAndView modelAndView){
-    modelAndView.setViewName("newreport");
-        System.out.println(filePath.getFileList().size());
-        modelAndView.addObject("fileList",filePath.getFileList());
+        System.out.println(filePath.getDirectory());
+        File file = new File(filePath.getDirectory());
+        ArrayList listFiles = new ArrayList<>(Arrays.asList(file.listFiles()));
+        myCompleteReport.addFiles(listFiles);
+        modelAndView.setViewName("newreport");
         return modelAndView;
     }
 
@@ -146,13 +160,14 @@ public class ReportController {
     }
 
     @GetMapping("/confirm")
-    public ModelAndView sendReport(ModelAndView modelAndView, Principal principal)  {
+    public ModelAndView sendReport(ModelAndView modelAndView, Principal principal) throws EmployeeNotFoundException {
 
         List<Report> reports = reportMapper.newInstanceFromDto(myCompleteReport.getReports());
 
         reportService.save(reports);
         projectDetailsService.addHoursFromReport(reports);
 
+        emailSender.sendEmail(myCompleteReport, myCompleteReport.getFileList());
         myCompleteReport.clear();
         modelAndView.setViewName("newreport");
         return modelAndView;

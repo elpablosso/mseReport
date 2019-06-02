@@ -5,15 +5,20 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @Scope(scopeName = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MyCompleteReport {
 
     private List<ReportDto> reports = new ArrayList<>();
+    private Set<String> reciptiensEmails = new HashSet<>();
+    private List<File> fileList = new ArrayList<>();
 
     private BigDecimal modelling;
     private BigDecimal drawings;
@@ -27,6 +32,7 @@ public class MyCompleteReport {
         documentation = BigDecimal.ZERO;
         correspondence = BigDecimal.ZERO;
         totalDuration = BigDecimal.ZERO;
+        reciptiensEmails.add("elpablos79@gmail.com");
     }
 
     public void rearangeIds(){
@@ -37,6 +43,7 @@ public class MyCompleteReport {
 
     public void clear(){
         reports.clear();
+        fileList.clear();
         setModelling(BigDecimal.ZERO);
         setDrawings(BigDecimal.ZERO);
         setDocumentation(BigDecimal.ZERO);
@@ -45,6 +52,8 @@ public class MyCompleteReport {
 
     public void addReport(ReportDto reportDto){
         reports.add(reportDto);
+        reciptiensEmails.add(reportDto.getProject().getLeader().getEmail());
+        //reciptiensEmails.add(reportDto.getProject().getDesigner().getEmail());
         increaseDepartment(reportDto.getDepartment(),reportDto.getTime());
     }
 
@@ -58,6 +67,10 @@ public class MyCompleteReport {
             case "CORRESPONDENCE" : increaseCorrespondence(value); break; }
 
         increaseTotalDuration(value);
+    }
+
+    public void addFiles(List<File> files){
+        fileList.addAll(files);
     }
 
     private void increaseModelling(BigDecimal value){
@@ -122,6 +135,22 @@ public class MyCompleteReport {
 
     public BigDecimal getTotalDuration() {
         return totalDuration;
+    }
+
+    public Set<String> getReciptiensEmails() {
+        return reciptiensEmails;
+    }
+
+    public void setReciptiensEmails(Set<String> reciptiensEmails) {
+        this.reciptiensEmails = reciptiensEmails;
+    }
+
+    public List<File> getFileList() {
+        return fileList;
+    }
+
+    public void setFileList(List<File> fileList) {
+        this.fileList = fileList;
     }
 
     public void setTotalDuration(BigDecimal totalDuration) {
