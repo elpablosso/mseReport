@@ -1,6 +1,7 @@
 package com.maven.pablo.reportingtool.report;
 import com.maven.pablo.reportingtool.email.EmailSender;
 import com.maven.pablo.reportingtool.email.FilePath;
+import com.maven.pablo.reportingtool.email.StorageService;
 import com.maven.pablo.reportingtool.employee.EmployeeDto;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
@@ -21,13 +22,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -90,6 +93,7 @@ public class ReportController {
     private List<EmployeeDto> employeeList(){
         return employeeMapper.convertToDto(employeeService.findAll());
     }
+
     @ModelAttribute("reportDto")
     private ReportDto reportDto(){
         return new ReportDto();
@@ -120,19 +124,28 @@ public class ReportController {
         return new FilePath();
     }
 
-    @GetMapping("/create")
+
+    @GetMapping("/")
+    public ModelAndView myReports(ModelAndView modelAndView, Principal principal){
+        modelAndView.setViewName("reports");
+        modelAndView.addObject("summary", Statistics.of(allReports()));
+        return modelAndView;
+    }
+
+    @GetMapping("/new")
     public ModelAndView createReport(ModelAndView modelAndView){
-         modelAndView.setViewName("newreport");
+        modelAndView.setViewName("newreport");
         return modelAndView;
     }
 
     @PostMapping("/directory")
-    public ModelAndView applyDirectory(@ModelAttribute FilePath filePath, BindingResult bindingResult,
-                                       ModelAndView modelAndView){
-        System.out.println(filePath.getDirectory());
-        File file = new File(filePath.getDirectory());
-        ArrayList listFiles = new ArrayList<>(Arrays.asList(file.listFiles()));
-        myCompleteReport.addFiles(listFiles);
+    public ModelAndView applyDirectory(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
+                                       ModelAndView modelAndView) throws IOException {
+
+        for(MultipartFile multipartFile : uploadingFiles) {
+            multipartFile.getContentType();
+            myCompleteReport.addFiles(new File(multipartFile.getOriginalFilename()));
+        }
         modelAndView.setViewName("newreport");
         return modelAndView;
     }
@@ -189,16 +202,11 @@ public class ReportController {
         List<ReportDto> reportList = reportMapper.convertToDto(reportService.findByForm(reportFindForm));
         modelAndView.addObject("allReports", reportList);
         modelAndView.addObject("summary", Statistics.of(reportList));
-        modelAndView.setViewName("mydetails");
+        modelAndView.setViewName("reports");
         return modelAndView;
     }
 
-    @GetMapping("/my")
-    public ModelAndView myReports(ModelAndView modelAndView, Principal principal){
-        modelAndView.setViewName("mydetails");
-        modelAndView.addObject("summary", Statistics.of(loggedUserReports(principal)));
-        return modelAndView;
-    }
+
 
 
 }

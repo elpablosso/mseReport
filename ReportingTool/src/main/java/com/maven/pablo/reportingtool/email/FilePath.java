@@ -1,14 +1,15 @@
 package com.maven.pablo.reportingtool.email;
+import org.springframework.web.multipart.MultipartFile;
 
 public class FilePath {
 
-    private String directory;
+    private MultipartFile fileList;
 
-    public String getDirectory() {
-        return directory;
+    public MultipartFile getFileList() {
+        return fileList;
     }
 
-    public void setDirectory(String directory) {
-        this.directory = directory;
+    public void setFileList(MultipartFile fileList) {
+        this.fileList = fileList;
     }
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+
+<body>
+
+<div th:fragment="addFilesForm">
+    ADD FILES TO REPORT <br>
+    <form th:action="@{/reports/directory}"
+          th:method="POST"
+          enctype="multipart/form-data">
+    <input id="fileInput" type="file" name="uploadingFiles" onchange="updateSize();" multiple>
+
+    <input type="submit" value="SUBMIT"/> </form>
+    <br>
+    <form th:action="@{/reports/clear-attachment}"
+          th:method="GET">
+        <input type="submit" value="CLEAR FILES"/>
+    </form>
+</div>
+</body>
+</html>
