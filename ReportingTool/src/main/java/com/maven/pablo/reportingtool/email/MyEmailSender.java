@@ -11,9 +11,7 @@ import org.thymeleaf.context.Context;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -43,7 +41,7 @@ public class MyEmailSender implements EmailSender {
 
             for(File file : files) {
                 FileSystemResource addFile = new FileSystemResource(file);
-                helper.addAttachment(addFile.getPath(), file);
+                helper.addAttachment(addFile.getFilename(), file);
             }
 
             Context context = new Context();
@@ -58,5 +56,6 @@ public class MyEmailSender implements EmailSender {
         }
 
         javaMailSender.send(mail);
+        Attachment.clear();
     }
 }

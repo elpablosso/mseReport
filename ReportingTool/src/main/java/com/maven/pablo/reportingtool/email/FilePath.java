@@ -12,4 +12,5 @@ public class FilePath {
     public void setFileList(MultipartFile fileList) {
         this.fileList = fileList;
     }
+
 }

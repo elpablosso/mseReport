@@ -1,7 +1,7 @@
 package com.maven.pablo.reportingtool.report;
+import com.maven.pablo.reportingtool.email.Attachment;
 import com.maven.pablo.reportingtool.email.EmailSender;
 import com.maven.pablo.reportingtool.email.FilePath;
-import com.maven.pablo.reportingtool.email.StorageService;
 import com.maven.pablo.reportingtool.employee.EmployeeDto;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
@@ -29,12 +29,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.List;
 
 @Controller
 @RequestMapping("/reports")
 public class ReportController {
+
+    private static final String UPLOAD_FOLDER = "C://test//";
 
     // EMAIL SENDING //
     private final EmailSender emailSender;
@@ -140,12 +145,9 @@ public class ReportController {
     @PostMapping("/directory")
     public ModelAndView applyDirectory(HttpServletRequest servletRequest,
                                        @RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
-                                       ModelAndView modelAndView) throws IOException {
-
-        for(MultipartFile multipartFile : uploadingFiles) {
-           File file = new File(multipartFile.getOriginalFilename());
-           myCompleteReport.addFiles(file);
-        }
+                                       ModelAndView modelAndView) {
+        Attachment.save(uploadingFiles);
+        myCompleteReport.addFiles(Attachment.getAllFiles());
         modelAndView.setViewName("newreport");
         return modelAndView;
     }
