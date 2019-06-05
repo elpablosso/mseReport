@@ -1,7 +1,7 @@
-package com.maven.pablo.reportingtool.email;
+package com.maven.pablo.reportingtool.files;
 import org.springframework.web.multipart.MultipartFile;
 
-public class FilePath {
+public class FileDto {
 
     private MultipartFile fileList;
 

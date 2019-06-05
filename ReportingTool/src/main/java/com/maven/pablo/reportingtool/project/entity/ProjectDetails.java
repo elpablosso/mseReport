@@ -1,7 +1,5 @@
 package com.maven.pablo.reportingtool.project.entity;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
-
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 

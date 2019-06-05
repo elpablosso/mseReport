@@ -1,5 +1,4 @@
 package com.maven.pablo.reportingtool;
-
 import com.maven.pablo.reportingtool.employee.EmployeeDto;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
@@ -9,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.security.Principal;
 
 @Controller
@@ -27,10 +24,9 @@ public class HomeController {
 
     @ModelAttribute("loggedEmployee")
     public EmployeeDto loggedEmployee(Principal principal) throws EmployeeNotFoundException {
-
         return (principal==null) ?
                 null :
-                employeeMapper.convertToDto(employeeService.findById(principal.getName()));
+                employeeMapper.convertToDto(employeeService.findByUsername(principal.getName()));
     }
 
     @GetMapping("/")
@@ -38,7 +34,7 @@ public class HomeController {
         return (principal==null) ? "login" : "index" ;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping(value = "/login")
     public String postLogin(Principal principal)
     {
         return (principal==null) ? "login" : "index";

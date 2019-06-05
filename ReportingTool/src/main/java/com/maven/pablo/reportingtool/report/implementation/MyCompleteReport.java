@@ -17,8 +17,7 @@ import java.util.Set;
 public class MyCompleteReport {
 
     private List<ReportDto> reports = new ArrayList<>();
-    private Set<String> reciptiensEmails = new HashSet<>();
-    private List<File> fileList = new ArrayList<>();
+    private Set<String> recipientsEmails = new HashSet<>();
 
     private BigDecimal modelling;
     private BigDecimal drawings;
@@ -32,7 +31,7 @@ public class MyCompleteReport {
         documentation = BigDecimal.ZERO;
         correspondence = BigDecimal.ZERO;
         totalDuration = BigDecimal.ZERO;
-        reciptiensEmails.add("elpablos79@gmail.com");
+        recipientsEmails.add("elpablos79@gmail.com");
     }
 
     public void rearangeIds(){
@@ -43,7 +42,6 @@ public class MyCompleteReport {
 
     public void clear(){
         reports.clear();
-        fileList.clear();
         setModelling(BigDecimal.ZERO);
         setDrawings(BigDecimal.ZERO);
         setDocumentation(BigDecimal.ZERO);
@@ -52,8 +50,8 @@ public class MyCompleteReport {
 
     public void addReport(ReportDto reportDto){
         reports.add(reportDto);
-        reciptiensEmails.add(reportDto.getProject().getLeader().getEmail());
-        //reciptiensEmails.add(reportDto.getProject().getDesigner().getEmail());
+        recipientsEmails.add(reportDto.getProject().getLeader().getEmail());
+        //recipientsEmails.add(reportDto.getProject().getDesigner().getEmail());
         increaseDepartment(reportDto.getDepartment(),reportDto.getTime());
     }
 
@@ -67,13 +65,6 @@ public class MyCompleteReport {
             case "CORRESPONDENCE" : increaseCorrespondence(value); break; }
 
         increaseTotalDuration(value);
-    }
-
-    public void addFiles(List<File> files){
-        fileList.addAll(files);
-    }
-    public void addFiles(File file){
-        fileList.add(file);
     }
 
 
@@ -141,20 +132,12 @@ public class MyCompleteReport {
         return totalDuration;
     }
 
-    public Set<String> getReciptiensEmails() {
-        return reciptiensEmails;
+    public Set<String> getRecipientsEmails() {
+        return recipientsEmails;
     }
 
-    public void setReciptiensEmails(Set<String> reciptiensEmails) {
-        this.reciptiensEmails = reciptiensEmails;
-    }
-
-    public List<File> getFileList() {
-        return fileList;
-    }
-
-    public void setFileList(List<File> fileList) {
-        this.fileList = fileList;
+    public void setRecipientsEmails(Set<String> recipientsEmails) {
+        this.recipientsEmails = recipientsEmails;
     }
 
     public void setTotalDuration(BigDecimal totalDuration) {

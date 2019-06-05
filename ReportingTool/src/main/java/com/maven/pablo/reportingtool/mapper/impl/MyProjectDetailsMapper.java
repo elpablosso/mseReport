@@ -1,5 +1,4 @@
 package com.maven.pablo.reportingtool.mapper.impl;
-
 import com.maven.pablo.reportingtool.mapper.MyMapper;
 import com.maven.pablo.reportingtool.project.dto.ProjectDetailsDto;
 import com.maven.pablo.reportingtool.project.entity.ProjectDetails;

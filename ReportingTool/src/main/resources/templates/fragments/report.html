@@ -38,7 +38,7 @@
         <td th:text="${report.description}"></td>
         <td th:text="${report.time}"></td>
         <td th:text="${report.additionalRange} ? 'X' : ''"></td></td>
-        <td><a th:href="@{/reports/delete(id=${report.id})}"
+        <td><a th:href="@{/report/create/delete-report-part(id=${report.id})}"
                class="fieldlink" style="border:1px solid orange; text-align:center"> DELETE </a> </td>
 
     </tr>
@@ -72,46 +72,16 @@
 </table>
 
 
-<table th:fragment="UnreadReports">
-    <thead>
-    <tr>
-        <th>DATE</th>
-        <th>EMPLOYEE</th>
-        <th>PROJECT</th>
-        <th>DEPARTMENT</th>
-        <th>DESCRIPTION</th>
-        <th>DURATION</th>
-        <th>EXTRA SCOPE</th>
-        <th>MARK AS READ</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="report: ${unreadReports}">
-        <td th:text="${report.date}"></td>
-        <td th:text="${report.employee.getName()}"></td>
-        <td th:text="${report.projectId}"></td>
-        <td th:text="${report.department}"></td>
-        <td th:text="${report.description}"></td>
-        <td th:text="${report.time}"></td>
-        <td th:text="${report.additionalRange} ? 'X' : ''"></td></td>
-        <td><a th:href="@{/reports/read(reportId=${report.repoId})}"
-               class="link"> X </a> </td>
-    </tr>
-    </tbody>
-</table>
-
 <form th:fragment="Form"
       action="#"
-      th:action="@{/reports/save}"
+      th:action="@{/report/create/add-report-part/}"
       th:object="${reportDto}"
       method="post">
 
     <label>PROJECT</label>
     <i class="orange">
     <td th:if="${#fields.hasErrors('projectId')}" th:errors="*{projectId}"/>
-    </i>
-        <br />
+    </i><br />
                 <select th:field="*{projectId}" id="projectId">
                 <option value=""> -- </option>
                 <option th:each="project : ${projectList}"

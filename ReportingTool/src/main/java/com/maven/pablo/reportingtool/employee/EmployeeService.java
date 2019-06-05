@@ -2,9 +2,7 @@ package com.maven.pablo.reportingtool.employee;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
 import com.maven.pablo.reportingtool.employee.enums.Role;
 import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface EmployeeService {
 

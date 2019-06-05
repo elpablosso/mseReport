@@ -2,11 +2,7 @@ package com.maven.pablo.reportingtool.employee.entity;
 import com.maven.pablo.reportingtool.employee.enums.Role;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import com.maven.pablo.reportingtool.project.entity.ProjectDetails;
-import com.maven.pablo.reportingtool.report.entity.Report;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
     @Entity

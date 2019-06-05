@@ -1,4 +1,5 @@
 package com.maven.pablo.reportingtool.email;
+import com.maven.pablo.reportingtool.files.Attachment;
 import com.maven.pablo.reportingtool.report.dto.Statistics;
 import com.maven.pablo.reportingtool.report.implementation.MyCompleteReport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,30 +15,34 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
-
 @Service
 public class MyEmailSender implements EmailSender {
 
-    @Autowired
-    private JavaMailSender javaMailSender;
 
+    private JavaMailSender javaMailSender;
+    private Attachment attachment;
     private final TemplateEngine templateEngine;
 
-    public MyEmailSender(TemplateEngine templateEngine) {
+    @Autowired
+    public MyEmailSender(JavaMailSender javaMailSender, Attachment attachment, TemplateEngine templateEngine) {
+        this.javaMailSender = javaMailSender;
+        this.attachment = attachment;
         this.templateEngine = templateEngine;
     }
 
     @Override
-    public void sendEmail(MyCompleteReport report, List<File> files) {
+    public void sendEmail(MyCompleteReport report) {
         MimeMessage mail = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);
-            String[] receivers = new String[report.getReciptiensEmails().size()];
-            System.arraycopy(report.getReciptiensEmails().toArray(), 0, receivers, 0, receivers.length);
+            String[] receivers = new String[report.getRecipientsEmails().size()];
+            System.arraycopy(report.getRecipientsEmails().toArray(), 0, receivers, 0, receivers.length);
             helper.setTo(receivers);
             helper.setReplyTo("msereportool@gmail.com");
             helper.setFrom("msereportool@gmail.com");
             helper.setSubject(LocalDate.now().toString()+" New report from " + report.getReports().get(0).getEmployee().getName()+"!");
+
+            List<File> files = attachment.attachedFilesList();
 
             for(File file : files) {
                 FileSystemResource addFile = new FileSystemResource(file);
@@ -56,6 +61,6 @@ public class MyEmailSender implements EmailSender {
         }
 
         javaMailSender.send(mail);
-        Attachment.clear();
+        attachment.clear();
     }
 }

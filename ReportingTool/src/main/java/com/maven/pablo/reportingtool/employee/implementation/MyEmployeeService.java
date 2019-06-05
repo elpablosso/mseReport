@@ -6,9 +6,8 @@ import com.maven.pablo.reportingtool.employee.enums.Role;
 import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class MyEmployeeService implements EmployeeService {

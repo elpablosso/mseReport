@@ -8,14 +8,14 @@
 
 <div th:fragment="addFilesForm">
     ADD FILES TO REPORT <br>
-    <form th:action="@{/reports/directory}"
+    <form th:action="@{/report/create/add-files/}"
           th:method="POST"
           enctype="multipart/form-data">
     <input id="fileInput" type="file" name="uploadingFiles" onchange="updateSize();" multiple>
 
     <input type="submit" value="SUBMIT"/> </form>
     <br>
-    <form th:action="@{/reports/clear-attachment}"
+    <form th:action="@{/report/create/clear-attachment/}"
           th:method="GET">
         <input type="submit" value="CLEAR FILES"/>
     </form>

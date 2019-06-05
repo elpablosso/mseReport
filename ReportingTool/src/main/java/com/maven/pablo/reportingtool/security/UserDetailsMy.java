@@ -38,7 +38,7 @@ public class UserDetailsMy implements UserDetailsService {
             throws UsernameNotFoundException {
         Employee employee = null;
         try {
-            employee = employeeService.findById(username);
+            employee = employeeService.findByUsername(username);
         } catch (EmployeeNotFoundException e) {
             e.printStackTrace();
         }

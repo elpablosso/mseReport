@@ -6,6 +6,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 public class ReportDto {
@@ -25,7 +27,6 @@ public class ReportDto {
     private String description;
 
     @NotNull(message = "How long?")
-    @Min(value = 15, message = "Minimum time is 15 minutes!")
     private BigDecimal time;
 
     @NotEmpty(message = "Select department!")

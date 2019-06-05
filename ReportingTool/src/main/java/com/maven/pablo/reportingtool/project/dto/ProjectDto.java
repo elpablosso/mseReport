@@ -5,7 +5,7 @@ import javax.validation.constraints.*;
 public class ProjectDto {
 
     @NotNull(message = "Project number can not be empty!")
-    @Size(min=3, max=20, message = "Number must be between 3 and 20")
+    @Size(min=3, max=20, message = "Between 3 and 20 letters!")
     private String number;
 
     @NotNull(message = "Title can not be empty!")
@@ -20,7 +20,7 @@ public class ProjectDto {
     @NotEmpty(message = "Select leader!")
     private String leaderId;
 
-    @NotEmpty(message = "Select designer!;")
+    @NotEmpty(message = "Select designer!")
     private String designerId;
 
     private boolean closed;

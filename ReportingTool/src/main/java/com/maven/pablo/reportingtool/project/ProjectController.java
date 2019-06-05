@@ -28,11 +28,7 @@ public class ProjectController {
 
     private EmployeeService employeeService;
     private ProjectService projectService;
-    private ProjectDetailsService projectDetailsService;
 
-
-    @Qualifier("myProjectDetailsMapper")
-    private MyMapper<ProjectDetails, ProjectDetailsDto> projectDetailsMapper;
     @Qualifier("myEmployeeMapper")
     private MyMapper<Employee,EmployeeDto> employeeMapper;
     @Qualifier("myProjectMapper")
@@ -40,13 +36,9 @@ public class ProjectController {
 
     @Autowired
     public ProjectController(EmployeeService employeeService, ProjectService projectService,
-                             ProjectDetailsService projectDetailsService, MyMapper<ProjectDetails,
-                             ProjectDetailsDto> projectDetailsMapper, MyMapper<Employee,
-                             EmployeeDto> employeeMapper, MyMapper<Project, ProjectDto> projectMapper1) {
+                              MyMapper<Employee,EmployeeDto> employeeMapper, MyMapper<Project, ProjectDto> projectMapper1) {
         this.employeeService = employeeService;
         this.projectService = projectService;
-        this.projectDetailsService = projectDetailsService;
-        this.projectDetailsMapper = projectDetailsMapper;
         this.employeeMapper = employeeMapper;
         this.projectMapper = projectMapper1;
     }
@@ -73,22 +65,10 @@ public class ProjectController {
         return projectMapper.convertToDto(projects);
     }
 
-    private List<ProjectDetailsDto> loggedUserProjectDetails(Principal principal){
-        List<ProjectDetails> myProjectDetails = projectDetailsService.findByEmployeeId(principal.getName());
-        return projectDetailsMapper.convertToDto(myProjectDetails);
-    }
-
     @GetMapping("/")
     public ModelAndView home(ModelAndView modelAndView){
         modelAndView.addObject("projectList",allProjects());
-        modelAndView.setViewName("allprojects");
-        return modelAndView;
-    }
-
-    @GetMapping("/add")
-    public ModelAndView addProject(ModelAndView modelAndView){
-        modelAndView.setViewName("project/add");
-        modelAndView.addObject("projectList",allProjects());
+        modelAndView.setViewName("project/all");
         return modelAndView;
     }
 
@@ -97,7 +77,7 @@ public class ProjectController {
                                           BindingResult bindingResult,
                                           ModelAndView modelAndView) throws EmployeeNotFoundException {
 
-        modelAndView.setViewName("project/add");
+        modelAndView.setViewName("project/all");
 
         if(bindingResult.hasErrors()) {
             modelAndView.addObject("projectList",allProjects());
@@ -110,44 +90,20 @@ public class ProjectController {
             }
 
         modelAndView.addObject("projectList",allProjects());
-        return modelAndView;
-    }
-
-    @GetMapping("/find")
-    public ModelAndView findProject(ModelAndView modelAndView){
-        modelAndView.setViewName("project/find");
-        modelAndView.addObject("projectList",allProjects());
+        modelAndView.addObject("projectDto");
         return modelAndView;
     }
 
     @PostMapping("/find")
     public ModelAndView findProjectSumbit(@ModelAttribute ProjectDto projectDto,
                                           ModelAndView modelAndView){
-        modelAndView.setViewName("project/find");
+        modelAndView.setViewName("project/all");
         modelAndView.addObject("projectList", filteredProjects(projectDto));
         return modelAndView;
     }
 
 
-    @GetMapping("/my")
-    public ModelAndView myProjects(ModelAndView modelAndView, Principal principal){
-
-        modelAndView.addObject("projectDetailsList",loggedUserProjectDetails(principal));
-        modelAndView.setViewName("project/my");
-        return modelAndView;
-    }
-
-
     @GetMapping("/delete")
-    public ModelAndView deleteConfirmation(@RequestParam("projectNumber") String projectNumber,
-                                      ModelAndView modelAndView){
-
-        modelAndView.setViewName("project/delete");
-        modelAndView.addObject("projectNumber", projectNumber);
-        return modelAndView;
-    }
-
-    @GetMapping("/deleteConfirmed")
     public ModelAndView deleteProject(@RequestParam("projectNumber") String projectNumber,
                                       ModelAndView modelAndView) throws ProjectNotFoundException {
 

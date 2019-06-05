@@ -32,23 +32,22 @@
 <table th:fragment="List">
     <thead>
     <tr>
-        <th>NUMBER</th>
+        <th style="width:50px; text-align:center;">NUMBER</th>
         <th>TITLE</th>
         <th>STATUS</th>
         <th>BUDGET</th>
         <th>LEADER</th>
-        <th>DELETE</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="project: ${projectList}">
-        <td th:text="${project.number}"></td>
+        <td style="width:50px; text-align:center;" th:text="${project.number}"></td>
         <td th:text="${project.title}"></td>
         <td th:text="${project.closed} ? 'Closed' : 'Open'"></td></td>
         <td th:text="${project.budget}"></td>
-        <td th:text="${project.leaderId}"></td>
-        <td><a th:href="@{/projects/delete(projectNumber=${project.number})}"
-               class="link"> X </a> </td>
+        <td th:text="${project.getLeader().getName()}"></td>
+        <td style="width:40px;"><a th:href="@{/projects/delete(projectNumber=${project.number})}"
+               class="fieldlink" style="border:1px solid orange; text-align:center"> DELETE </a> </td>
     </tr>
     </tbody>
 </table>
@@ -59,58 +58,43 @@
       th:object="${projectDto}"
       method="post">
 
-    <div class="row">
-            <div class="col-25">
-            <label for="number">NUMBER </label>
-            </div>
+            <label>NUMBER </label>
+            <i class="orange"><td th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></td></i>
+            <br />
+            <input type="text" th:field="*{number}" />
 
-            <div class="col-75">
-            <input type="text" id="number" th:field="*{number}" />
-                <td th:if="${#fields.hasErrors('number')}" th:errors="*{number}">
-                    Number Error</td>
-            </div>
-    </div>
+            <label>TITLE </label>
+            <i class="orange"><td th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></td></i>
+            <br />
+            <input type="text" th:field="*{title}" />
 
-    <div class="row">
-            <div class="col-25">
-            <label for="title">TITLE </label>
-            </div>
-
-            <div class="col-75">
-            <input type="text" id="title" th:field="*{title}" />
-                <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-                    Title not correct</td>
-            </div>
-    </div>
-
-    <div class="row">
-            <div class="col-25">
-            <label for="budget">BUDGET </label>
-            </div>
-
-            <div class="col-75">
+            <label>BUDGET </label>
+            <i class="orange"><td th:if="${#fields.hasErrors('budget')}" th:errors="*{budget}"></td></i>
+            <br />
             <input type="text" id="budget" th:field="*{budget}"/>
-                <td th:if="${#fields.hasErrors('budget')}" th:errors="*{budget}">
-                    Budget?</td>
-            </div>
-    </div>
 
-    <div class="row">
-        <div class="col-25">
-            <label for="leaderId">LEADER</label>
-        </div>
-        <div class="col-75">
-                <select th:field="*{leaderId}" id="leaderId">
+            <label>LEADER</label>
+            <i class="orange"><td th:if="${#fields.hasErrors('leaderId')}" th:errors="*{leaderId}"></td></i>
+            <br />
+                 <select th:field="*{leaderId}">
                  <option value=""> -- </option>
                  <option th:each="employee : ${leaderList}"
-                 th:value="${employee.id}"
-                 th:utext="${employee.name}"/>
+                         th:value="${employee.id}"
+                         th:utext="${employee.name}"></option>
                 </select>
-            <td th:if="${#fields.hasErrors('leaderId')}" th:errors="*{leaderId}"></td>
 
-        </div>
-    </div>
+            <label>DESIGNER</label>
+            <i class="orange"><td th:if="${#fields.hasErrors('designerId')}" th:errors="*{designerId}"></td></i>
+            <br />
+            <select th:field="*{designerId}">
+            <option value=""> -- </option>
+            <option th:each="employee : ${designerList}"
+                    th:value="${employee.id}"
+                    th:utext="${employee.name}"></option>
+    </select>
 
+
+    <br><br><br>
     <input type="submit" value="Submit" />
 
 </form>
@@ -120,36 +104,15 @@
       th:object="${projectDto}"
       method="post">
 
-    <div class="row">
-        <div class="col-25">
-            <label for="number">NUMBER </label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="number" th:field="*{number}" />
-        </div></div>
+        <label>NUMBER </label> <br/>
+        <input type="text" th:field="*{number}" />
 
-    <div class="row">
-        <div class="col-25">
-            <label for="title">TITLE </label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="title" th:field="*{title}" />
-        </div></div>
-
-    <input type="submit" value="Submit" />
-
+        <label>TITLE </label> <br/>
+        <input type="text" id="title" th:field="*{title}" />
+        <br><br><br>
+        <input type="submit" value="Submit" />
 </form>
 
-
-<p th:fragment="DeleteConfirm">
-Are you sure you want to delete : <td th:text="${projectNumber}"></td> ??
-<br><br>
-<td><a th:href="@{/projects/deleteConfirmed(projectNumber=${projectNumber})}" class="link">
-    YES, DELETE </a> </td>
-<br><br>
-<td><a th:href="@{/projects/all}" class="link">
-    NO, TAKE ME BACK </a> </td>
-</p>
 
 
 </body>
