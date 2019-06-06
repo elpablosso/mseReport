@@ -27,6 +27,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -66,7 +67,7 @@ public class CreateReportController {
 
     @ModelAttribute("fileList")
     private List<File> fileList(){
-        return attachment.attachedFilesList(); }
+        return attachment.attachedFilesList() == null ?  Collections.emptyList() : attachment.attachedFilesList(); }
 
     @ModelAttribute("projectList")
     private List<ProjectDto> projectList(){

@@ -15,6 +15,12 @@
     <div class="botbarfield" th:text="${summary.getTotalDocumentation()}"></div>
     <div class="botbarfield">CORRESPONDENCE</div>
     <div class="botbarfield" th:text="${summary.getTotalCorrespondence()}"></div>
+    <div class="botbarfield">STATIC</div>
+    <div class="botbarfield" th:text="${summary.getTotalStatic()}"></div>
+    <div class="botbarfield">OTHERS</div>
+    <div class="botbarfield" th:text="${summary.getTotalOthers()}"></div>
+
+
     <div class="botbarfieldR" th:text="${summary.getTotalSum()}"></div>
     <div class="botbarfieldR">TOTAL</div>
 </div>
