@@ -12,9 +12,10 @@ import com.maven.pablo.reportingtool.project.ProjectService;
 import com.maven.pablo.reportingtool.project.dto.ProjectDto;
 import com.maven.pablo.reportingtool.project.entity.Project;
 import com.maven.pablo.reportingtool.report.dto.ReportDto;
+import com.maven.pablo.reportingtool.report.dto.Statistics;
 import com.maven.pablo.reportingtool.report.entity.Report;
 import com.maven.pablo.reportingtool.report.implementation.MyCompleteReport;
-import com.maven.pablo.reportingtool.report.implementation.ReportTimeRound;
+import com.maven.pablo.reportingtool.report.implementation.RoundedBigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.File;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +64,7 @@ public class CreateReportController {
         this.reportMapper = reportMapper;
     }
 
-    @ModelAttribute("fileList")
+   @ModelAttribute("fileList")
     private List<File> fileList(){
         return attachment.attachedFilesList() == null ?  Collections.emptyList() : attachment.attachedFilesList(); }
 
@@ -87,6 +86,11 @@ public class CreateReportController {
     @ModelAttribute("unsentReports")
     private List<ReportDto> unsendReports(){
         return myCompleteReport.getReports();
+    }
+
+    @ModelAttribute("summary")
+    private Statistics summary(){
+        return Statistics.of(myCompleteReport.getReports());
     }
 
     @ModelAttribute("fileDto")
@@ -111,7 +115,7 @@ public class CreateReportController {
     @GetMapping("/clear-attachment")
     public ModelAndView clearAttachment(ModelAndView modelAndView){
         attachment.clear();
-        modelAndView.addObject("fileList", fileList());
+       modelAndView.addObject("fileList", fileList());
         modelAndView.setViewName("report/new");
         return modelAndView;
     }
@@ -127,7 +131,7 @@ public class CreateReportController {
         Employee employee = employeeService.findByUsername(principal.getName());
         reportDto.setEmployee(employee);
         reportDto.setEmployeeId(employee.getId());
-        reportDto.setTime(ReportTimeRound.round(reportDto.getTime(), new BigDecimal(0.5), RoundingMode.HALF_UP));
+        reportDto.setTime(RoundedBigDecimal.of(reportDto.getTime()));
 
         Project project = projectService.findByNumber(reportDto.getProjectId());
         reportDto.setProject(project);
@@ -135,6 +139,7 @@ public class CreateReportController {
         reportDto.setId(myCompleteReport.getReports().size());
         myCompleteReport.addReport(reportDto);
 
+        modelAndView.addObject("summary", summary());
         modelAndView.setViewName("report/new");
         return modelAndView;
     }
@@ -149,6 +154,7 @@ public class CreateReportController {
 
         emailSender.sendEmail(myCompleteReport);
         myCompleteReport.clear();
+        modelAndView.addObject("fileList" , fileList());
         modelAndView.setViewName("report/new");
         return modelAndView;
     }

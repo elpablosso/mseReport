@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,7 +35,8 @@ public class Attachment implements FileOperations{
     @Override
     public List<File> attachedFilesList() {
         File file = new File(FileOperations.PATH);
-        return Arrays.asList(Objects.requireNonNull(file.listFiles()));
+        if(file.listFiles()==null) return Collections.emptyList();
+        else return Arrays.asList(file.listFiles());
     }
 
     @Override
