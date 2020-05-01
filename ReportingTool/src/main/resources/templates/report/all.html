@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:a="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+
+<div id="container">
+    <div id="logo">Reporting tool</div>
+    <div id="navbar">
+        <div class="navfield"><a class="fieldlink" th:href="@{/report/create/}">NEW REPORT</a></div>
+        <div class="navfieldactive">REPORTS</div>
+        <div class="navfield"><a class="fieldlink" th:href="@{/projects/}">PROJECTS</a></div>
+
+        <div class="navfieldR"><a class="fieldlink" th:href="@{/logout}">LOG OUT</a></div>
+        <div style="clear:both;"></div>
+    </div>
+
+    <div id="leftbox">
+        <form th:replace="fragments/reportfind :: FindForm"></form>
+    </div>
+
+    <div id="middlebox">
+        <table th:replace="fragments/report :: MyReports"></table>
+    </div>
+
+    <div id="rightbox">
+        Rightbox
+    </div>
+
+    <div id="footerleft"><i>Created by PaweMuniak</i></div>
+    <div id="footerright"><div th:replace="fragments/report :: summary"></div></div>
+</div>
+
+</body>
+</html>

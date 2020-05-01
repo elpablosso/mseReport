@@ -1,11 +1,8 @@
 package com.maven.pablo.reportingtool.report;
-import com.maven.pablo.reportingtool.email.EmailSender;
 import com.maven.pablo.reportingtool.employee.EmployeeService;
 import com.maven.pablo.reportingtool.employee.entity.Employee;
 import com.maven.pablo.reportingtool.exceptions.EmployeeNotFoundException;
 import com.maven.pablo.reportingtool.exceptions.ProjectNotFoundException;
-import com.maven.pablo.reportingtool.files.Attachment;
-import com.maven.pablo.reportingtool.files.FileDto;
 import com.maven.pablo.reportingtool.mapper.MyMapper;
 import com.maven.pablo.reportingtool.project.ProjectDetailsService;
 import com.maven.pablo.reportingtool.project.ProjectService;
@@ -33,9 +30,6 @@ import java.util.List;
 @RequestMapping("/report/create")
 public class CreateReportController {
 
-    private final EmailSender emailSender;
-    private Attachment attachment;
-
     private ReportService reportService;
     private ProjectService projectService;
     private EmployeeService employeeService;
@@ -49,12 +43,9 @@ public class CreateReportController {
     private MyMapper<Report, ReportDto> reportMapper;
 
     @Autowired
-    public CreateReportController(EmailSender emailSender, Attachment attachment,
-                                  ReportService reportService, ProjectService projectService,
+    public CreateReportController(ReportService reportService, ProjectService projectService,
                                   EmployeeService employeeService, ProjectDetailsService projectDetailsService, MyCompleteReport myCompleteReport, MyMapper<Project, ProjectDto> projectMapper,
                                   MyMapper<Report, ReportDto> reportMapper) {
-        this.emailSender = emailSender;
-        this.attachment = attachment;
         this.reportService = reportService;
         this.projectService = projectService;
         this.employeeService = employeeService;
@@ -63,10 +54,6 @@ public class CreateReportController {
         this.projectMapper = projectMapper;
         this.reportMapper = reportMapper;
     }
-
-   @ModelAttribute("fileList")
-    private List<File> fileList(){
-        return attachment.attachedFilesList() == null ?  Collections.emptyList() : attachment.attachedFilesList(); }
 
     @ModelAttribute("projectList")
     private List<ProjectDto> projectList(){
@@ -93,29 +80,8 @@ public class CreateReportController {
         return Statistics.of(myCompleteReport.getReports());
     }
 
-    @ModelAttribute("fileDto")
-    private FileDto fileDto(){
-        return new FileDto(); }
-
     @GetMapping("/")
     public ModelAndView createReport(ModelAndView modelAndView){
-        modelAndView.setViewName("report/new");
-        return modelAndView;
-    }
-
-    @PostMapping("/add-files")
-    public ModelAndView applyDirectory(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
-                                       ModelAndView modelAndView) {
-        attachment.save(uploadingFiles);
-        modelAndView.addObject("fileList", fileList());
-        modelAndView.setViewName("report/new");
-        return modelAndView;
-    }
-
-    @GetMapping("/clear-attachment")
-    public ModelAndView clearAttachment(ModelAndView modelAndView){
-        attachment.clear();
-       modelAndView.addObject("fileList", fileList());
         modelAndView.setViewName("report/new");
         return modelAndView;
     }
@@ -151,10 +117,7 @@ public class CreateReportController {
 
         reportService.save(reports);
         projectDetailsService.addHoursFromReport(reports);
-
-        emailSender.sendEmail(myCompleteReport);
         myCompleteReport.clear();
-        modelAndView.addObject("fileList" , fileList());
         modelAndView.setViewName("report/new");
         return modelAndView;
     }
